@@ -1,12 +1,12 @@
 # SecureAudit MX — Especificación de Requerimientos de Software
 
-| Campo                      | Valor           |
-| -------------------------- | --------------- |
-| **Versión**                | 1.0.0           |
-| **Fecha**                  | 2026-05-29      |
-| **Autor**                  | Roberto Pérez   |
-| **Estado**                 | En desarrollo   |
-| **Estándar de referencia** | CIS Controls v8 |
+| Campo                      | Valor         |
+| -------------------------- | ------------- |
+| **Versión**                | 1.0.0         |
+| **Fecha**                  | 2026-05-29    |
+| **Autor**                  | Roberto Pérez |
+| **Estado**                 | En desarrollo |
+| **Estándar de referencia** | IEEE 830      |
 
 ---
 
@@ -191,29 +191,29 @@ SecureAudit MX ofrece una herramienta de auditoría local, gratuita y guiada, ba
 
 ### Resumen
 
-| ID | Módulo | Prioridad | Estado | Fase |
-|---|---|:---:|:---:|:---:|
-| RF-01 | Autenticación y gestión de usuarios | Alta | Pendiente | Semana 7 |
-| RF-02 | Gestión de empresas auditadas | Alta | Pendiente | Semana 3 |
-| RF-03 | Gestión de sesiones de auditoría | Alta | Pendiente | Semana 4 |
-| RF-04 | Cuestionario de auditoría | Alta | Pendiente | Semana 4 |
-| RF-05 | Sistema de scoring y evaluación de riesgo | Alta | Pendiente | Semana 5 |
-| RF-06 | Dashboard de resultados | Media | Pendiente | Semana 5 |
-| RF-07 | Generación y exportación de reportes | Alta | Pendiente | Semana 6 |
-| RF-08 | Módulo de escaneo de red | Media | Pendiente | Semana 8 |
-| RF-09 | Log de actividad interno | Alta | Pendiente | Semana 7 |
+| ID    | Módulo                                    | Prioridad |  Estado   |   Fase   |
+| ----- | ----------------------------------------- | :-------: | :-------: | :------: |
+| RF-01 | Autenticación y gestión de usuarios       |   Alta    | Pendiente | Semana 7 |
+| RF-02 | Gestión de empresas auditadas             |   Alta    | Pendiente | Semana 3 |
+| RF-03 | Gestión de sesiones de auditoría          |   Alta    | Pendiente | Semana 4 |
+| RF-04 | Cuestionario de auditoría                 |   Alta    | Pendiente | Semana 4 |
+| RF-05 | Sistema de scoring y evaluación de riesgo |   Alta    | Pendiente | Semana 5 |
+| RF-06 | Dashboard de resultados                   |   Media   | Pendiente | Semana 5 |
+| RF-07 | Generación y exportación de reportes      |   Alta    | Pendiente | Semana 6 |
+| RF-08 | Módulo de escaneo de red                  |   Media   | Pendiente | Semana 8 |
+| RF-09 | Log de actividad interno                  |   Alta    | Pendiente | Semana 7 |
 
 ---
 
 ### RF-01 — Autenticación y gestión de usuarios
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-01 |
-| **Nombre** | Autenticación y gestión de usuarios |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Fase** | Semana 7 |
+| Campo         | Detalle                             |
+| ------------- | ----------------------------------- |
+| **ID**        | RF-01                               |
+| **Nombre**    | Autenticación y gestión de usuarios |
+| **Prioridad** | Alta                                |
+| **Actores**   | U01 Auditor, U02 Técnico            |
+| **Fase**      | Semana 7                            |
 
 **Descripción**
 
@@ -221,26 +221,26 @@ El sistema debe permitir el registro, autenticación y administración de usuari
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
-| RF-01.1 | El sistema debe permitir registrar un nuevo usuario con nombre, correo electrónico y contraseña. |
-| RF-01.2 | El sistema debe autenticar usuarios mediante correo y contraseña. Las contraseñas deben almacenarse con hash (bcrypt). |
-| RF-01.3 | El sistema debe mantener la sesión activa mediante cookies seguras y cerrarla al hacer logout o por inactividad. |
+| ID      | Descripción                                                                                                                                                                                                                                                                    |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RF-01.1 | El sistema debe permitir registrar un nuevo usuario con nombre, correo electrónico y contraseña.                                                                                                                                                                               |
+| RF-01.2 | El sistema debe autenticar usuarios mediante correo y contraseña. Las contraseñas deben almacenarse con hash (bcrypt).                                                                                                                                                         |
+| RF-01.3 | El sistema debe mantener la sesión activa mediante cookies seguras y cerrarla al hacer logout o por inactividad.                                                                                                                                                               |
 | RF-01.4 | El sistema debe soportar tres roles: **Auditor** (acceso completo a auditorías y reportes), **Técnico** (auditorías parciales y consulta de reportes) y **Directivo** (solo lectura: consulta y exportación de reportes). La gestión de usuarios es exclusiva del rol Auditor. |
-| RF-01.5 | Todas las rutas de la aplicación deben estar protegidas y requerir autenticación activa. |
-| RF-01.6 | El Administrador puede crear, desactivar y eliminar cuentas de usuario. |
+| RF-01.5 | Todas las rutas de la aplicación deben estar protegidas y requerir autenticación activa.                                                                                                                                                                                       |
+| RF-01.6 | El Administrador puede crear, desactivar y eliminar cuentas de usuario.                                                                                                                                                                                                        |
 
 ---
 
 ### RF-02 — Gestión de empresas auditadas
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-02 |
-| **Nombre** | Gestión de empresas auditadas |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Fase** | Semana 3 |
+| Campo         | Detalle                       |
+| ------------- | ----------------------------- |
+| **ID**        | RF-02                         |
+| **Nombre**    | Gestión de empresas auditadas |
+| **Prioridad** | Alta                          |
+| **Actores**   | U01 Auditor, U02 Técnico      |
+| **Fase**      | Semana 3                      |
 
 **Descripción**
 
@@ -248,24 +248,24 @@ El sistema debe permitir registrar y administrar los datos de las organizaciones
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
+| ID      | Descripción                                                                                                                   |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | RF-02.1 | El sistema debe permitir crear un registro de empresa con nombre, sector, tamaño (número de empleados) y nombre del contacto. |
-| RF-02.2 | El sistema debe listar todas las empresas registradas por el usuario autenticado. |
-| RF-02.3 | El sistema debe permitir editar los datos de una empresa existente. |
-| RF-02.4 | El sistema debe impedir eliminar una empresa que tenga sesiones de auditoría activas o finalizadas asociadas. |
+| RF-02.2 | El sistema debe listar todas las empresas registradas por el usuario autenticado.                                             |
+| RF-02.3 | El sistema debe permitir editar los datos de una empresa existente.                                                           |
+| RF-02.4 | El sistema debe impedir eliminar una empresa que tenga sesiones de auditoría activas o finalizadas asociadas.                 |
 
 ---
 
 ### RF-03 — Gestión de sesiones de auditoría
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-03 |
-| **Nombre** | Gestión de sesiones de auditoría |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Fase** | Semana 4 |
+| Campo         | Detalle                          |
+| ------------- | -------------------------------- |
+| **ID**        | RF-03                            |
+| **Nombre**    | Gestión de sesiones de auditoría |
+| **Prioridad** | Alta                             |
+| **Actores**   | U01 Auditor, U02 Técnico         |
+| **Fase**      | Semana 4                         |
 
 **Descripción**
 
@@ -273,26 +273,26 @@ El sistema debe permitir crear, pausar, reanudar y finalizar sesiones de auditor
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
+| ID      | Descripción                                                                                                                             |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | RF-03.1 | El sistema debe permitir crear una nueva sesión de auditoría asociada a una empresa, registrando fecha de inicio y auditor responsable. |
-| RF-03.2 | El sistema debe permitir seleccionar los controles CIS a evaluar antes de iniciar (auditoría completa o parcial). |
-| RF-03.3 | El sistema debe permitir pausar una sesión en cualquier punto y reanudarla posteriormente desde donde se dejó. |
-| RF-03.4 | El sistema debe mostrar el estado de cada sesión: **En progreso**, **Pausada** o **Finalizada**. |
-| RF-03.5 | Una sesión finalizada no puede ser modificada; solo puede consultarse y exportarse. |
-| RF-03.6 | El sistema debe listar todas las sesiones de auditoría del usuario, ordenadas por fecha de creación. |
+| RF-03.2 | El sistema debe permitir seleccionar los controles CIS a evaluar antes de iniciar (auditoría completa o parcial).                       |
+| RF-03.3 | El sistema debe permitir pausar una sesión en cualquier punto y reanudarla posteriormente desde donde se dejó.                          |
+| RF-03.4 | El sistema debe mostrar el estado de cada sesión: **En progreso**, **Pausada** o **Finalizada**.                                        |
+| RF-03.5 | Una sesión finalizada no puede ser modificada; solo puede consultarse y exportarse.                                                     |
+| RF-03.6 | El sistema debe listar todas las sesiones de auditoría del usuario, ordenadas por fecha de creación.                                    |
 
 ---
 
 ### RF-04 — Cuestionario de auditoría
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-04 |
-| **Nombre** | Cuestionario de auditoría |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Fase** | Semana 4 |
+| Campo         | Detalle                   |
+| ------------- | ------------------------- |
+| **ID**        | RF-04                     |
+| **Nombre**    | Cuestionario de auditoría |
+| **Prioridad** | Alta                      |
+| **Actores**   | U01 Auditor, U02 Técnico  |
+| **Fase**      | Semana 4                  |
 
 **Descripción**
 
@@ -300,27 +300,27 @@ El sistema debe presentar de forma guiada las preguntas de evaluación correspon
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
-| RF-04.1 | El sistema debe mostrar las preguntas organizadas por control CIS (máximo 18 secciones). |
-| RF-04.2 | Cada pregunta debe ofrecer tres opciones de respuesta: **Sí**, **No** y **N/A**. |
-| RF-04.3 | El sistema debe permitir agregar un comentario opcional por pregunta para registrar evidencia o contexto. |
-| RF-04.4 | El sistema debe mostrar una barra de progreso global y por control durante la auditoría. |
-| RF-04.5 | El sistema debe permitir navegar libremente entre controles (anterior / siguiente) sin perder respuestas ya guardadas. |
+| ID      | Descripción                                                                                                                   |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| RF-04.1 | El sistema debe mostrar las preguntas organizadas por control CIS (máximo 18 secciones).                                      |
+| RF-04.2 | Cada pregunta debe ofrecer tres opciones de respuesta: **Sí**, **No** y **N/A**.                                              |
+| RF-04.3 | El sistema debe permitir agregar un comentario opcional por pregunta para registrar evidencia o contexto.                     |
+| RF-04.4 | El sistema debe mostrar una barra de progreso global y por control durante la auditoría.                                      |
+| RF-04.5 | El sistema debe permitir navegar libremente entre controles (anterior / siguiente) sin perder respuestas ya guardadas.        |
 | RF-04.6 | El sistema debe guardar automáticamente las respuestas al avanzar entre preguntas, sin requerir acción explícita del usuario. |
-| RF-04.7 | El sistema debe indicar visualmente qué controles ya fueron completados y cuáles están pendientes. |
+| RF-04.7 | El sistema debe indicar visualmente qué controles ya fueron completados y cuáles están pendientes.                            |
 
 ---
 
 ### RF-05 — Sistema de scoring y evaluación de riesgo
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-05 |
-| **Nombre** | Sistema de scoring y evaluación de riesgo |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Fase** | Semana 5 |
+| Campo         | Detalle                                   |
+| ------------- | ----------------------------------------- |
+| **ID**        | RF-05                                     |
+| **Nombre**    | Sistema de scoring y evaluación de riesgo |
+| **Prioridad** | Alta                                      |
+| **Actores**   | U01 Auditor, U02 Técnico                  |
+| **Fase**      | Semana 5                                  |
 
 **Descripción**
 
@@ -328,25 +328,25 @@ El sistema debe calcular automáticamente un puntaje de riesgo por control y un 
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
-| RF-05.1 | Cada pregunta debe tener asignada una criticidad: **Alta**, **Media** o **Baja**. |
+| ID      | Descripción                                                                                                                                                                                     |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RF-05.1 | Cada pregunta debe tener asignada una criticidad: **Alta**, **Media** o **Baja**.                                                                                                               |
 | RF-05.2 | El sistema debe calcular el score de riesgo de acuerdo con la siguiente tabla: respuesta "No" en pregunta Alta = 3 puntos; Media = 2 puntos; Baja = 1 punto; respuesta "Sí" o "N/A" = 0 puntos. |
-| RF-05.3 | El sistema debe calcular un score parcial por cada control CIS y un score global de la auditoría (escala 0–100, donde 100 representa el máximo riesgo). |
-| RF-05.4 | El sistema debe clasificar cada control con un nivel de riesgo: **Crítico** (≥ 75%), **Alto** (50–74%), **Medio** (25–49%) o **Bajo** (< 25%). |
-| RF-05.5 | El sistema debe recalcular el score en tiempo real conforme el auditor avanza en el cuestionario. |
+| RF-05.3 | El sistema debe calcular un score parcial por cada control CIS y un score global de la auditoría (escala 0–100, donde 100 representa el máximo riesgo).                                         |
+| RF-05.4 | El sistema debe clasificar cada control con un nivel de riesgo: **Crítico** (≥ 75%), **Alto** (50–74%), **Medio** (25–49%) o **Bajo** (< 25%).                                                  |
+| RF-05.5 | El sistema debe recalcular el score en tiempo real conforme el auditor avanza en el cuestionario.                                                                                               |
 
 ---
 
 ### RF-06 — Dashboard de resultados
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-06 |
-| **Nombre** | Dashboard de resultados |
-| **Prioridad** | Media |
-| **Actores** | U01 Auditor, U02 Técnico, U03 Directivo |
-| **Fase** | Semana 5 |
+| Campo         | Detalle                                 |
+| ------------- | --------------------------------------- |
+| **ID**        | RF-06                                   |
+| **Nombre**    | Dashboard de resultados                 |
+| **Prioridad** | Media                                   |
+| **Actores**   | U01 Auditor, U02 Técnico, U03 Directivo |
+| **Fase**      | Semana 5                                |
 
 **Descripción**
 
@@ -354,25 +354,25 @@ El sistema debe presentar una vista consolidada de los resultados de una auditor
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
+| ID      | Descripción                                                                                                           |
+| ------- | --------------------------------------------------------------------------------------------------------------------- |
 | RF-06.1 | El sistema debe mostrar el score global de la auditoría con indicador visual tipo semáforo (Verde / Amarillo / Rojo). |
-| RF-06.2 | El sistema debe mostrar una gráfica de radar con el nivel de riesgo de cada uno de los 18 controles CIS. |
-| RF-06.3 | El sistema debe listar los hallazgos (respuestas "No") ordenados por criticidad descendente. |
-| RF-06.4 | El sistema debe mostrar un resumen de cumplimiento: número de controles con riesgo Crítico, Alto, Medio y Bajo. |
-| RF-06.5 | El dashboard debe ser accesible para el rol U03 (Directivo) en modo solo lectura, sin opción de editar respuestas. |
+| RF-06.2 | El sistema debe mostrar una gráfica de radar con el nivel de riesgo de cada uno de los 18 controles CIS.              |
+| RF-06.3 | El sistema debe listar los hallazgos (respuestas "No") ordenados por criticidad descendente.                          |
+| RF-06.4 | El sistema debe mostrar un resumen de cumplimiento: número de controles con riesgo Crítico, Alto, Medio y Bajo.       |
+| RF-06.5 | El dashboard debe ser accesible para el rol U03 (Directivo) en modo solo lectura, sin opción de editar respuestas.    |
 
 ---
 
 ### RF-07 — Generación y exportación de reportes
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-07 |
-| **Nombre** | Generación y exportación de reportes |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor, U02 Técnico, U03 Directivo |
-| **Fase** | Semana 6 |
+| Campo         | Detalle                                 |
+| ------------- | --------------------------------------- |
+| **ID**        | RF-07                                   |
+| **Nombre**    | Generación y exportación de reportes    |
+| **Prioridad** | Alta                                    |
+| **Actores**   | U01 Auditor, U02 Técnico, U03 Directivo |
+| **Fase**      | Semana 6                                |
 
 **Descripción**
 
@@ -380,25 +380,25 @@ El sistema debe generar un reporte profesional descargable en formato PDF que co
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
+| ID      | Descripción                                                                                                                                                                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | RF-07.1 | El sistema debe generar un reporte PDF con la siguiente estructura: portada (nombre empresa, fecha, auditor), resumen ejecutivo, score global con semáforo, hallazgos por control con nivel de riesgo, top 10 recomendaciones priorizadas, y glosario. |
-| RF-07.2 | El resumen ejecutivo debe estar redactado en lenguaje no técnico, orientado al perfil U03 (Directivo / Dueño PyME). |
-| RF-07.3 | El sistema debe permitir descargar el reporte PDF directamente desde la vista de resultados de una sesión finalizada. |
-| RF-07.4 | El sistema debe ofrecer también exportación en formato HTML para visualización en navegador sin necesidad de lector PDF. |
-| RF-07.5 | El reporte debe incluir fecha de generación, versión del sistema y nombre del auditor que ejecutó la auditoría. |
+| RF-07.2 | El resumen ejecutivo debe estar redactado en lenguaje no técnico, orientado al perfil U03 (Directivo / Dueño PyME).                                                                                                                                    |
+| RF-07.3 | El sistema debe permitir descargar el reporte PDF directamente desde la vista de resultados de una sesión finalizada.                                                                                                                                  |
+| RF-07.4 | El sistema debe ofrecer también exportación en formato HTML para visualización en navegador sin necesidad de lector PDF.                                                                                                                               |
+| RF-07.5 | El reporte debe incluir fecha de generación, versión del sistema y nombre del auditor que ejecutó la auditoría.                                                                                                                                        |
 
 ---
 
 ### RF-08 — Módulo de escaneo de red
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-08 |
-| **Nombre** | Módulo de escaneo de red |
-| **Prioridad** | Media |
-| **Actores** | U01 Auditor |
-| **Fase** | Semana 8 |
+| Campo         | Detalle                  |
+| ------------- | ------------------------ |
+| **ID**        | RF-08                    |
+| **Nombre**    | Módulo de escaneo de red |
+| **Prioridad** | Media                    |
+| **Actores**   | U01 Auditor              |
+| **Fase**      | Semana 8                 |
 
 **Descripción**
 
@@ -406,27 +406,27 @@ El sistema debe ofrecer un módulo opcional que automatice parcialmente el cuest
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
-| RF-08.1 | El sistema debe mostrar un aviso legal y requerir confirmación explícita del auditor antes de ejecutar cualquier escaneo. |
-| RF-08.2 | El sistema debe permitir especificar el rango de red a escanear (CIDR, e.g. `192.168.1.0/24`). |
-| RF-08.3 | El sistema debe detectar hosts activos, puertos abiertos y versiones de servicios en la red especificada mediante python-nmap. |
+| ID      | Descripción                                                                                                                                                                                |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RF-08.1 | El sistema debe mostrar un aviso legal y requerir confirmación explícita del auditor antes de ejecutar cualquier escaneo.                                                                  |
+| RF-08.2 | El sistema debe permitir especificar el rango de red a escanear (CIDR, e.g. `192.168.1.0/24`).                                                                                             |
+| RF-08.3 | El sistema debe detectar hosts activos, puertos abiertos y versiones de servicios en la red especificada mediante python-nmap.                                                             |
 | RF-08.4 | El sistema debe correlacionar automáticamente los resultados del escaneo con preguntas del cuestionario. Por ejemplo: puerto 23 (Telnet) abierto → marcar control CIS 4.3 como incumplido. |
-| RF-08.5 | Las respuestas auto-completadas por el escaneo deben ser identificables visualmente y el auditor debe poder revisarlas y modificarlas manualmente. |
-| RF-08.6 | Los resultados del escaneo deben integrarse en el reporte PDF como sección de evidencia técnica. |
-| RF-08.7 | El módulo de escaneo requiere que Nmap esté instalado en el sistema operativo del equipo donde corre la aplicación. |
+| RF-08.5 | Las respuestas auto-completadas por el escaneo deben ser identificables visualmente y el auditor debe poder revisarlas y modificarlas manualmente.                                         |
+| RF-08.6 | Los resultados del escaneo deben integrarse en el reporte PDF como sección de evidencia técnica.                                                                                           |
+| RF-08.7 | El módulo de escaneo requiere que Nmap esté instalado en el sistema operativo del equipo donde corre la aplicación.                                                                        |
 
 ---
 
 ### RF-09 — Log de actividad interno
 
-| Campo | Detalle |
-|---|---|
-| **ID** | RF-09 |
-| **Nombre** | Log de actividad interno |
-| **Prioridad** | Alta |
-| **Actores** | U01 Auditor |
-| **Fase** | Semana 7 |
+| Campo         | Detalle                  |
+| ------------- | ------------------------ |
+| **ID**        | RF-09                    |
+| **Nombre**    | Log de actividad interno |
+| **Prioridad** | Alta                     |
+| **Actores**   | U01 Auditor              |
+| **Fase**      | Semana 7                 |
 
 **Descripción**
 
@@ -434,13 +434,13 @@ SecureAudit MX es una herramienta de auditoría — debe ser auditable ella mism
 
 **Requerimientos específicos**
 
-| ID | Descripción |
-|---|---|
+| ID      | Descripción                                                                                                                                                                                                                                                                      |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RF-09.1 | El sistema debe registrar en un log interno las siguientes acciones: inicio y cierre de sesión de usuario, creación y finalización de sesiones de auditoría, generación y exportación de reportes, ejecución del módulo de escaneo de red, y creación o eliminación de usuarios. |
-| RF-09.2 | Cada entrada de log debe contener: marca de tiempo (timestamp), identificador del usuario, tipo de acción y resultado (éxito / fallo). |
-| RF-09.3 | El log debe persistirse en un archivo local (e.g., `logs/auditoria.log`) con rotación automática al superar 10 MB. |
-| RF-09.4 | El log no debe contener información sensible como contraseñas, tokens de sesión ni datos personales de los usuarios auditados. |
-| RF-09.5 | El Auditor (U01) debe poder consultar el log de actividad desde la interfaz de administración. Otros roles no tienen acceso al log. |
+| RF-09.2 | Cada entrada de log debe contener: marca de tiempo (timestamp), identificador del usuario, tipo de acción y resultado (éxito / fallo).                                                                                                                                           |
+| RF-09.3 | El log debe persistirse en un archivo local (e.g., `logs/auditoria.log`) con rotación automática al superar 10 MB.                                                                                                                                                               |
+| RF-09.4 | El log no debe contener información sensible como contraseñas, tokens de sesión ni datos personales de los usuarios auditados.                                                                                                                                                   |
+| RF-09.5 | El Auditor (U01) debe poder consultar el log de actividad desde la interfaz de administración. Otros roles no tienen acceso al log.                                                                                                                                              |
 
 ---
 
@@ -448,14 +448,14 @@ SecureAudit MX es una herramienta de auditoría — debe ser auditable ella mism
 
 ### Resumen
 
-| ID | Categoría | Prioridad |
-|---|---|:---:|
-| RNF-01 | Seguridad | Alta |
-| RNF-02 | Usabilidad | Alta |
-| RNF-03 | Rendimiento | Media |
-| RNF-04 | Portabilidad | Alta |
-| RNF-05 | Mantenibilidad | Media |
-| RNF-06 | Confiabilidad | Alta |
+| ID     | Categoría      | Prioridad |
+| ------ | -------------- | :-------: |
+| RNF-01 | Seguridad      |   Alta    |
+| RNF-02 | Usabilidad     |   Alta    |
+| RNF-03 | Rendimiento    |   Media   |
+| RNF-04 | Portabilidad   |   Alta    |
+| RNF-05 | Mantenibilidad |   Media   |
+| RNF-06 | Confiabilidad  |   Alta    |
 
 ---
 
@@ -465,14 +465,14 @@ SecureAudit MX es una herramienta de auditoría — debe ser auditable ella mism
 
 Dado que SecureAudit MX es una herramienta de auditoría de seguridad, la aplicación misma no debe presentar las vulnerabilidades que evalúa. La implementación debe seguir las prácticas recomendadas por OWASP para aplicaciones web.
 
-| ID | Requerimiento |
-|---|---|
-| RNF-01.1 | Las contraseñas de usuario deben almacenarse usando hashing bcrypt. Queda prohibido almacenar contraseñas en texto plano. |
-| RNF-01.2 | Todos los formularios POST deben incluir protección contra CSRF mediante tokens de sesión. |
-| RNF-01.3 | La aplicación debe sanitizar y validar todos los inputs del usuario para prevenir inyección SQL y XSS. |
+| ID       | Requerimiento                                                                                                                                               |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-01.1 | Las contraseñas de usuario deben almacenarse usando hashing bcrypt. Queda prohibido almacenar contraseñas en texto plano.                                   |
+| RNF-01.2 | Todos los formularios POST deben incluir protección contra CSRF mediante tokens de sesión.                                                                  |
+| RNF-01.3 | La aplicación debe sanitizar y validar todos los inputs del usuario para prevenir inyección SQL y XSS.                                                      |
 | RNF-01.4 | La aplicación debe incluir headers de seguridad HTTP: `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options` y `Strict-Transport-Security`. |
-| RNF-01.5 | Las sesiones de usuario deben expirar tras 60 minutos de inactividad. |
-| RNF-01.6 | El módulo de escaneo de red (RF-08) debe requerir confirmación explícita antes de ejecutarse y registrar en log la autorización del auditor. |
+| RNF-01.5 | Las sesiones de usuario deben expirar tras 60 minutos de inactividad.                                                                                       |
+| RNF-01.6 | El módulo de escaneo de red (RF-08) debe requerir confirmación explícita antes de ejecutarse y registrar en log la autorización del auditor.                |
 
 ---
 
@@ -482,14 +482,14 @@ Dado que SecureAudit MX es una herramienta de auditoría de seguridad, la aplica
 
 La herramienta debe ser operable por usuarios con distintos niveles técnicos, incluyendo el perfil U03 (Directivo / Dueño PyME) que tiene nivel técnico bajo. El flujo de auditoría debe ser guiado y no requerir capacitación previa.
 
-| ID | Requerimiento |
-|---|---|
-| RNF-02.1 | Un auditor sin experiencia previa con la herramienta debe poder completar su primera auditoría en menos de 45 minutos. |
-| RNF-02.2 | La interfaz debe estar completamente en español, incluyendo mensajes de error, etiquetas y ayudas contextuales. |
-| RNF-02.3 | Cada pregunta del cuestionario debe incluir una descripción de ayuda que explique qué se está evaluando, sin asumir conocimiento técnico avanzado del usuario. |
-| RNF-02.4 | Los mensajes de error deben ser descriptivos e indicar al usuario la acción correctiva, sin exponer detalles internos del sistema (stack traces, rutas de archivo, etc.). |
+| ID       | Requerimiento                                                                                                                                                                    |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-02.1 | Un auditor sin experiencia previa con la herramienta debe poder completar su primera auditoría en menos de 45 minutos.                                                           |
+| RNF-02.2 | La interfaz debe estar completamente en español, incluyendo mensajes de error, etiquetas y ayudas contextuales.                                                                  |
+| RNF-02.3 | Cada pregunta del cuestionario debe incluir una descripción de ayuda que explique qué se está evaluando, sin asumir conocimiento técnico avanzado del usuario.                   |
+| RNF-02.4 | Los mensajes de error deben ser descriptivos e indicar al usuario la acción correctiva, sin exponer detalles internos del sistema (stack traces, rutas de archivo, etc.).        |
 | RNF-02.5 | El reporte PDF generado (RF-07) debe incluir un resumen ejecutivo comprensible para un perfil no técnico, evitando siglas sin definir y terminología especializada sin contexto. |
-| RNF-02.6 | La aplicación debe ser responsiva y operable desde un navegador de escritorio con resolución mínima de 1280 × 720 px. |
+| RNF-02.6 | La aplicación debe ser responsiva y operable desde un navegador de escritorio con resolución mínima de 1280 × 720 px.                                                            |
 
 ---
 
@@ -499,12 +499,12 @@ La herramienta debe ser operable por usuarios con distintos niveles técnicos, i
 
 La aplicación debe responder en tiempos razonables en hardware típico de una PyME, sin requerir equipos especializados ni conexión a internet.
 
-| ID | Requerimiento |
-|---|---|
+| ID       | Requerimiento                                                                                                                                                                  |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | RNF-03.1 | El tiempo de respuesta de cualquier página de la aplicación (excluido el escaneo de red) no debe superar 2 segundos en un equipo con 4 GB de RAM y procesador de doble núcleo. |
-| RNF-03.2 | La generación del reporte PDF no debe tardar más de 10 segundos para una auditoría completa de 18 controles. |
-| RNF-03.3 | El inicio del servidor Flask local debe completarse en menos de 5 segundos desde la ejecución del comando de arranque. |
-| RNF-03.4 | La base de datos SQLite debe soportar el almacenamiento de al menos 500 sesiones de auditoría sin degradación perceptible del rendimiento. |
+| RNF-03.2 | La generación del reporte PDF no debe tardar más de 10 segundos para una auditoría completa de 18 controles.                                                                   |
+| RNF-03.3 | El inicio del servidor Flask local debe completarse en menos de 5 segundos desde la ejecución del comando de arranque.                                                         |
+| RNF-03.4 | La base de datos SQLite debe soportar el almacenamiento de al menos 500 sesiones de auditoría sin degradación perceptible del rendimiento.                                     |
 
 ---
 
@@ -514,13 +514,13 @@ La aplicación debe responder en tiempos razonables en hardware típico de una P
 
 La herramienta debe poder instalarse y ejecutarse en los sistemas operativos más comunes sin requerir configuración compleja ni dependencias de red.
 
-| ID | Requerimiento |
-|---|---|
-| RNF-04.1 | La aplicación debe funcionar en Windows 10/11, Ubuntu 20.04+ y macOS 12+. |
+| ID       | Requerimiento                                                                                                                                               |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-04.1 | La aplicación debe funcionar en Windows 10/11, Ubuntu 20.04+ y macOS 12+.                                                                                   |
 | RNF-04.2 | La aplicación debe ejecutarse con Python 3.10 o superior. No debe depender de versiones específicas del sistema operativo más allá de lo que impone Python. |
-| RNF-04.3 | Todas las dependencias deben estar declaradas en `requirements.txt` e instalarse mediante `pip install -r requirements.txt` sin pasos adicionales. |
-| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Todas las librerías frontend (Bootstrap, Chart.js) deben servirse localmente. |
-| RNF-04.5 | La base de datos SQLite debe crearse e inicializarse automáticamente en el primer arranque, sin intervención del usuario. |
+| RNF-04.3 | Todas las dependencias deben estar declaradas en `requirements.txt` e instalarse mediante `pip install -r requirements.txt` sin pasos adicionales.          |
+| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Todas las librerías frontend (Bootstrap, Chart.js) deben servirse localmente.      |
+| RNF-04.5 | La base de datos SQLite debe crearse e inicializarse automáticamente en el primer arranque, sin intervención del usuario.                                   |
 
 ---
 
@@ -530,13 +530,13 @@ La herramienta debe poder instalarse y ejecutarse en los sistemas operativos má
 
 El código debe estar organizado de forma modular, documentado y cubierto por pruebas automatizadas, de manera que sea comprensible para evaluadores académicos y colaboradores externos.
 
-| ID | Requerimiento |
-|---|---|
-| RNF-05.1 | El proyecto debe seguir la estructura de directorios definida en el plan (`app/models/`, `app/routes/`, `app/templates/`, `tests/`). |
-| RNF-05.2 | La cobertura de pruebas automatizadas debe ser mayor al 70% para los módulos de scoring (RF-05) y generación de reportes (RF-07). |
-| RNF-05.3 | Cada módulo de rutas debe incluir docstrings que describan el propósito de la ruta, los parámetros esperados y el valor de retorno. |
+| ID       | Requerimiento                                                                                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-05.1 | El proyecto debe seguir la estructura de directorios definida en el plan (`app/models/`, `app/routes/`, `app/templates/`, `tests/`).                                |
+| RNF-05.2 | La cobertura de pruebas automatizadas debe ser mayor al 70% para los módulos de scoring (RF-05) y generación de reportes (RF-07).                                   |
+| RNF-05.3 | Cada módulo de rutas debe incluir docstrings que describan el propósito de la ruta, los parámetros esperados y el valor de retorno.                                 |
 | RNF-05.4 | Los commits en el repositorio deben seguir el formato: `tipo(módulo): descripción breve en español` (e.g., `feat(scoring): agregar cálculo de riesgo por control`). |
-| RNF-05.5 | El archivo `README.md` debe incluir instrucciones de instalación, ejecución y descripción del stack tecnológico. |
+| RNF-05.5 | El archivo `README.md` debe incluir instrucciones de instalación, ejecución y descripción del stack tecnológico.                                                    |
 
 ---
 
@@ -546,12 +546,12 @@ El código debe estar organizado de forma modular, documentado y cubierto por pr
 
 La aplicación debe garantizar que los datos de una sesión de auditoría no se pierdan ante cierres inesperados del navegador o del servidor, y que el estado de la sesión pueda recuperarse íntegramente.
 
-| ID | Requerimiento |
-|---|---|
-| RNF-06.1 | Las respuestas del cuestionario deben persistirse en la base de datos de forma incremental (RF-04.6), de modo que un cierre inesperado no provoque pérdida de más de una respuesta. |
-| RNF-06.2 | Al reanudar una sesión pausada, el sistema debe restaurar exactamente el estado en que se dejó: respuestas previas, control activo y progreso acumulado. |
+| ID       | Requerimiento                                                                                                                                                                                 |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-06.1 | Las respuestas del cuestionario deben persistirse en la base de datos de forma incremental (RF-04.6), de modo que un cierre inesperado no provoque pérdida de más de una respuesta.           |
+| RNF-06.2 | Al reanudar una sesión pausada, el sistema debe restaurar exactamente el estado en que se dejó: respuestas previas, control activo y progreso acumulado.                                      |
 | RNF-06.3 | El sistema no debe permitir que una sesión quede en estado inconsistente (respuestas parciales sin sesión asociada). Las operaciones de escritura deben realizarse en transacciones atómicas. |
-| RNF-06.4 | Ante un error interno del servidor (código 500), el sistema debe mostrar una página de error amigable sin exponer información sensible, y registrar el detalle del error en un log interno. |
+| RNF-06.4 | Ante un error interno del servidor (código 500), el sistema debe mostrar una página de error amigable sin exponer información sensible, y registrar el detalle del error en un log interno.   |
 
 ---
 
@@ -574,25 +574,25 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 ### Resumen
 
-| ID | Nombre | Actor principal | RF relacionados |
-|---|---|---|---|
-| CU-01 | Registrar e iniciar sesión | U01, U02, U03 | RF-01 |
-| CU-02 | Crear y configurar sesión de auditoría | U01, U02 | RF-02, RF-03 |
-| CU-03 | Ejecutar cuestionario de auditoría | U01, U02 | RF-04, RF-05 |
-| CU-04 | Consultar dashboard de resultados | U01, U02, U03 | RF-05, RF-06 |
-| CU-05 | Generar y exportar reporte | U01, U02, U03 | RF-07 |
-| CU-06 | Ejecutar escaneo de red automatizado | U01 | RF-08 |
+| ID    | Nombre                                 | Actor principal | RF relacionados |
+| ----- | -------------------------------------- | --------------- | --------------- |
+| CU-01 | Registrar e iniciar sesión             | U01, U02, U03   | RF-01           |
+| CU-02 | Crear y configurar sesión de auditoría | U01, U02        | RF-02, RF-03    |
+| CU-03 | Ejecutar cuestionario de auditoría     | U01, U02        | RF-04, RF-05    |
+| CU-04 | Consultar dashboard de resultados      | U01, U02, U03   | RF-05, RF-06    |
+| CU-05 | Generar y exportar reporte             | U01, U02, U03   | RF-07           |
+| CU-06 | Ejecutar escaneo de red automatizado   | U01             | RF-08           |
 
 ---
 
 ### CU-01 — Registrar e iniciar sesión
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-01 |
-| **Actores** | U01 Auditor, U02 Técnico, U03 Directivo |
-| **Precondición** | La aplicación está en ejecución. El usuario tiene un navegador web abierto en `localhost`. |
-| **Postcondición** | El usuario queda autenticado y es redirigido al dashboard principal según su rol. |
+| Campo             | Detalle                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| **ID**            | CU-01                                                                                      |
+| **Actores**       | U01 Auditor, U02 Técnico, U03 Directivo                                                    |
+| **Precondición**  | La aplicación está en ejecución. El usuario tiene un navegador web abierto en `localhost`. |
+| **Postcondición** | El usuario queda autenticado y es redirigido al dashboard principal según su rol.          |
 
 **Flujo principal**
 
@@ -604,21 +604,21 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
-| CU-01-A1 | Las credenciales son incorrectas | El sistema muestra un mensaje de error genérico ("Credenciales inválidas") sin especificar cuál campo es incorrecto. |
-| CU-01-A2 | El usuario no tiene cuenta | El usuario puede registrarse; el sistema solicita nombre, correo y contraseña. El primer usuario registrado obtiene el rol Auditor por defecto. |
-| CU-01-A3 | La sesión ya está activa | El sistema redirige directamente al dashboard sin mostrar el formulario. |
+| ID       | Condición                        | Respuesta del sistema                                                                                                                           |
+| -------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| CU-01-A1 | Las credenciales son incorrectas | El sistema muestra un mensaje de error genérico ("Credenciales inválidas") sin especificar cuál campo es incorrecto.                            |
+| CU-01-A2 | El usuario no tiene cuenta       | El usuario puede registrarse; el sistema solicita nombre, correo y contraseña. El primer usuario registrado obtiene el rol Auditor por defecto. |
+| CU-01-A3 | La sesión ya está activa         | El sistema redirige directamente al dashboard sin mostrar el formulario.                                                                        |
 
 ---
 
 ### CU-02 — Crear y configurar sesión de auditoría
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-02 |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Precondición** | El usuario está autenticado. Existe al menos una empresa registrada en el sistema. |
+| Campo             | Detalle                                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ID**            | CU-02                                                                                                                                         |
+| **Actores**       | U01 Auditor, U02 Técnico                                                                                                                      |
+| **Precondición**  | El usuario está autenticado. Existe al menos una empresa registrada en el sistema.                                                            |
 | **Postcondición** | Se crea una sesión de auditoría en estado **En progreso**, asociada a la empresa seleccionada, y el sistema redirige al cuestionario (CU-03). |
 
 **Flujo principal**
@@ -632,21 +632,21 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
-| CU-02-A1 | No existe ninguna empresa registrada | El sistema notifica al usuario y lo redirige al formulario de registro de empresa antes de continuar. |
-| CU-02-A2 | U02 (Técnico) intenta crear una auditoría completa | El sistema restringe la selección a auditorías parciales según el rol. |
-| CU-02-A3 | Ya existe una sesión en progreso para la misma empresa | El sistema muestra una advertencia y ofrece reanudar la sesión existente o crear una nueva. |
+| ID       | Condición                                              | Respuesta del sistema                                                                                 |
+| -------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| CU-02-A1 | No existe ninguna empresa registrada                   | El sistema notifica al usuario y lo redirige al formulario de registro de empresa antes de continuar. |
+| CU-02-A2 | U02 (Técnico) intenta crear una auditoría completa     | El sistema restringe la selección a auditorías parciales según el rol.                                |
+| CU-02-A3 | Ya existe una sesión en progreso para la misma empresa | El sistema muestra una advertencia y ofrece reanudar la sesión existente o crear una nueva.           |
 
 ---
 
 ### CU-03 — Ejecutar cuestionario de auditoría
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-03 |
-| **Actores** | U01 Auditor, U02 Técnico |
-| **Precondición** | Existe una sesión de auditoría en estado **En progreso** o **Pausada**. El usuario está autenticado. |
+| Campo             | Detalle                                                                                                                                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ID**            | CU-03                                                                                                                                                                                                      |
+| **Actores**       | U01 Auditor, U02 Técnico                                                                                                                                                                                   |
+| **Precondición**  | Existe una sesión de auditoría en estado **En progreso** o **Pausada**. El usuario está autenticado.                                                                                                       |
 | **Postcondición** | Las respuestas quedan persistidas en la base de datos. Si se completan todos los controles seleccionados, la sesión pasa a estado **Finalizada** y el sistema redirige al dashboard de resultados (CU-04). |
 
 **Flujo principal**
@@ -661,22 +661,22 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
-| CU-03-A1 | El usuario cierra el navegador sin finalizar | Las respuestas ya guardadas persisten. Al regresar, el sistema reanuda desde el último control respondido. |
-| CU-03-A2 | El usuario pausa la sesión explícitamente | El sistema actualiza el estado a **Pausada** y redirige al menú principal. |
-| CU-03-A3 | El usuario intenta acceder a una sesión finalizada | El sistema muestra las respuestas en modo solo lectura sin permitir modificaciones. |
+| ID       | Condición                                          | Respuesta del sistema                                                                                      |
+| -------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| CU-03-A1 | El usuario cierra el navegador sin finalizar       | Las respuestas ya guardadas persisten. Al regresar, el sistema reanuda desde el último control respondido. |
+| CU-03-A2 | El usuario pausa la sesión explícitamente          | El sistema actualiza el estado a **Pausada** y redirige al menú principal.                                 |
+| CU-03-A3 | El usuario intenta acceder a una sesión finalizada | El sistema muestra las respuestas en modo solo lectura sin permitir modificaciones.                        |
 
 ---
 
 ### CU-04 — Consultar dashboard de resultados
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-04 |
-| **Actores** | U01 Auditor, U02 Técnico, U03 Directivo |
-| **Precondición** | El usuario está autenticado. Existe al menos una sesión de auditoría en estado **Finalizada**. |
-| **Postcondición** | El usuario visualiza el resumen de resultados de la auditoría seleccionada. |
+| Campo             | Detalle                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| **ID**            | CU-04                                                                                          |
+| **Actores**       | U01 Auditor, U02 Técnico, U03 Directivo                                                        |
+| **Precondición**  | El usuario está autenticado. Existe al menos una sesión de auditoría en estado **Finalizada**. |
+| **Postcondición** | El usuario visualiza el resumen de resultados de la auditoría seleccionada.                    |
 
 **Flujo principal**
 
@@ -687,21 +687,21 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
+| ID       | Condición                           | Respuesta del sistema                                                                                     |
+| -------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | CU-04-A1 | U03 (Directivo) accede al dashboard | El sistema muestra la misma vista pero sin opciones de edición ni botones de acción sobre las respuestas. |
-| CU-04-A2 | No existen sesiones finalizadas | El sistema muestra un estado vacío con indicación de que aún no hay auditorías completadas. |
+| CU-04-A2 | No existen sesiones finalizadas     | El sistema muestra un estado vacío con indicación de que aún no hay auditorías completadas.               |
 
 ---
 
 ### CU-05 — Generar y exportar reporte
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-05 |
-| **Actores** | U01 Auditor, U02 Técnico, U03 Directivo |
-| **Precondición** | El usuario está autenticado. Existe una sesión de auditoría en estado **Finalizada**. |
-| **Postcondición** | El archivo PDF o HTML es generado y descargado en el equipo del usuario. |
+| Campo             | Detalle                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| **ID**            | CU-05                                                                                 |
+| **Actores**       | U01 Auditor, U02 Técnico, U03 Directivo                                               |
+| **Precondición**  | El usuario está autenticado. Existe una sesión de auditoría en estado **Finalizada**. |
+| **Postcondición** | El archivo PDF o HTML es generado y descargado en el equipo del usuario.              |
 
 **Flujo principal**
 
@@ -712,20 +712,20 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
-| CU-05-A1 | Error durante la generación del PDF | El sistema muestra un mensaje de error amigable (RNF-02.4) y registra el detalle en el log interno. |
+| ID       | Condición                                          | Respuesta del sistema                                                                                       |
+| -------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| CU-05-A1 | Error durante la generación del PDF                | El sistema muestra un mensaje de error amigable (RNF-02.4) y registra el detalle en el log interno.         |
 | CU-05-A2 | El usuario intenta exportar una sesión en progreso | El sistema no permite la exportación y muestra un mensaje indicando que la auditoría debe estar finalizada. |
 
 ---
 
 ### CU-06 — Ejecutar escaneo de red automatizado
 
-| Campo | Detalle |
-|---|---|
-| **ID** | CU-06 |
-| **Actores** | U01 Auditor |
-| **Precondición** | El usuario está autenticado con rol Auditor. Existe una sesión de auditoría en estado **En progreso**. Nmap está instalado en el equipo. |
+| Campo             | Detalle                                                                                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ID**            | CU-06                                                                                                                                                     |
+| **Actores**       | U01 Auditor                                                                                                                                               |
+| **Precondición**  | El usuario está autenticado con rol Auditor. Existe una sesión de auditoría en estado **En progreso**. Nmap está instalado en el equipo.                  |
 | **Postcondición** | Los resultados del escaneo quedan registrados y las preguntas correlacionadas del cuestionario son auto-completadas con estado **Pendiente de revisión**. |
 
 **Flujo principal**
@@ -740,12 +740,12 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 **Flujos alternativos**
 
-| ID | Condición | Respuesta del sistema |
-|---|---|---|
-| CU-06-A1 | Nmap no está instalado en el equipo | El sistema detecta la ausencia de Nmap antes de iniciar, muestra un mensaje con instrucciones de instalación y cancela la operación. |
-| CU-06-A2 | El rango CIDR ingresado es inválido | El sistema valida el formato antes de ejecutar el escaneo y solicita corrección. |
-| CU-06-A3 | El escaneo no encuentra hosts activos | El sistema informa el resultado y no modifica ninguna respuesta del cuestionario. |
-| CU-06-A4 | El usuario cancela durante el escaneo | El sistema detiene el proceso y descarta los resultados parciales sin afectar las respuestas existentes. |
+| ID       | Condición                             | Respuesta del sistema                                                                                                                |
+| -------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| CU-06-A1 | Nmap no está instalado en el equipo   | El sistema detecta la ausencia de Nmap antes de iniciar, muestra un mensaje con instrucciones de instalación y cancela la operación. |
+| CU-06-A2 | El rango CIDR ingresado es inválido   | El sistema valida el formato antes de ejecutar el escaneo y solicita corrección.                                                     |
+| CU-06-A3 | El escaneo no encuentra hosts activos | El sistema informa el resultado y no modifica ninguna respuesta del cuestionario.                                                    |
+| CU-06-A4 | El usuario cancela durante el escaneo | El sistema detiene el proceso y descarta los resultados parciales sin afectar las respuestas existentes.                             |
 
 ---
 
@@ -753,13 +753,13 @@ La aplicación debe garantizar que los datos de una sesión de auditoría no se 
 
 Las restricciones son límites no negociables que condicionan el diseño e implementación del sistema. A diferencia de los requerimientos no funcionales, no describen atributos de calidad sino fronteras fijas derivadas de decisiones técnicas, legales o de contexto del proyecto.
 
-| ID | Categoría | Descripción breve |
-|---|---|---|
-| R-01 | Tecnológica | Stack obligatorio: Python 3.10+, Flask 3.x, SQLite |
-| R-02 | De alcance | Solo CIS Controls v8 IG1 |
-| R-03 | De despliegue | Aplicación local únicamente |
-| R-04 | Legal / ética | Escaneo de red requiere autorización previa |
-| R-05 | De recursos | Proyecto individual, 10 semanas |
+| ID   | Categoría     | Descripción breve                                  |
+| ---- | ------------- | -------------------------------------------------- |
+| R-01 | Tecnológica   | Stack obligatorio: Python 3.10+, Flask 3.x, SQLite |
+| R-02 | De alcance    | Solo CIS Controls v8 IG1                           |
+| R-03 | De despliegue | Aplicación local únicamente                        |
+| R-04 | Legal / ética | Escaneo de red requiere autorización previa        |
+| R-05 | De recursos   | Proyecto individual, 10 semanas                    |
 
 ---
 
