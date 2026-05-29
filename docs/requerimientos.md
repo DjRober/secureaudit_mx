@@ -49,7 +49,7 @@ Este documento especifica los requerimientos funcionales y no funcionales de **S
 
 - Remediación automática de vulnerabilidades encontradas
 - Monitoreo continuo o en tiempo real (no es un SIEM)
-- Cobertura de controles IG2 e IG3 (versión actual)
+- Cobertura completa de controles IG2 e IG3 (la versión actual incluye únicamente salvaguardas IG1 completas más elementos selectos de IG2 relevantes para PyMES)
 - Integración con herramientas externas de terceros
 - Auditoría de infraestructura cloud
 - Gestión o modificación directa de configuraciones del sistema auditado
@@ -201,6 +201,7 @@ SecureAudit MX ofrece una herramienta de auditoría local, gratuita y guiada, ba
 | RF-06 | Dashboard de resultados | Media | Pendiente | Semana 5 |
 | RF-07 | Generación y exportación de reportes | Alta | Pendiente | Semana 6 |
 | RF-08 | Módulo de escaneo de red | Media | Pendiente | Semana 8 |
+| RF-09 | Log de actividad interno | Alta | Pendiente | Semana 7 |
 
 ---
 
@@ -414,6 +415,32 @@ El sistema debe ofrecer un módulo opcional que automatice parcialmente el cuest
 | RF-08.5 | Las respuestas auto-completadas por el escaneo deben ser identificables visualmente y el auditor debe poder revisarlas y modificarlas manualmente. |
 | RF-08.6 | Los resultados del escaneo deben integrarse en el reporte PDF como sección de evidencia técnica. |
 | RF-08.7 | El módulo de escaneo requiere que Nmap esté instalado en el sistema operativo del equipo donde corre la aplicación. |
+
+---
+
+### RF-09 — Log de actividad interno
+
+| Campo | Detalle |
+|---|---|
+| **ID** | RF-09 |
+| **Nombre** | Log de actividad interno |
+| **Prioridad** | Alta |
+| **Actores** | U01 Auditor |
+| **Fase** | Semana 7 |
+
+**Descripción**
+
+SecureAudit MX es una herramienta de auditoría — debe ser auditable ella misma. El sistema debe registrar en un log interno las acciones relevantes realizadas por los usuarios, de modo que exista trazabilidad de quién hizo qué y cuándo dentro de la aplicación.
+
+**Requerimientos específicos**
+
+| ID | Descripción |
+|---|---|
+| RF-09.1 | El sistema debe registrar en un log interno las siguientes acciones: inicio y cierre de sesión de usuario, creación y finalización de sesiones de auditoría, generación y exportación de reportes, ejecución del módulo de escaneo de red, y creación o eliminación de usuarios. |
+| RF-09.2 | Cada entrada de log debe contener: marca de tiempo (timestamp), identificador del usuario, tipo de acción y resultado (éxito / fallo). |
+| RF-09.3 | El log debe persistirse en un archivo local (e.g., `logs/auditoria.log`) con rotación automática al superar 10 MB. |
+| RF-09.4 | El log no debe contener información sensible como contraseñas, tokens de sesión ni datos personales de los usuarios auditados. |
+| RF-09.5 | El Auditor (U01) debe poder consultar el log de actividad desde la interfaz de administración. Otros roles no tienen acceso al log. |
 
 ---
 
@@ -744,9 +771,9 @@ Esta restricción existe porque el stack fue elegido deliberadamente para maximi
 
 ---
 
-### R-02 — Alcance limitado a CIS Controls v8 IG1
+### R-02 — Alcance del marco CIS Controls v8
 
-El sistema evalúa únicamente los **18 controles CIS v8 Implementation Group 1**. Queda fuera del alcance de la versión 1.0.0 la implementación de controles IG2, IG3, otros marcos de referencia (NIST CSF, ISO 27001, CMMC) o controles personalizados definidos por el usuario. El contenido del cuestionario (preguntas, criticidades y recomendaciones) está basado en el estándar CIS publicado en 2021 y no se actualizará dinámicamente ante revisiones futuras del marco.
+El sistema evalúa los **18 controles CIS v8 IG1 de forma completa**, más un subconjunto de salvaguardas IG2 seleccionadas por su relevancia para el contexto PyME mexicano. La selección de elementos IG2 incluidos debe estar documentada y justificada en el checklist de auditoría (`docs/checklist_auditoria_v1.md`). Queda fuera del alcance de la versión 1.0.0 la cobertura completa de IG2, cualquier control IG3, otros marcos de referencia (NIST CSF, ISO 27001, CMMC) o controles personalizados definidos por el usuario. El contenido del cuestionario está basado en el estándar CIS publicado en 2021 y no se actualizará dinámicamente ante revisiones futuras del marco.
 
 ---
 
