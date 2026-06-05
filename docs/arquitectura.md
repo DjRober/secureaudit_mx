@@ -169,14 +169,14 @@ flowchart TD
     K --> L{¿Último control?}
     L -- No --> M[Siguiente control]
     M --> I
-    L -- Sí --> N[POST /sesiones/finalizar]
-
-    N --> O[GET /resultados/dashboard]
-    O --> P{¿Ejecutar escaneo?}
+    L -- Sí --> P{¿Ejecutar escaneo\nantes de finalizar?}
     P -- Sí --> Q[POST /escaneo/ejecutar]
     Q --> R[Revisar resultados auto-completados]
-    R --> O
-    P -- No --> S[GET /reportes/exportar]
+    R --> N
+    P -- No --> N[POST /sesiones/finalizar]
+
+    N --> O[GET /resultados/dashboard]
+    O --> S[GET /reportes/exportar]
 
     S --> T{Formato}
     T -- PDF --> U([Descarga reporte.pdf])

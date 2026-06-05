@@ -92,6 +92,7 @@ Para cada categoría STRIDE se identifican las amenazas específicas al contexto
 | T-01 | Un usuario con acceso al sistema de archivos modifica directamente el archivo `secureaudit.db` para alterar resultados de una auditoría | A-05 | Media | Alto |
 | T-02 | Un usuario con rol Técnico (U02) manipula parámetros HTTP para modificar respuestas de una sesión de otro auditor | A-02 | Baja | Alto |
 | T-03 | Un usuario modifica el archivo de log `auditoria.log` para eliminar evidencia de sus acciones | A-04 | Baja | Medio |
+| T-04 | Un script malicioso en otra pestaña del navegador envía un POST a `localhost:5000` en nombre del usuario autenticado, modificando respuestas o ejecutando acciones no deseadas (CSRF) | A-02, A-06 | Baja | Alto |
 
 ### R — Repudiation (Repudio)
 
@@ -139,6 +140,7 @@ Para cada categoría STRIDE se identifican las amenazas específicas al contexto
 | T-01 | Riesgo residual aceptado (ver sección 5). Documentar en el README que el archivo `.db` debe protegerse a nivel de permisos del SO | — |
 | T-02 | Validar en el servidor que el `sesion_id` de cada request pertenece al usuario autenticado antes de cualquier operación de escritura | RNF-01.3 |
 | T-03 | Riesgo residual aceptado (ver sección 5). El log no es la única fuente de verdad — la base de datos también registra timestamps | RF-09 |
+| T-04 | Implementar Flask-WTF con token CSRF en todos los formularios POST. Configurar `WTF_CSRF_ENABLED = True` en la configuración de Flask | RNF-01.2, RF-01.7 |
 | R-01 | El log registra cada exportación con timestamp y usuario (RF-09.1) | RF-09 |
 | R-02 | El módulo de escaneo requiere confirmación explícita que se registra en el log con timestamp y usuario | RF-08.1, RF-09.1 |
 | I-01 | En producción, desactivar el modo debug de Flask. Implementar página de error 500 personalizada que no exponga detalles internos | RNF-02.4, RNF-06.4 |

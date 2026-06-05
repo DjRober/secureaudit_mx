@@ -228,7 +228,8 @@ El sistema debe permitir el registro, autenticación y administración de usuari
 | RF-01.3 | El sistema debe mantener la sesión activa mediante cookies seguras y cerrarla al hacer logout o por inactividad.                                                                                                                                                               |
 | RF-01.4 | El sistema debe soportar tres roles: **Auditor** (acceso completo a auditorías y reportes), **Técnico** (auditorías parciales y consulta de reportes) y **Directivo** (solo lectura: consulta y exportación de reportes). La gestión de usuarios es exclusiva del rol Auditor. |
 | RF-01.5 | Todas las rutas de la aplicación deben estar protegidas y requerir autenticación activa.                                                                                                                                                                                       |
-| RF-01.6 | El Administrador puede crear, desactivar y eliminar cuentas de usuario.                                                                                                                                                                                                        |
+| RF-01.6 | El Auditor (U01) puede crear, desactivar y eliminar cuentas de usuario.                                                                                                                                                                                                        |
+| RF-01.7 | El sistema debe limitar los intentos de login fallidos a un máximo de 5 por cuenta. Tras alcanzar el límite, la cuenta debe bloquearse temporalmente durante 15 minutos. El bloqueo y los intentos fallidos deben registrarse en el log interno (RF-09).                        |
 
 ---
 
@@ -470,7 +471,7 @@ Dado que SecureAudit MX es una herramienta de auditoría de seguridad, la aplica
 | RNF-01.1 | Las contraseñas de usuario deben almacenarse usando hashing bcrypt. Queda prohibido almacenar contraseñas en texto plano.                                   |
 | RNF-01.2 | Todos los formularios POST deben incluir protección contra CSRF mediante tokens de sesión.                                                                  |
 | RNF-01.3 | La aplicación debe sanitizar y validar todos los inputs del usuario para prevenir inyección SQL y XSS.                                                      |
-| RNF-01.4 | La aplicación debe incluir headers de seguridad HTTP: `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options` y `Strict-Transport-Security`. |
+| RNF-01.4 | La aplicación debe incluir headers de seguridad HTTP: `Content-Security-Policy`, `X-Content-Type-Options` y `X-Frame-Options`. El header `Strict-Transport-Security` debe configurarse únicamente en despliegues futuros sobre HTTPS — en `localhost` HTTP es ignorado por el navegador y no aplica en v1.0.0. |
 | RNF-01.5 | Las sesiones de usuario deben expirar tras 60 minutos de inactividad.                                                                                       |
 | RNF-01.6 | El módulo de escaneo de red (RF-08) debe requerir confirmación explícita antes de ejecutarse y registrar en log la autorización del auditor.                |
 
