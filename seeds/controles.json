@@ -1,0 +1,20 @@
+[
+  { "id_control": 1,  "numero_control": 1,  "nombre_control": "Inventario y Control de Activos de Hardware" },
+  { "id_control": 2,  "numero_control": 2,  "nombre_control": "Inventario y Control de Activos de Software" },
+  { "id_control": 3,  "numero_control": 3,  "nombre_control": "Protección de Datos" },
+  { "id_control": 4,  "numero_control": 4,  "nombre_control": "Configuración Segura de Activos" },
+  { "id_control": 5,  "numero_control": 5,  "nombre_control": "Gestión de Cuentas" },
+  { "id_control": 6,  "numero_control": 6,  "nombre_control": "Gestión de Control de Acceso" },
+  { "id_control": 7,  "numero_control": 7,  "nombre_control": "Gestión Continua de Vulnerabilidades" },
+  { "id_control": 8,  "numero_control": 8,  "nombre_control": "Gestión de Registros de Auditoría (Logs)" },
+  { "id_control": 9,  "numero_control": 9,  "nombre_control": "Protecciones del Navegador y Correo Electrónico" },
+  { "id_control": 10, "numero_control": 10, "nombre_control": "Defensas contra Malware" },
+  { "id_control": 11, "numero_control": 11, "nombre_control": "Recuperación de Datos (Backups)" },
+  { "id_control": 12, "numero_control": 12, "nombre_control": "Gestión de Infraestructura de Red" },
+  { "id_control": 13, "numero_control": 13, "nombre_control": "Monitoreo y Defensa de Red" },
+  { "id_control": 14, "numero_control": 14, "nombre_control": "Concienciación y Capacitación" },
+  { "id_control": 15, "numero_control": 15, "nombre_control": "Gestión de Proveedores y Servicios de Terceros" },
+  { "id_control": 16, "numero_control": 16, "nombre_control": "Seguridad del Software Desarrollado Internamente" },
+  { "id_control": 17, "numero_control": 17, "nombre_control": "Gestión de Respuesta a Incidentes" },
+  { "id_control": 18, "numero_control": 18, "nombre_control": "Pruebas de Penetración" }
+]
