@@ -1,3 +1,11 @@
+# Entorno virtual y artefactos de Python
 venv/
 __pycache__/
 *.pyc
+
+# Base de datos local (instancia)
+instance/
+*.db
+
+# Configuración local de herramientas
+.claude/
