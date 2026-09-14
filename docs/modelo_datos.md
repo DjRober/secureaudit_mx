@@ -2,10 +2,14 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión** | 1.0.0 |
-| **Fecha** | 2026-06-11 |
+| **Versión** | 1.1.0 |
+| **Fecha** | 2026-09-09 |
 | **Autor** | Roberto Pérez |
-| **Estado** | En desarrollo |
+| **Estado** | Implementado |
+
+> **Registro de cambios**
+> - **v1.1.0 (2026-09-09)** — Esquema implementado en `app/models/` (8 modelos SQLAlchemy 2.0) y verificado: PK/FK, `CHECK` de criticidad y tipo de respuesta, `UNIQUE(id_sesion, id_pregunta)` en `respuestas`, PK compuesta en `sesion_controles` y relaciones bidireccionales. Sin cambios de contenido respecto al esquema.
+> - **v1.0.0 (2026-06-11)** — Versión inicial del modelo de datos.
 
 ---
 

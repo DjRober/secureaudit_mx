@@ -219,14 +219,14 @@
 | 9. Navegador y Correo | 4 | 2 | 2 | 0 |
 | 10. Malware | 4 | 3 | 1 | 0 |
 | 11. Backups | 4 | 4 | 0 | 0 |
-| 12. Red | 4 | 3 | 2 | 0 |
+| 12. Red | 4 | 2 | 2 | 0 |
 | 13. Monitoreo de Red | 3 | 2 | 1 | 0 |
 | 14. Capacitación | 4 | 3 | 1 | 0 |
 | 15. Proveedores | 3 | 3 | 0 | 0 |
 | 16. Software Propio | 3 | 2 | 1 | 0 |
 | 17. Respuesta Incidentes | 4 | 2 | 2 | 0 |
 | 18. Pen Testing | 3 | 2 | 1 | 0 |
-| **TOTAL** | **71** | **52** | **19** | **1** |
+| **TOTAL** | **71** | **51** | **19** | **1** |
 
 ---
 *Documento generado para el proyecto SecureAudit MX*  

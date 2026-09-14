@@ -2,11 +2,15 @@
 
 | Campo                      | Valor         |
 | -------------------------- | ------------- |
-| **Versión**                | 1.0.0         |
-| **Fecha**                  | 2026-05-29    |
+| **Versión**                | 1.0.1         |
+| **Fecha**                  | 2026-09-09    |
 | **Autor**                  | Roberto Pérez |
 | **Estado**                 | En desarrollo |
 | **Estándar de referencia** | IEEE 830      |
+
+> **Registro de cambios**
+> - **v1.0.1 (2026-09-09)** — Nota de avance en §3: la capa de datos (modelos y catálogo) que sustenta los RF ya está implementada; los estados de los RF se mantienen en *Pendiente* hasta desarrollar su lógica. Sin cambios en los requerimientos.
+> - **v1.0.0 (2026-05-29)** — Versión inicial de la especificación.
 
 ---
 
@@ -202,6 +206,8 @@ SecureAudit MX ofrece una herramienta de auditoría local, gratuita y guiada, ba
 | RF-07 | Generación y exportación de reportes      |   Alta    | Pendiente | Semana 6 |
 | RF-08 | Módulo de escaneo de red                  |   Media   | Pendiente | Semana 8 |
 | RF-09 | Log de actividad interno                  |   Alta    | Pendiente | Semana 7 |
+
+> **Nota de avance (2026-09-09):** el modelo de datos (8 tablas) y el catálogo base (18 controles / 71 preguntas) que sustentan estos requerimientos ya están implementados (`app/models/`) y sembrados (`seed.py` + `seeds/`). Los RF se mantienen en **Pendiente** porque su lógica y rutas aún no se desarrollan; esta capa de datos es transversal a RF-02…RF-09 y habilita su implementación.
 
 ---
 
