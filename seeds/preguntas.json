@@ -1,90 +1,712 @@
 [
-  { "id_pregunta": 1,  "id_control": 1, "codigo_pregunta": "1.1", "texto_pregunta": "¿La empresa tiene un inventario actualizado de todos los dispositivos conectados a la red (computadoras, impresoras, routers, etc.)?", "cia_pregunta": "C, I, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 2,  "id_control": 1, "codigo_pregunta": "1.2", "texto_pregunta": "¿Se registra quién es el responsable de cada dispositivo?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 3,  "id_control": 1, "codigo_pregunta": "1.3", "texto_pregunta": "¿Existe algún proceso para registrar dispositivos nuevos antes de conectarlos a la red?", "cia_pregunta": "C, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 4,  "id_control": 1, "codigo_pregunta": "1.4", "texto_pregunta": "¿Se detectan y bloquean dispositivos no autorizados que se conecten a la red?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 5,  "id_control": 2, "codigo_pregunta": "2.1", "texto_pregunta": "¿La empresa tiene un listado del software instalado en sus equipos?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 6,  "id_control": 2, "codigo_pregunta": "2.2", "texto_pregunta": "¿Está prohibido instalar software sin autorización?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 7,  "id_control": 2, "codigo_pregunta": "2.3", "texto_pregunta": "¿Se verifica periódicamente si hay software no autorizado instalado?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 8,  "id_control": 2, "codigo_pregunta": "2.4", "texto_pregunta": "¿El software utilizado cuenta con licencias válidas y actualizadas?", "cia_pregunta": "I", "criticidad_pregunta": "Baja", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 9,  "id_control": 3, "codigo_pregunta": "3.1", "texto_pregunta": "¿La empresa sabe qué datos son sensibles (datos de clientes, financieros, personales)?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 10, "id_control": 3, "codigo_pregunta": "3.2", "texto_pregunta": "¿Los datos sensibles están cifrados cuando se almacenan?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 11, "id_control": 3, "codigo_pregunta": "3.3", "texto_pregunta": "¿Los datos sensibles están cifrados cuando se transmiten (uso de HTTPS, VPN, etc.)?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 12, "id_control": 3, "codigo_pregunta": "3.4", "texto_pregunta": "¿Existe una política sobre qué empleados pueden acceder a qué datos?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 13, "id_control": 3, "codigo_pregunta": "3.5", "texto_pregunta": "¿Se tiene conocimiento de la Ley Federal de Protección de Datos Personales (LFPDPPP) y se cumple con ella?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 14, "id_control": 4, "codigo_pregunta": "4.1", "texto_pregunta": "¿Se cambian las contraseñas por defecto de routers, switches y otros dispositivos de red?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 15, "id_control": 4, "codigo_pregunta": "4.2", "texto_pregunta": "¿Los equipos tienen activado el firewall del sistema operativo?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 16, "id_control": 4, "codigo_pregunta": "4.3", "texto_pregunta": "¿Se deshabilitan servicios y puertos innecesarios en los equipos?", "cia_pregunta": "C, A", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 17, "id_control": 4, "codigo_pregunta": "4.4", "texto_pregunta": "¿Las configuraciones de seguridad de los equipos se revisan periódicamente?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 18, "id_control": 5, "codigo_pregunta": "5.1", "texto_pregunta": "¿Cada empleado tiene su propia cuenta de usuario (no comparten cuentas)?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 19, "id_control": 5, "codigo_pregunta": "5.2", "texto_pregunta": "¿Existen cuentas de administrador separadas de las cuentas de uso diario?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 20, "id_control": 5, "codigo_pregunta": "5.3", "texto_pregunta": "¿Se eliminan o deshabilitan las cuentas de empleados que ya no trabajan en la empresa?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 21, "id_control": 5, "codigo_pregunta": "5.4", "texto_pregunta": "¿Se tiene un registro de todas las cuentas de usuario activas?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 22, "id_control": 5, "codigo_pregunta": "5.5", "texto_pregunta": "¿Se revisa periódicamente quién tiene acceso a qué sistemas?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 23, "id_control": 6, "codigo_pregunta": "6.1", "texto_pregunta": "¿Se aplica el principio de mínimo privilegio (cada usuario solo accede a lo que necesita)?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 24, "id_control": 6, "codigo_pregunta": "6.2", "texto_pregunta": "¿Se usa autenticación de dos factores (2FA) en sistemas críticos o correo corporativo?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 25, "id_control": 6, "codigo_pregunta": "6.3", "texto_pregunta": "¿Las contraseñas cumplen con una política de seguridad (mínimo de caracteres, complejidad)?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 26, "id_control": 6, "codigo_pregunta": "6.4", "texto_pregunta": "¿Se bloquea la sesión automáticamente tras un período de inactividad?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 27, "id_control": 6, "codigo_pregunta": "6.5", "texto_pregunta": "¿Está prohibido compartir contraseñas entre empleados?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 28, "id_control": 7, "codigo_pregunta": "7.1", "texto_pregunta": "¿Los sistemas operativos de los equipos están actualizados?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 29, "id_control": 7, "codigo_pregunta": "7.2", "texto_pregunta": "¿Las aplicaciones (navegadores, Office, etc.) están actualizadas?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 30, "id_control": 7, "codigo_pregunta": "7.3", "texto_pregunta": "¿Se aplican parches de seguridad cuando están disponibles?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 31, "id_control": 7, "codigo_pregunta": "7.4", "texto_pregunta": "¿Existe algún proceso para conocer nuevas vulnerabilidades que afecten el software que usan?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 32, "id_control": 8, "codigo_pregunta": "8.1", "texto_pregunta": "¿Los sistemas críticos generan logs de actividad (accesos, errores, cambios)?", "cia_pregunta": "I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 33, "id_control": 8, "codigo_pregunta": "8.2", "texto_pregunta": "¿Los logs se almacenan de forma segura y no pueden ser borrados por usuarios normales?", "cia_pregunta": "I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 34, "id_control": 8, "codigo_pregunta": "8.3", "texto_pregunta": "¿Alguien revisa los logs periódicamente para detectar actividad sospechosa?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 35, "id_control": 8, "codigo_pregunta": "8.4", "texto_pregunta": "¿Se conservan los logs por al menos 90 días?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 36, "id_control": 9, "codigo_pregunta": "9.1", "texto_pregunta": "¿Los empleados tienen capacitación básica para identificar correos de phishing?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 37, "id_control": 9, "codigo_pregunta": "9.2", "texto_pregunta": "¿Existe un filtro de spam activo en el correo corporativo?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 38, "id_control": 9, "codigo_pregunta": "9.3", "texto_pregunta": "¿Está bloqueado el acceso a sitios web maliciosos o no relacionados con el trabajo?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 39, "id_control": 9, "codigo_pregunta": "9.4", "texto_pregunta": "¿Los navegadores están actualizados a su versión más reciente?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 40, "id_control": 10, "codigo_pregunta": "10.1", "texto_pregunta": "¿Todos los equipos tienen un antivirus o antimalware instalado y activo?", "cia_pregunta": "C, I, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 41, "id_control": 10, "codigo_pregunta": "10.2", "texto_pregunta": "¿Las definiciones del antivirus se actualizan automáticamente?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 42, "id_control": 10, "codigo_pregunta": "10.3", "texto_pregunta": "¿Está deshabilitada la ejecución automática de dispositivos USB?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 43, "id_control": 10, "codigo_pregunta": "10.4", "texto_pregunta": "¿Se realizan escaneos periódicos completos en los equipos?", "cia_pregunta": "C, I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 44, "id_control": 11, "codigo_pregunta": "11.1", "texto_pregunta": "¿Se realizan copias de seguridad (backups) de los datos críticos del negocio?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 45, "id_control": 11, "codigo_pregunta": "11.2", "texto_pregunta": "¿Los backups se almacenan en una ubicación separada (externa o en la nube)?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 46, "id_control": 11, "codigo_pregunta": "11.3", "texto_pregunta": "¿Se ha probado alguna vez la restauración de un backup para verificar que funciona?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 47, "id_control": 11, "codigo_pregunta": "11.4", "texto_pregunta": "¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual)", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "frecuencia", "descripcion_ayuda": null },
-
-  { "id_pregunta": 48, "id_control": 12, "codigo_pregunta": "12.1", "texto_pregunta": "¿La red WiFi de empleados está separada de la red WiFi para visitantes?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 49, "id_control": 12, "codigo_pregunta": "12.2", "texto_pregunta": "¿El router/firewall perimetral tiene configuración de seguridad revisada?", "cia_pregunta": "C, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 50, "id_control": 12, "codigo_pregunta": "12.3", "texto_pregunta": "¿Se monitorea quién está conectado a la red en tiempo real?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 51, "id_control": 12, "codigo_pregunta": "12.4", "texto_pregunta": "¿Existen redes separadas (VLANs) para diferentes áreas del negocio?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 52, "id_control": 13, "codigo_pregunta": "13.1", "texto_pregunta": "¿Existe algún sistema que alerte sobre actividad inusual en la red?", "cia_pregunta": "C, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 53, "id_control": 13, "codigo_pregunta": "13.2", "texto_pregunta": "¿Se monitorea el tráfico de red para detectar transferencias anómalas de datos?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 54, "id_control": 13, "codigo_pregunta": "13.3", "texto_pregunta": "¿Se han definido qué eventos de red deben generar una alerta?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 55, "id_control": 14, "codigo_pregunta": "14.1", "texto_pregunta": "¿Los empleados reciben capacitación en seguridad informática al menos una vez al año?", "cia_pregunta": "C, I, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 56, "id_control": 14, "codigo_pregunta": "14.2", "texto_pregunta": "¿Existe una política de uso aceptable de los recursos tecnológicos de la empresa?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 57, "id_control": 14, "codigo_pregunta": "14.3", "texto_pregunta": "¿Los empleados saben a quién reportar un incidente de seguridad?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 58, "id_control": 14, "codigo_pregunta": "14.4", "texto_pregunta": "¿Se realizan simulacros de phishing para medir la concienciación del personal?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 59, "id_control": 15, "codigo_pregunta": "15.1", "texto_pregunta": "¿Se evalúa la seguridad de los proveedores que tienen acceso a sistemas o datos de la empresa?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 60, "id_control": 15, "codigo_pregunta": "15.2", "texto_pregunta": "¿Los contratos con proveedores incluyen cláusulas de seguridad y confidencialidad?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 61, "id_control": 15, "codigo_pregunta": "15.3", "texto_pregunta": "¿Se revoca el acceso de proveedores cuando ya no son necesarios?", "cia_pregunta": "C", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 62, "id_control": 16, "codigo_pregunta": "16.1", "texto_pregunta": "¿El software desarrollado internamente sigue prácticas de desarrollo seguro?", "cia_pregunta": "C, I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 63, "id_control": 16, "codigo_pregunta": "16.2", "texto_pregunta": "¿Se realizan revisiones de seguridad antes de poner en producción nuevo software?", "cia_pregunta": "I", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 64, "id_control": 16, "codigo_pregunta": "16.3", "texto_pregunta": "¿Los errores de la aplicación se manejan sin exponer información técnica al usuario?", "cia_pregunta": "C", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 65, "id_control": 17, "codigo_pregunta": "17.1", "texto_pregunta": "¿Existe un plan de respuesta a incidentes de seguridad documentado?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 66, "id_control": 17, "codigo_pregunta": "17.2", "texto_pregunta": "¿Los empleados clave saben qué hacer si detectan un ataque o brecha de seguridad?", "cia_pregunta": "A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 67, "id_control": 17, "codigo_pregunta": "17.3", "texto_pregunta": "¿Se ha practicado o simulado alguna vez la respuesta a un incidente?", "cia_pregunta": "A", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 68, "id_control": 17, "codigo_pregunta": "17.4", "texto_pregunta": "¿Se documentan los incidentes de seguridad ocurridos para aprender de ellos?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-
-  { "id_pregunta": 69, "id_control": 18, "codigo_pregunta": "18.1", "texto_pregunta": "¿Se realizan pruebas de penetración periódicas a los sistemas críticos?", "cia_pregunta": "C, I, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 70, "id_control": 18, "codigo_pregunta": "18.2", "texto_pregunta": "¿Los hallazgos de pruebas anteriores han sido corregidos?", "cia_pregunta": "C, I, A", "criticidad_pregunta": "Alta", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null },
-  { "id_pregunta": 71, "id_control": 18, "codigo_pregunta": "18.3", "texto_pregunta": "¿Existe un proceso formal para contratar y autorizar pruebas de seguridad externas?", "cia_pregunta": "I", "criticidad_pregunta": "Media", "tipo_respuesta": "si_no_na", "descripcion_ayuda": null }
+  {
+    "id_pregunta": 1,
+    "id_control": 1,
+    "codigo_pregunta": "1.1",
+    "texto_pregunta": "¿La empresa tiene un inventario actualizado de todos los dispositivos conectados a la red (computadoras, impresoras, routers, etc.)?",
+    "cia_pregunta": "C, I, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que exista una lista actualizada de todos los equipos conectados a la red (computadoras, impresoras, routers, servidores, móviles). No se puede proteger lo que no se sabe que existe: el inventario es la base para monitorear y responder a incidentes (CIS v8, 1.1)."
+  },
+  {
+    "id_pregunta": 2,
+    "id_control": 1,
+    "codigo_pregunta": "1.2",
+    "texto_pregunta": "¿Se registra quién es el responsable de cada dispositivo?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que cada equipo tenga asignado un responsable. Saber quién administra cada activo permite aplicar controles y rendir cuentas cuando algo falla (CIS v8, 1.1)."
+  },
+  {
+    "id_pregunta": 3,
+    "id_control": 1,
+    "codigo_pregunta": "1.3",
+    "texto_pregunta": "¿Existe algún proceso para registrar dispositivos nuevos antes de conectarlos a la red?",
+    "cia_pregunta": "C, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si hay un proceso para registrar y aprobar equipos nuevos antes de conectarlos a la red. Evita que dispositivos sin configurar ni parchear entren sin control (CIS v8, 1.1)."
+  },
+  {
+    "id_pregunta": 4,
+    "id_control": 1,
+    "codigo_pregunta": "1.4",
+    "texto_pregunta": "¿Se detectan y bloquean dispositivos no autorizados que se conecten a la red?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si la empresa detecta y bloquea o aísla equipos no autorizados que se conectan a la red. Los activos desconocidos suelen tener configuraciones débiles que un atacante puede aprovechar (CIS v8, 1.2)."
+  },
+  {
+    "id_pregunta": 5,
+    "id_control": 2,
+    "codigo_pregunta": "2.1",
+    "texto_pregunta": "¿La empresa tiene un listado del software instalado en sus equipos?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que exista un inventario del software instalado (título, editor, propósito). Sin saber qué software corre, no se puede detectar si hay versiones vulnerables o sin licencia (CIS v8, 2.1)."
+  },
+  {
+    "id_pregunta": 6,
+    "id_control": 2,
+    "codigo_pregunta": "2.2",
+    "texto_pregunta": "¿Está prohibido instalar software sin autorización?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que solo se pueda instalar software autorizado. Restringir instalaciones reduce la superficie de ataque y el malware oculto en programas no aprobados (CIS v8, 2.5)."
+  },
+  {
+    "id_pregunta": 7,
+    "id_control": 2,
+    "codigo_pregunta": "2.3",
+    "texto_pregunta": "¿Se verifica periódicamente si hay software no autorizado instalado?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se revisa con regularidad la presencia de software no autorizado para removerlo. El software no gestionado introduce vulnerabilidades y riesgos (CIS v8, 2.3)."
+  },
+  {
+    "id_pregunta": 8,
+    "id_control": 2,
+    "codigo_pregunta": "2.4",
+    "texto_pregunta": "¿El software utilizado cuenta con licencias válidas y actualizadas?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Baja",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa que el software tenga licencias vigentes y siga soportado por el fabricante. El software sin soporte deja de recibir parches de seguridad (CIS v8, 2.2)."
+  },
+  {
+    "id_pregunta": 9,
+    "id_control": 3,
+    "codigo_pregunta": "3.1",
+    "texto_pregunta": "¿La empresa sabe qué datos son sensibles (datos de clientes, financieros, personales)?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que la empresa haya identificado y clasificado sus datos sensibles (de clientes, financieros, personales). Proteger los datos empieza por saber cuáles son críticos y dónde están (CIS v8, 3.1 y 3.2)."
+  },
+  {
+    "id_pregunta": 10,
+    "id_control": 3,
+    "codigo_pregunta": "3.2",
+    "texto_pregunta": "¿Los datos sensibles están cifrados cuando se almacenan?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que los datos sensibles se guarden cifrados en equipos, servidores y bases de datos. El cifrado en reposo mitiga el robo o la pérdida física de los equipos (CIS v8, 3.6 y 3.11)."
+  },
+  {
+    "id_pregunta": 11,
+    "id_control": 3,
+    "codigo_pregunta": "3.3",
+    "texto_pregunta": "¿Los datos sensibles están cifrados cuando se transmiten (uso de HTTPS, VPN, etc.)?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si los datos sensibles viajan cifrados (HTTPS, TLS, VPN). El cifrado en tránsito evita que sean interceptados mientras circulan por la red (CIS v8, 3.10)."
+  },
+  {
+    "id_pregunta": 12,
+    "id_control": 3,
+    "codigo_pregunta": "3.4",
+    "texto_pregunta": "¿Existe una política sobre qué empleados pueden acceder a qué datos?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa que existan reglas de quién puede acceder a qué datos, según su necesidad de conocer. Limita la exposición si una cuenta llega a comprometerse (CIS v8, 3.3)."
+  },
+  {
+    "id_pregunta": 13,
+    "id_control": 3,
+    "codigo_pregunta": "3.5",
+    "texto_pregunta": "¿Se tiene conocimiento de la Ley Federal de Protección de Datos Personales (LFPDPPP) y se cumple con ella?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica el conocimiento y cumplimiento de la Ley Federal de Protección de Datos Personales (LFPDPPP). La gestión adecuada de datos personales es un requisito legal, no solo técnico (CIS v8, Control 3)."
+  },
+  {
+    "id_pregunta": 14,
+    "id_control": 4,
+    "codigo_pregunta": "4.1",
+    "texto_pregunta": "¿Se cambian las contraseñas por defecto de routers, switches y otros dispositivos de red?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que se cambien las contraseñas y cuentas por defecto de routers, switches y demás dispositivos. Las credenciales de fábrica son de las primeras cosas que prueba un atacante (CIS v8, 4.7)."
+  },
+  {
+    "id_pregunta": 15,
+    "id_control": 4,
+    "codigo_pregunta": "4.2",
+    "texto_pregunta": "¿Los equipos tienen activado el firewall del sistema operativo?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que los equipos tengan activo el firewall del sistema operativo, idealmente denegando por defecto. Limita el tráfico no autorizado hacia y desde el equipo (CIS v8, 4.4 y 4.5)."
+  },
+  {
+    "id_pregunta": 16,
+    "id_control": 4,
+    "codigo_pregunta": "4.3",
+    "texto_pregunta": "¿Se deshabilitan servicios y puertos innecesarios en los equipos?",
+    "cia_pregunta": "C, A",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se desactivan los servicios y puertos que no se usan. Cada servicio abierto es una posible puerta de entrada (CIS v8, 4.8)."
+  },
+  {
+    "id_pregunta": 17,
+    "id_control": 4,
+    "codigo_pregunta": "4.4",
+    "texto_pregunta": "¿Las configuraciones de seguridad de los equipos se revisan periódicamente?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si las configuraciones de seguridad se auditan con regularidad. Las configuraciones se degradan con el tiempo por cambios y excepciones acumuladas (CIS v8, 4.1 y 4.2)."
+  },
+  {
+    "id_pregunta": 18,
+    "id_control": 5,
+    "codigo_pregunta": "5.1",
+    "texto_pregunta": "¿Cada empleado tiene su propia cuenta de usuario (no comparten cuentas)?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que cada empleado tenga su propia cuenta y que no se compartan. Las cuentas compartidas impiden saber quién hizo qué y son difíciles de revocar (CIS v8, 5.1)."
+  },
+  {
+    "id_pregunta": 19,
+    "id_control": 5,
+    "codigo_pregunta": "5.2",
+    "texto_pregunta": "¿Existen cuentas de administrador separadas de las cuentas de uso diario?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que existan cuentas de administrador distintas de las de uso diario. Así, si se compromete la cuenta normal, el atacante no obtiene privilegios elevados (CIS v8, 5.4)."
+  },
+  {
+    "id_pregunta": 20,
+    "id_control": 5,
+    "codigo_pregunta": "5.3",
+    "texto_pregunta": "¿Se eliminan o deshabilitan las cuentas de empleados que ya no trabajan en la empresa?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se deshabilitan o eliminan las cuentas de quienes dejan la empresa, cuanto antes tras la baja. Las cuentas huérfanas son un vector de acceso frecuente (CIS v8, 5.3)."
+  },
+  {
+    "id_pregunta": 21,
+    "id_control": 5,
+    "codigo_pregunta": "5.4",
+    "texto_pregunta": "¿Se tiene un registro de todas las cuentas de usuario activas?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa que exista un inventario de todas las cuentas activas, de usuario y de administrador. Permite validar que cada cuenta corresponde a un usuario autorizado (CIS v8, 5.1)."
+  },
+  {
+    "id_pregunta": 22,
+    "id_control": 5,
+    "codigo_pregunta": "5.5",
+    "texto_pregunta": "¿Se revisa periódicamente quién tiene acceso a qué sistemas?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si se revisa con regularidad quién tiene acceso a qué sistemas. Detecta privilegios acumulados o accesos que ya no corresponden al rol (CIS v8, 5.1 y 6.8)."
+  },
+  {
+    "id_pregunta": 23,
+    "id_control": 6,
+    "codigo_pregunta": "6.1",
+    "texto_pregunta": "¿Se aplica el principio de mínimo privilegio (cada usuario solo accede a lo que necesita)?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que cada usuario tenga solo el acceso que necesita para su rol (mínimo privilegio). Limita el daño si una cuenta llega a comprometerse (CIS v8, 6.8)."
+  },
+  {
+    "id_pregunta": 24,
+    "id_control": 6,
+    "codigo_pregunta": "6.2",
+    "texto_pregunta": "¿Se usa autenticación de dos factores (2FA) en sistemas críticos o correo corporativo?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica el uso de autenticación de dos factores (2FA/MFA) en sistemas críticos, acceso remoto y correo. Agrega una barrera aunque la contraseña se filtre (CIS v8, 6.3, 6.4 y 6.5)."
+  },
+  {
+    "id_pregunta": 25,
+    "id_control": 6,
+    "codigo_pregunta": "6.3",
+    "texto_pregunta": "¿Las contraseñas cumplen con una política de seguridad (mínimo de caracteres, complejidad)?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si las contraseñas cumplen una política mínima de longitud y complejidad (CIS sugiere 14 caracteres sin MFA, u 8 con MFA). Las contraseñas débiles son fáciles de adivinar o descifrar (CIS v8, 5.2)."
+  },
+  {
+    "id_pregunta": 26,
+    "id_control": 6,
+    "codigo_pregunta": "6.4",
+    "texto_pregunta": "¿Se bloquea la sesión automáticamente tras un período de inactividad?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si la sesión se bloquea automáticamente tras un periodo de inactividad (CIS recomienda no más de 15 minutos en equipos de escritorio). Evita accesos a equipos desatendidos (CIS v8, 4.3)."
+  },
+  {
+    "id_pregunta": 27,
+    "id_control": 6,
+    "codigo_pregunta": "6.5",
+    "texto_pregunta": "¿Está prohibido compartir contraseñas entre empleados?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que esté prohibido compartir contraseñas entre empleados. Compartir credenciales rompe la trazabilidad y multiplica el riesgo de fuga (CIS v8, Control 5)."
+  },
+  {
+    "id_pregunta": 28,
+    "id_control": 7,
+    "codigo_pregunta": "7.1",
+    "texto_pregunta": "¿Los sistemas operativos de los equipos están actualizados?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que los sistemas operativos estén actualizados, idealmente con parcheo automático mensual o más frecuente. Los equipos sin parches son blanco de exploits conocidos (CIS v8, 7.3)."
+  },
+  {
+    "id_pregunta": 29,
+    "id_control": 7,
+    "codigo_pregunta": "7.2",
+    "texto_pregunta": "¿Las aplicaciones (navegadores, Office, etc.) están actualizadas?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que las aplicaciones (navegadores, Office, etc.) estén al día. Las aplicaciones desactualizadas son una vía común de intrusión (CIS v8, 7.4)."
+  },
+  {
+    "id_pregunta": 30,
+    "id_control": 7,
+    "codigo_pregunta": "7.3",
+    "texto_pregunta": "¿Se aplican parches de seguridad cuando están disponibles?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se aplican los parches de seguridad cuando salen. Cerrar cuanto antes la ventana entre el parche y su instalación reduce el riesgo de explotación (CIS v8, 7.3 y 7.7)."
+  },
+  {
+    "id_pregunta": 31,
+    "id_control": 7,
+    "codigo_pregunta": "7.4",
+    "texto_pregunta": "¿Existe algún proceso para conocer nuevas vulnerabilidades que afecten el software que usan?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si hay un proceso para enterarse de nuevas vulnerabilidades que afecten su software. Gestionar vulnerabilidades es una actividad continua, no puntual (CIS v8, 7.1)."
+  },
+  {
+    "id_pregunta": 32,
+    "id_control": 8,
+    "codigo_pregunta": "8.1",
+    "texto_pregunta": "¿Los sistemas críticos generan logs de actividad (accesos, errores, cambios)?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que los sistemas críticos generen registros (logs) de accesos, errores y cambios. A veces los logs son la única evidencia de un ataque exitoso (CIS v8, 8.2)."
+  },
+  {
+    "id_pregunta": 33,
+    "id_control": 8,
+    "codigo_pregunta": "8.2",
+    "texto_pregunta": "¿Los logs se almacenan de forma segura y no pueden ser borrados por usuarios normales?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que los logs se almacenen de forma segura y que un usuario normal no pueda borrarlos. Los atacantes intentan borrar sus rastros (CIS v8, 8.3)."
+  },
+  {
+    "id_pregunta": 34,
+    "id_control": 8,
+    "codigo_pregunta": "8.3",
+    "texto_pregunta": "¿Alguien revisa los logs periódicamente para detectar actividad sospechosa?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si alguien revisa los logs periódicamente para detectar actividad sospechosa. Guardar logs sin analizarlos no sirve para detectar ataques (CIS v8, 8.11)."
+  },
+  {
+    "id_pregunta": 35,
+    "id_control": 8,
+    "codigo_pregunta": "8.4",
+    "texto_pregunta": "¿Se conservan los logs por al menos 90 días?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si los logs se conservan al menos 90 días. La retención permite investigar ataques que pasaron desapercibidos durante un tiempo (CIS v8, 8.10)."
+  },
+  {
+    "id_pregunta": 36,
+    "id_control": 9,
+    "codigo_pregunta": "9.1",
+    "texto_pregunta": "¿Los empleados tienen capacitación básica para identificar correos de phishing?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que los empleados sepan identificar correos de phishing. El correo es el vector de ataque más común y el usuario es la primera línea de defensa (CIS v8, 14.2)."
+  },
+  {
+    "id_pregunta": 37,
+    "id_control": 9,
+    "codigo_pregunta": "9.2",
+    "texto_pregunta": "¿Existe un filtro de spam activo en el correo corporativo?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que el correo corporativo tenga un filtro de spam y anti-malware activo. Reduce la cantidad de correos y adjuntos maliciosos que llegan (CIS v8, 9.6 y 9.7)."
+  },
+  {
+    "id_pregunta": 38,
+    "id_control": 9,
+    "codigo_pregunta": "9.3",
+    "texto_pregunta": "¿Está bloqueado el acceso a sitios web maliciosos o no relacionados con el trabajo?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se bloquea el acceso a sitios web maliciosos (por ejemplo con filtrado DNS o de URL). Evita que un clic lleve a una página que instala malware (CIS v8, 9.2 y 9.3)."
+  },
+  {
+    "id_pregunta": 39,
+    "id_control": 9,
+    "codigo_pregunta": "9.4",
+    "texto_pregunta": "¿Los navegadores están actualizados a su versión más reciente?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa que los navegadores estén en su versión más reciente. Un navegador sin parchear puede ser explotado con solo abrir una página maliciosa (CIS v8, 9.1)."
+  },
+  {
+    "id_pregunta": 40,
+    "id_control": 10,
+    "codigo_pregunta": "10.1",
+    "texto_pregunta": "¿Todos los equipos tienen un antivirus o antimalware instalado y activo?",
+    "cia_pregunta": "C, I, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que todos los equipos tengan antivirus o antimalware instalado y activo. Es la defensa base contra código malicioso en cada punto de entrada (CIS v8, 10.1)."
+  },
+  {
+    "id_pregunta": 41,
+    "id_control": 10,
+    "codigo_pregunta": "10.2",
+    "texto_pregunta": "¿Las definiciones del antivirus se actualizan automáticamente?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que las firmas del antivirus se actualicen automáticamente. Un antivirus desactualizado no reconoce las amenazas nuevas (CIS v8, 10.2)."
+  },
+  {
+    "id_pregunta": 42,
+    "id_control": 10,
+    "codigo_pregunta": "10.3",
+    "texto_pregunta": "¿Está deshabilitada la ejecución automática de dispositivos USB?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si está desactivada la ejecución automática (autorun) de USB y medios extraíbles. El autorun permite que el malware se ejecute con solo insertar la memoria (CIS v8, 10.3)."
+  },
+  {
+    "id_pregunta": 43,
+    "id_control": 10,
+    "codigo_pregunta": "10.4",
+    "texto_pregunta": "¿Se realizan escaneos periódicos completos en los equipos?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si se realizan escaneos completos periódicos en los equipos, incluidos los medios extraíbles (CIS v8, 10.4)."
+  },
+  {
+    "id_pregunta": 44,
+    "id_control": 11,
+    "codigo_pregunta": "11.1",
+    "texto_pregunta": "¿Se realizan copias de seguridad (backups) de los datos críticos del negocio?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que se hagan copias de seguridad (backups) de los datos críticos del negocio. Ante ransomware o error humano, un backup reciente permite volver a un estado confiable (CIS v8, 11.2)."
+  },
+  {
+    "id_pregunta": 45,
+    "id_control": 11,
+    "codigo_pregunta": "11.2",
+    "texto_pregunta": "¿Los backups se almacenan en una ubicación separada (externa o en la nube)?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que los backups se guarden en una ubicación separada (externa, en la nube u offline). Si el respaldo está junto a los datos, el mismo ataque puede cifrarlo también (CIS v8, 11.4)."
+  },
+  {
+    "id_pregunta": 46,
+    "id_control": 11,
+    "codigo_pregunta": "11.3",
+    "texto_pregunta": "¿Se ha probado alguna vez la restauración de un backup para verificar que funciona?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si alguna vez se ha probado restaurar un backup. Un respaldo que nunca se ha probado puede no funcionar justo cuando más se necesita (CIS v8, 11.5)."
+  },
+  {
+    "id_pregunta": 47,
+    "id_control": 11,
+    "codigo_pregunta": "11.4",
+    "texto_pregunta": "¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual)",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "frecuencia",
+    "descripcion_ayuda": "Indica cada cuánto se realizan los backups (diario, semanal o mensual). CIS recomienda al menos semanal, o más seguido según la sensibilidad de los datos; a mayor frecuencia, menos datos se pierden ante un incidente (CIS v8, 11.2)."
+  },
+  {
+    "id_pregunta": 48,
+    "id_control": 12,
+    "codigo_pregunta": "12.1",
+    "texto_pregunta": "¿La red WiFi de empleados está separada de la red WiFi para visitantes?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que la red WiFi de empleados esté separada de la de visitantes. La segmentación evita que un invitado alcance los sistemas internos (CIS v8, 12.2)."
+  },
+  {
+    "id_pregunta": 49,
+    "id_control": 12,
+    "codigo_pregunta": "12.2",
+    "texto_pregunta": "¿El router/firewall perimetral tiene configuración de seguridad revisada?",
+    "cia_pregunta": "C, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que la configuración de seguridad del router o firewall perimetral se revise. Las reglas mal configuradas o por defecto abren huecos (CIS v8, 12.1 y 4.2)."
+  },
+  {
+    "id_pregunta": 50,
+    "id_control": 12,
+    "codigo_pregunta": "12.3",
+    "texto_pregunta": "¿Se monitorea quién está conectado a la red en tiempo real?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se monitorea en tiempo real quién está conectado a la red. Ayuda a detectar dispositivos o accesos inesperados (CIS v8, Controles 12 y 13)."
+  },
+  {
+    "id_pregunta": 51,
+    "id_control": 12,
+    "codigo_pregunta": "12.4",
+    "texto_pregunta": "¿Existen redes separadas (VLANs) para diferentes áreas del negocio?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si existen redes separadas (VLANs) para distintas áreas del negocio. Segmentar limita el movimiento lateral de un atacante dentro de la red (CIS v8, 12.2)."
+  },
+  {
+    "id_pregunta": 52,
+    "id_control": 13,
+    "codigo_pregunta": "13.1",
+    "texto_pregunta": "¿Existe algún sistema que alerte sobre actividad inusual en la red?",
+    "cia_pregunta": "C, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si existe algún sistema que alerte sobre actividad inusual en la red. La detección temprana reduce el tiempo que un atacante pasa sin ser visto (CIS v8, 13.1)."
+  },
+  {
+    "id_pregunta": 53,
+    "id_control": 13,
+    "codigo_pregunta": "13.2",
+    "texto_pregunta": "¿Se monitorea el tráfico de red para detectar transferencias anómalas de datos?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba si se vigila el tráfico de red para detectar transferencias anómalas de datos. Muchas fugas pasan inadvertidas por falta de monitoreo de salida (CIS v8, 13.6)."
+  },
+  {
+    "id_pregunta": 54,
+    "id_control": 13,
+    "codigo_pregunta": "13.3",
+    "texto_pregunta": "¿Se han definido qué eventos de red deben generar una alerta?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se ha definido qué eventos de red deben disparar una alerta. Sin umbrales definidos, las herramientas generan ruido o pasan por alto lo importante (CIS v8, 13.11)."
+  },
+  {
+    "id_pregunta": 55,
+    "id_control": 14,
+    "codigo_pregunta": "14.1",
+    "texto_pregunta": "¿Los empleados reciben capacitación en seguridad informática al menos una vez al año?",
+    "cia_pregunta": "C, I, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica que los empleados reciban capacitación en seguridad al menos una vez al año. Las personas son decisivas: suele ser más fácil engañar a un usuario que vulnerar la red (CIS v8, 14.1)."
+  },
+  {
+    "id_pregunta": 56,
+    "id_control": 14,
+    "codigo_pregunta": "14.2",
+    "texto_pregunta": "¿Existe una política de uso aceptable de los recursos tecnológicos de la empresa?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba que exista una política de uso aceptable de los recursos tecnológicos. Fija expectativas claras de comportamiento seguro (CIS v8, Control 14)."
+  },
+  {
+    "id_pregunta": 57,
+    "id_control": 14,
+    "codigo_pregunta": "14.3",
+    "texto_pregunta": "¿Los empleados saben a quién reportar un incidente de seguridad?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si los empleados saben a quién reportar un incidente de seguridad. Reportar rápido acorta el tiempo de respuesta (CIS v8, 14.6 y 17.3)."
+  },
+  {
+    "id_pregunta": 58,
+    "id_control": 14,
+    "codigo_pregunta": "14.4",
+    "texto_pregunta": "¿Se realizan simulacros de phishing para medir la concienciación del personal?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si se realizan simulacros de phishing para medir la concienciación del personal. Permiten educar con casos reales y medir la mejora con el tiempo (CIS v8, 14.2)."
+  },
+  {
+    "id_pregunta": 59,
+    "id_control": 15,
+    "codigo_pregunta": "15.1",
+    "texto_pregunta": "¿Se evalúa la seguridad de los proveedores que tienen acceso a sistemas o datos de la empresa?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si se evalúa la seguridad de los proveedores que tienen acceso a sistemas o datos. Una brecha en un tercero puede impactar directamente a la empresa (CIS v8, 15.1 y 15.5)."
+  },
+  {
+    "id_pregunta": 60,
+    "id_control": 15,
+    "codigo_pregunta": "15.2",
+    "texto_pregunta": "¿Los contratos con proveedores incluyen cláusulas de seguridad y confidencialidad?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba si los contratos con proveedores incluyen cláusulas de seguridad y confidencialidad (por ejemplo, notificación de brechas). Fija requisitos mínimos y traslada responsabilidad (CIS v8, 15.4)."
+  },
+  {
+    "id_pregunta": 61,
+    "id_control": 15,
+    "codigo_pregunta": "15.3",
+    "texto_pregunta": "¿Se revoca el acceso de proveedores cuando ya no son necesarios?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se revoca el acceso de proveedores cuando ya no son necesarios. Desactivar cuentas y flujos de datos al terminar el contrato evita accesos olvidados (CIS v8, 15.7)."
+  },
+  {
+    "id_pregunta": 62,
+    "id_control": 16,
+    "codigo_pregunta": "16.1",
+    "texto_pregunta": "¿El software desarrollado internamente sigue prácticas de desarrollo seguro?",
+    "cia_pregunta": "C, I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si el software desarrollado internamente sigue prácticas de desarrollo seguro (diseño seguro, codificación segura, manejo de vulnerabilidades). Las fallas de aplicación son un vector de ataque frecuente (CIS v8, 16.1)."
+  },
+  {
+    "id_pregunta": 63,
+    "id_control": 16,
+    "codigo_pregunta": "16.2",
+    "texto_pregunta": "¿Se realizan revisiones de seguridad antes de poner en producción nuevo software?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba si se hacen revisiones de seguridad antes de poner software en producción. Detectar fallas antes de publicar es más barato y seguro (CIS v8, 16.1 y 16.12)."
+  },
+  {
+    "id_pregunta": 64,
+    "id_control": 16,
+    "codigo_pregunta": "16.3",
+    "texto_pregunta": "¿Los errores de la aplicación se manejan sin exponer información técnica al usuario?",
+    "cia_pregunta": "C",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si los errores de la aplicación se manejan sin mostrar detalles técnicos al usuario (stack traces, rutas de archivo). Esa información le da pistas al atacante (CIS v8, 16.10)."
+  },
+  {
+    "id_pregunta": 65,
+    "id_control": 17,
+    "codigo_pregunta": "17.1",
+    "texto_pregunta": "¿Existe un plan de respuesta a incidentes de seguridad documentado?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si existe un plan de respuesta a incidentes documentado. Sin un plan, es casi imposible responder bien bajo presión (CIS v8, 17.4)."
+  },
+  {
+    "id_pregunta": 66,
+    "id_control": 17,
+    "codigo_pregunta": "17.2",
+    "texto_pregunta": "¿Los empleados clave saben qué hacer si detectan un ataque o brecha de seguridad?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba si el personal clave sabe qué hacer ante un ataque o brecha, con roles y contactos definidos. La coordinación reduce el impacto (CIS v8, 17.1 y 17.2)."
+  },
+  {
+    "id_pregunta": 67,
+    "id_control": 17,
+    "codigo_pregunta": "17.3",
+    "texto_pregunta": "¿Se ha practicado o simulado alguna vez la respuesta a un incidente?",
+    "cia_pregunta": "A",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si se ha practicado o simulado la respuesta a un incidente. Los simulacros revelan huecos en el plan antes de un incidente real (CIS v8, 17.7)."
+  },
+  {
+    "id_pregunta": 68,
+    "id_control": 17,
+    "codigo_pregunta": "17.4",
+    "texto_pregunta": "¿Se documentan los incidentes de seguridad ocurridos para aprender de ellos?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Revisa si se documentan los incidentes ocurridos para aprender de ellos. Las revisiones post-incidente ayudan a que no se repitan (CIS v8, 17.8)."
+  },
+  {
+    "id_pregunta": 69,
+    "id_control": 18,
+    "codigo_pregunta": "18.1",
+    "texto_pregunta": "¿Se realizan pruebas de penetración periódicas a los sistemas críticos?",
+    "cia_pregunta": "C, I, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Verifica si se realizan pruebas de penetración periódicas a los sistemas críticos. Simular a un atacante revela huecos que las revisiones normales no ven (CIS v8, 18.1 y 18.2)."
+  },
+  {
+    "id_pregunta": 70,
+    "id_control": 18,
+    "codigo_pregunta": "18.2",
+    "texto_pregunta": "¿Los hallazgos de pruebas anteriores han sido corregidos?",
+    "cia_pregunta": "C, I, A",
+    "criticidad_pregunta": "Alta",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Comprueba si los hallazgos de pruebas anteriores fueron corregidos. Una prueba sin remediación no reduce el riesgo real (CIS v8, 18.3)."
+  },
+  {
+    "id_pregunta": 71,
+    "id_control": 18,
+    "codigo_pregunta": "18.3",
+    "texto_pregunta": "¿Existe un proceso formal para contratar y autorizar pruebas de seguridad externas?",
+    "cia_pregunta": "I",
+    "criticidad_pregunta": "Media",
+    "tipo_respuesta": "si_no_na",
+    "descripcion_ayuda": "Evalúa si hay un proceso formal para contratar y autorizar pruebas de seguridad externas. La autorización explícita es clave legal y organizacionalmente (CIS v8, 18.1)."
+  }
 ]
