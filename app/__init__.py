@@ -1,14 +1,15 @@
 from flask import Flask
 from app.extensions import db
-import logging
+import os
 
-logging.debug("Entramos")
 
 def create_app():
     # Create the app
     app = Flask(__name__)
-    # Configure the SQLite database, relative to the app intance folder
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///secureaudit.db"
+    
+    # Configurations
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'clave_alternativa_de_desarrollo'
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///secureaudit.db" #SQLite database
     # Initialize the app with the extension
     db.init_app(app)
 
