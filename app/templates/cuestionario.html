@@ -295,6 +295,7 @@
       }
 
       .sa-toggle {
+        position: relative;
         display: inline-flex;
         padding: 3px;
         gap: 3px;
@@ -302,8 +303,19 @@
         border: 1px solid var(--border);
         border-radius: var(--radius-md);
       }
+      /* Radio real oculto a la vista, pero sigue siendo enfocable con teclado */
+      /* y anunciado por lectores de pantalla; lo que se ve es su <label>.    */
+      .sa-toggle__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
       .sa-toggle__opt {
         appearance: none;
+        user-select: none;
         border: 1px solid transparent;
         background: transparent;
         color: var(--ink-muted);
@@ -320,26 +332,27 @@
       .sa-toggle__opt:hover {
         color: var(--ink);
       }
-      .sa-toggle__opt:focus-visible {
+      .sa-toggle__input:focus-visible + .sa-toggle__opt {
         outline: 2px solid var(--focus-ring);
         outline-offset: 2px;
       }
-      .sa-toggle__opt[aria-pressed="true"].is-si {
+      .sa-toggle__input:checked + .sa-toggle__opt.is-si {
         background: var(--success-surface);
         color: var(--success-text);
         border-color: var(--success-border);
       }
-      .sa-toggle__opt[aria-pressed="true"].is-no {
+      .sa-toggle__input:checked + .sa-toggle__opt.is-no {
         background: var(--danger-surface);
         color: var(--danger-text);
         border-color: var(--danger-border);
       }
-      .sa-toggle__opt[aria-pressed="true"].is-na {
+      .sa-toggle__input:checked + .sa-toggle__opt.is-na {
         background: var(--neutral-surface);
         color: var(--neutral-text);
         border-color: var(--neutral-border);
       }
-      .sa-toggle__opt[aria-pressed="true"].is-freq {
+      .sa-toggle__input:checked
+        + .sa-toggle__opt:is(.is-diario, .is-semanal, .is-mensual) {
         background: var(--surface-200);
         color: var(--brand-text);
         border-color: var(--brand);
@@ -526,10 +539,41 @@
         letter-spacing: 0.04em;
         text-transform: uppercase;
       }
+      /* El form envuelve preguntas + footer; hereda el gap de .page para */
+      /* que el espaciado sea el mismo que antes de existir el form.        */
+      .cuestionario-form {
+        display: flex;
+        flex-direction: column;
+        gap: inherit;
+      }
       .questions {
         display: flex;
         flex-direction: column;
         gap: var(--space-5);
+      }
+      .sa-alerts {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        max-width: 640px;
+      }
+      .sa-alert {
+        margin: 0;
+        padding: var(--space-3) var(--space-4);
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid transparent;
+        border-radius: var(--radius-md);
+      }
+      .sa-alert--exito {
+        background: var(--success-surface);
+        color: var(--success-text);
+        border-color: var(--success-border);
+      }
+      .sa-alert--aviso {
+        background: var(--warning-surface);
+        color: var(--warning-text);
+        border-color: var(--warning-border);
       }
       .footer-nav {
         display: flex;
@@ -648,6 +692,26 @@
         </div>
       </header>
 
+      <!--Mensajes flash del POST anterior (categorias: exito, aviso)-->
+      {% with mensajes = get_flashed_messages(with_categories = true) %}
+      {% if mensajes %}
+      <div class="sa-alerts" role="status">
+        {% for categoria, mensaje in mensajes %}
+        <p class="sa-alert sa-alert--{{ categoria }}">{{ mensaje }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <!--Formulario: envia todas las respuestas del control a /cuestionario/guardar-->
+      <form
+        class="cuestionario-form"
+        method="post"
+        action="{{ url_for('cuestionario_page.guardar') }}"
+      >
+      <!--Le dice a guardar() que control se esta contestando (y a donde redirigir)-->
+      <input type="hidden" name="numero_control" value="{{ control.numero_control }}" />
+
       <!--Englobador de todas las preguntas-->
       <div class="questions">
         <!--Nombre completo de cada letra CIA (para title y lectores de pantalla)-->
@@ -684,81 +748,31 @@
           <!--Descripcion-->
           <p class="sa-card__help">{{ pregunta.descripcion_ayuda }}</p>
 
-          <!--Acciones-->
+          <!--Acciones: un radio por opcion; todos comparten name, asi solo uno puede estar marcado-->
           <div class="sa-card__actions">
-            {% if pregunta.tipo_respuesta == "si_no_na" %}
+            {% set guardada = respuestas.get(pregunta.id_pregunta) %}
             <div
               class="sa-toggle"
-              role="group"
+              role="radiogroup"
               aria-label="Respuesta a la pregunta {{pregunta.codigo_pregunta}}"
               data-question="{{ pregunta.id_pregunta }}"
             >
-              <button
-                type="button"
-                class="sa-toggle__opt is-si"
-                data-value="si"
-                aria-pressed="false"
+              {% for valor, texto in opciones[pregunta.tipo_respuesta] %}
+              <input
+                type="radio"
+                class="sa-toggle__input"
+                id="p{{ pregunta.id_pregunta }}-{{ valor }}"
+                name="respuesta_{{ pregunta.id_pregunta }}"
+                value="{{ valor }}"
+                {% if guardada == valor %}checked{% endif %}
+              />
+              <label
+                for="p{{ pregunta.id_pregunta }}-{{ valor }}"
+                class="sa-toggle__opt is-{{ valor }}"
+                >{{ texto }}</label
               >
-                Sí
-              </button>
-              <button
-                type="button"
-                class="sa-toggle__opt is-no"
-                data-value="no"
-                aria-pressed="false"
-              >
-                No
-              </button>
-              <button
-                type="button"
-                class="sa-toggle__opt is-na"
-                data-value="na"
-                aria-pressed="false"
-              >
-                N/A
-              </button>
+              {% endfor %}
             </div>
-            {% else %}
-            <div
-              class="sa-toggle"
-              role="group"
-              aria-label="Respuesta a la pregunta {{pregunta.codigo_pregunta}}"
-              data-question="{{ pregunta.id_pregunta }}"
-            >
-              <button
-                type="button"
-                class="sa-toggle__opt is-freq"
-                data-value="diario"
-                aria-pressed="false"
-              >
-                Diario
-              </button>
-              <button
-                type="button"
-                class="sa-toggle__opt is-freq"
-                data-value="semanal"
-                aria-pressed="false"
-              >
-                Semanal
-              </button>
-              <button
-                type="button"
-                class="sa-toggle__opt is-freq"
-                data-value="mensual"
-                aria-pressed="false"
-              >
-                Mensual
-              </button>
-              <button
-                type="button"
-                class="sa-toggle__opt is-na"
-                data-value="na"
-                aria-pressed="false"
-              >
-                N/A
-              </button>
-            </div>
-            {% endif %}
           </div>
         </article>
         <!--End of pregunta-->
@@ -777,11 +791,13 @@
         {% endif %}
         <div class="footer-nav-right">
           <span class="footer-count" id="footer-count">0 / {{ preguntas | length }} respondidas</span>
-          <button type="button" class="sa-btn sa-btn--primary">
+          <button type="submit" class="sa-btn sa-btn--primary">
             Guardar y continuar →
           </button>
         </div>
       </div>
+      </form>
+      <!--End form-->
     </div>
 
     <script>
@@ -792,7 +808,7 @@
           var groups = document.querySelectorAll(".sa-toggle[data-question]");
           var n = 0;
           groups.forEach(function (g) {
-            if (g.querySelector('.sa-toggle__opt[aria-pressed="true"]')) n++;
+            if (g.querySelector(".sa-toggle__input:checked")) n++;
           });
           return n;
         }
@@ -814,17 +830,12 @@
             footerCount.textContent = answered + " / " + TOTAL + " respondidas";
         }
 
+        // El navegador ya marca/desmarca los radios por si solo; aqui solo
+        // se recalcula el progreso. Al cargar cuenta las respuestas ya guardadas.
         document
-          .querySelectorAll(".sa-toggle[data-question] .sa-toggle__opt")
-          .forEach(function (btn) {
-            btn.addEventListener("click", function () {
-              var group = btn.closest(".sa-toggle");
-              group.querySelectorAll(".sa-toggle__opt").forEach(function (b) {
-                b.setAttribute("aria-pressed", "false");
-              });
-              btn.setAttribute("aria-pressed", "true");
-              updateProgress();
-            });
+          .querySelectorAll(".sa-toggle__input")
+          .forEach(function (input) {
+            input.addEventListener("change", updateProgress);
           });
         updateProgress();
 
