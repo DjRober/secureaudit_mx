@@ -1,15 +1,8 @@
-from flask import Blueprint, render_template, abort
-from jinja2 import TemplateNotFound
+from flask import Blueprint, render_template
 
-autentificacion_page = Blueprint("autentificacion_page", __name__, template_folder="templates")
+autentificacion_page = Blueprint("autentificacion_page", __name__, url_prefix="/auth")
 
 #Pruebas de my first blueprint (temporal)
-@autentificacion_page.route("/auth")
+@autentificacion_page.route("/")
 def show():
-    try:
-        return render_template("auth.html")
-    except TemplateNotFound:
-        abort(404)
-
-
-
+    return render_template("auth.html")
