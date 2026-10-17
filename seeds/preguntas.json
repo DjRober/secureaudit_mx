@@ -4,7 +4,7 @@
     "id_control": 1,
     "codigo_pregunta": "1.1",
     "texto_pregunta": "¿La empresa tiene un inventario actualizado de todos los dispositivos conectados a la red (computadoras, impresoras, routers, etc.)?",
-    "cia_pregunta": "C, I, A",
+    "cia_pregunta": "C I A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que exista una lista actualizada de todos los equipos conectados a la red (computadoras, impresoras, routers, servidores, móviles). No se puede proteger lo que no se sabe que existe: el inventario es la base para monitorear y responder a incidentes (CIS v8, 1.1)."
@@ -24,7 +24,7 @@
     "id_control": 1,
     "codigo_pregunta": "1.3",
     "texto_pregunta": "¿Existe algún proceso para registrar dispositivos nuevos antes de conectarlos a la red?",
-    "cia_pregunta": "C, A",
+    "cia_pregunta": "C A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Evalúa si hay un proceso para registrar y aprobar equipos nuevos antes de conectarlos a la red. Evita que dispositivos sin configurar ni parchear entren sin control (CIS v8, 1.1)."
@@ -54,7 +54,7 @@
     "id_control": 2,
     "codigo_pregunta": "2.2",
     "texto_pregunta": "¿Está prohibido instalar software sin autorización?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba que solo se pueda instalar software autorizado. Restringir instalaciones reduce la superficie de ataque y el malware oculto en programas no aprobados (CIS v8, 2.5)."
@@ -64,7 +64,7 @@
     "id_control": 2,
     "codigo_pregunta": "2.3",
     "texto_pregunta": "¿Se verifica periódicamente si hay software no autorizado instalado?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Evalúa si se revisa con regularidad la presencia de software no autorizado para removerlo. El software no gestionado introduce vulnerabilidades y riesgos (CIS v8, 2.3)."
@@ -84,7 +84,7 @@
     "id_control": 3,
     "codigo_pregunta": "3.1",
     "texto_pregunta": "¿La empresa sabe qué datos son sensibles (datos de clientes, financieros, personales)?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que la empresa haya identificado y clasificado sus datos sensibles (de clientes, financieros, personales). Proteger los datos empieza por saber cuáles son críticos y dónde están (CIS v8, 3.1 y 3.2)."
@@ -124,7 +124,7 @@
     "id_control": 3,
     "codigo_pregunta": "3.5",
     "texto_pregunta": "¿Se tiene conocimiento de la Ley Federal de Protección de Datos Personales (LFPDPPP) y se cumple con ella?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica el conocimiento y cumplimiento de la Ley Federal de Protección de Datos Personales (LFPDPPP). La gestión adecuada de datos personales es un requisito legal, no solo técnico (CIS v8, Control 3)."
@@ -154,7 +154,7 @@
     "id_control": 4,
     "codigo_pregunta": "4.3",
     "texto_pregunta": "¿Se deshabilitan servicios y puertos innecesarios en los equipos?",
-    "cia_pregunta": "C, A",
+    "cia_pregunta": "C A",
     "criticidad_pregunta": "Media",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Evalúa si se desactivan los servicios y puertos que no se usan. Cada servicio abierto es una posible puerta de entrada (CIS v8, 4.8)."
@@ -174,7 +174,7 @@
     "id_control": 5,
     "codigo_pregunta": "5.1",
     "texto_pregunta": "¿Cada empleado tiene su propia cuenta de usuario (no comparten cuentas)?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que cada empleado tenga su propia cuenta y que no se compartan. Las cuentas compartidas impiden saber quién hizo qué y son difíciles de revocar (CIS v8, 5.1)."
@@ -184,7 +184,7 @@
     "id_control": 5,
     "codigo_pregunta": "5.2",
     "texto_pregunta": "¿Existen cuentas de administrador separadas de las cuentas de uso diario?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba que existan cuentas de administrador distintas de las de uso diario. Así, si se compromete la cuenta normal, el atacante no obtiene privilegios elevados (CIS v8, 5.4)."
@@ -214,7 +214,7 @@
     "id_control": 5,
     "codigo_pregunta": "5.5",
     "texto_pregunta": "¿Se revisa periódicamente quién tiene acceso a qué sistemas?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica si se revisa con regularidad quién tiene acceso a qué sistemas. Detecta privilegios acumulados o accesos que ya no corresponden al rol (CIS v8, 5.1 y 6.8)."
@@ -284,7 +284,7 @@
     "id_control": 7,
     "codigo_pregunta": "7.2",
     "texto_pregunta": "¿Las aplicaciones (navegadores, Office, etc.) están actualizadas?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que las aplicaciones (navegadores, Office, etc.) estén al día. Las aplicaciones desactualizadas son una vía común de intrusión (CIS v8, 7.4)."
@@ -334,7 +334,7 @@
     "id_control": 8,
     "codigo_pregunta": "8.3",
     "texto_pregunta": "¿Alguien revisa los logs periódicamente para detectar actividad sospechosa?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Evalúa si alguien revisa los logs periódicamente para detectar actividad sospechosa. Guardar logs sin analizarlos no sirve para detectar ataques (CIS v8, 8.11)."
@@ -394,7 +394,7 @@
     "id_control": 10,
     "codigo_pregunta": "10.1",
     "texto_pregunta": "¿Todos los equipos tienen un antivirus o antimalware instalado y activo?",
-    "cia_pregunta": "C, I, A",
+    "cia_pregunta": "C I A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que todos los equipos tengan antivirus o antimalware instalado y activo. Es la defensa base contra código malicioso en cada punto de entrada (CIS v8, 10.1)."
@@ -404,7 +404,7 @@
     "id_control": 10,
     "codigo_pregunta": "10.2",
     "texto_pregunta": "¿Las definiciones del antivirus se actualizan automáticamente?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba que las firmas del antivirus se actualicen automáticamente. Un antivirus desactualizado no reconoce las amenazas nuevas (CIS v8, 10.2)."
@@ -414,7 +414,7 @@
     "id_control": 10,
     "codigo_pregunta": "10.3",
     "texto_pregunta": "¿Está deshabilitada la ejecución automática de dispositivos USB?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Evalúa si está desactivada la ejecución automática (autorun) de USB y medios extraíbles. El autorun permite que el malware se ejecute con solo insertar la memoria (CIS v8, 10.3)."
@@ -424,7 +424,7 @@
     "id_control": 10,
     "codigo_pregunta": "10.4",
     "texto_pregunta": "¿Se realizan escaneos periódicos completos en los equipos?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Media",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Revisa si se realizan escaneos completos periódicos en los equipos, incluidos los medios extraíbles (CIS v8, 10.4)."
@@ -484,7 +484,7 @@
     "id_control": 12,
     "codigo_pregunta": "12.2",
     "texto_pregunta": "¿El router/firewall perimetral tiene configuración de seguridad revisada?",
-    "cia_pregunta": "C, A",
+    "cia_pregunta": "C A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba que la configuración de seguridad del router o firewall perimetral se revise. Las reglas mal configuradas o por defecto abren huecos (CIS v8, 12.1 y 4.2)."
@@ -514,7 +514,7 @@
     "id_control": 13,
     "codigo_pregunta": "13.1",
     "texto_pregunta": "¿Existe algún sistema que alerte sobre actividad inusual en la red?",
-    "cia_pregunta": "C, A",
+    "cia_pregunta": "C A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica si existe algún sistema que alerte sobre actividad inusual en la red. La detección temprana reduce el tiempo que un atacante pasa sin ser visto (CIS v8, 13.1)."
@@ -544,7 +544,7 @@
     "id_control": 14,
     "codigo_pregunta": "14.1",
     "texto_pregunta": "¿Los empleados reciben capacitación en seguridad informática al menos una vez al año?",
-    "cia_pregunta": "C, I, A",
+    "cia_pregunta": "C I A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica que los empleados reciban capacitación en seguridad al menos una vez al año. Las personas son decisivas: suele ser más fácil engañar a un usuario que vulnerar la red (CIS v8, 14.1)."
@@ -554,7 +554,7 @@
     "id_control": 14,
     "codigo_pregunta": "14.2",
     "texto_pregunta": "¿Existe una política de uso aceptable de los recursos tecnológicos de la empresa?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba que exista una política de uso aceptable de los recursos tecnológicos. Fija expectativas claras de comportamiento seguro (CIS v8, Control 14)."
@@ -594,7 +594,7 @@
     "id_control": 15,
     "codigo_pregunta": "15.2",
     "texto_pregunta": "¿Los contratos con proveedores incluyen cláusulas de seguridad y confidencialidad?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba si los contratos con proveedores incluyen cláusulas de seguridad y confidencialidad (por ejemplo, notificación de brechas). Fija requisitos mínimos y traslada responsabilidad (CIS v8, 15.4)."
@@ -614,7 +614,7 @@
     "id_control": 16,
     "codigo_pregunta": "16.1",
     "texto_pregunta": "¿El software desarrollado internamente sigue prácticas de desarrollo seguro?",
-    "cia_pregunta": "C, I",
+    "cia_pregunta": "C I",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica si el software desarrollado internamente sigue prácticas de desarrollo seguro (diseño seguro, codificación segura, manejo de vulnerabilidades). Las fallas de aplicación son un vector de ataque frecuente (CIS v8, 16.1)."
@@ -684,7 +684,7 @@
     "id_control": 18,
     "codigo_pregunta": "18.1",
     "texto_pregunta": "¿Se realizan pruebas de penetración periódicas a los sistemas críticos?",
-    "cia_pregunta": "C, I, A",
+    "cia_pregunta": "C I A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Verifica si se realizan pruebas de penetración periódicas a los sistemas críticos. Simular a un atacante revela huecos que las revisiones normales no ven (CIS v8, 18.1 y 18.2)."
@@ -694,7 +694,7 @@
     "id_control": 18,
     "codigo_pregunta": "18.2",
     "texto_pregunta": "¿Los hallazgos de pruebas anteriores han sido corregidos?",
-    "cia_pregunta": "C, I, A",
+    "cia_pregunta": "C I A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "si_no_na",
     "descripcion_ayuda": "Comprueba si los hallazgos de pruebas anteriores fueron corregidos. Una prueba sin remediación no reduce el riesgo real (CIS v8, 18.3)."
