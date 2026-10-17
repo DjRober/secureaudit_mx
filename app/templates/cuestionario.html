@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SecureAudit MX — Control 1: Inventario de Hardware</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== Tokens — SecureAudit MX (tema claro por defecto) ===== */
+      :root {
+        --surface-100: #f4f7fb;
+        --surface-200: #ffffff;
+        --surface-300: #e9eef5;
+        --border: #d5dde8;
+        --border-strong: #b7c2d2;
+        --ink: #131b28;
+        --ink-muted: #52607a;
+        --ink-subtle: #6c7789;
+        --brand: #0f4c81;
+        --brand-hover: #0c3e6b;
+        --on-brand: #ffffff;
+        --brand-text: #0f4c81;
+        --focus-ring: #2f81d6;
+        --danger-surface: #fbe7e6;
+        --danger-text: #a51f1a;
+        --danger-border: #f0b7b2;
+        --warning-surface: #fdf1dc;
+        --warning-text: #8a5a02;
+        --warning-border: #f2d59a;
+        --success-surface: #e2f4ea;
+        --success-text: #1c7a45;
+        --success-border: #b6e2c8;
+        --info-surface: #e4eefb;
+        --info-text: #17548c;
+        --info-border: #b9d3ef;
+        --neutral-surface: #eceff4;
+        --neutral-text: #4d5972;
+        --neutral-border: #d5dbe4;
+        --cia-c-surface: #e7e9fb;
+        --cia-c-text: #3b3fa3;
+        --cia-i-surface: #d9f2f0;
+        --cia-i-text: #0f6b64;
+        --cia-a-surface: #f0e6fb;
+        --cia-a-text: #7a2fb0;
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 14px;
+        --radius-pill: 999px;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 24px;
+        --space-6: 32px;
+        --space-7: 48px;
+        --shadow-sm:
+          0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.04);
+        --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.1);
+        --font-display:
+          "Space Grotesk", "Inter", system-ui, -apple-system, "Segoe UI",
+          Roboto, sans-serif;
+        --font-sans:
+          "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        --font-mono:
+          "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code",
+          Consolas, monospace;
+      }
+
+      /* Tema oscuro: sigue la preferencia del sistema operativo / navegador,           */
+      /* salvo que el botón de esta página lo haya forzado con [data-theme].            */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --surface-100: #0d1220;
+          --surface-200: #151c2c;
+          --surface-300: #1e2739;
+          --border: #2a3446;
+          --border-strong: #3b475d;
+          --ink: #eef3f9;
+          --ink-muted: #9fabc0;
+          --ink-subtle: #7f8ca3;
+          --brand: #2f6db3;
+          --brand-hover: #3f7dc4;
+          --on-brand: #ffffff;
+          --brand-text: #7cb2ec;
+          --focus-ring: #6fb0f0;
+          --danger-surface: #3a1a1c;
+          --danger-text: #f4a6a1;
+          --danger-border: #5c2a2b;
+          --warning-surface: #3a2c12;
+          --warning-text: #f2c065;
+          --warning-border: #5c451c;
+          --success-surface: #16311f;
+          --success-text: #7fd6a1;
+          --success-border: #285138;
+          --info-surface: #172a3f;
+          --info-text: #8fbdec;
+          --info-border: #294864;
+          --neutral-surface: #232b3a;
+          --neutral-text: #aab6c9;
+          --neutral-border: #384357;
+          --cia-c-surface: #1c2140;
+          --cia-c-text: #a9adf0;
+          --cia-i-surface: #0f3230;
+          --cia-i-text: #6fd3ca;
+          --cia-a-surface: #2a1c40;
+          --cia-a-text: #ce9df0;
+          --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+          --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.55);
+        }
+      }
+      :root[data-theme="dark"] {
+        --surface-100: #0d1220;
+        --surface-200: #151c2c;
+        --surface-300: #1e2739;
+        --border: #2a3446;
+        --border-strong: #3b475d;
+        --ink: #eef3f9;
+        --ink-muted: #9fabc0;
+        --ink-subtle: #7f8ca3;
+        --brand: #2f6db3;
+        --brand-hover: #3f7dc4;
+        --on-brand: #ffffff;
+        --brand-text: #7cb2ec;
+        --focus-ring: #6fb0f0;
+        --danger-surface: #3a1a1c;
+        --danger-text: #f4a6a1;
+        --danger-border: #5c2a2b;
+        --warning-surface: #3a2c12;
+        --warning-text: #f2c065;
+        --warning-border: #5c451c;
+        --success-surface: #16311f;
+        --success-text: #7fd6a1;
+        --success-border: #285138;
+        --info-surface: #172a3f;
+        --info-text: #8fbdec;
+        --info-border: #294864;
+        --neutral-surface: #232b3a;
+        --neutral-text: #aab6c9;
+        --neutral-border: #384357;
+        --cia-c-surface: #1c2140;
+        --cia-c-text: #a9adf0;
+        --cia-i-surface: #0f3230;
+        --cia-i-text: #6fd3ca;
+        --cia-a-surface: #2a1c40;
+        --cia-a-text: #ce9df0;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+        --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.55);
+      }
+
+      /* ===== Reset básico ===== */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        background: var(--surface-100);
+        color: var(--ink);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background-color 0.15s ease,
+          color 0.15s ease;
+      }
+      a {
+        color: inherit;
+      }
+
+      /* ===== Estilos de componentes — SecureAudit MX ===== */
+      .sa-root {
+        font-family: var(--font-sans);
+        color: var(--ink);
+      }
+
+      .sa-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+        padding: 10px 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition:
+          background-color 0.12s ease,
+          border-color 0.12s ease,
+          color 0.12s ease;
+      }
+      .sa-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+      .sa-btn--primary {
+        background: var(--brand);
+        color: var(--on-brand);
+      }
+      .sa-btn--primary:hover {
+        background: var(--brand-hover);
+      }
+      .sa-btn--secondary {
+        background: var(--surface-200);
+        color: var(--brand-text);
+        border-color: var(--border-strong);
+      }
+      .sa-btn--secondary:hover {
+        background: var(--surface-300);
+      }
+      .sa-btn--subtle {
+        background: transparent;
+        color: var(--brand-text);
+      }
+      .sa-btn--subtle:hover {
+        background: var(--surface-300);
+      }
+      .sa-btn--sm {
+        padding: 7px 12px;
+        font-size: 13px;
+      }
+
+      .sa-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        font-family: var(--font-sans);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
+        border: 1px solid transparent;
+      }
+      .sa-badge__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: var(--radius-pill);
+        background: currentColor;
+      }
+      .sa-badge--alta {
+        background: var(--danger-surface);
+        color: var(--danger-text);
+        border-color: var(--danger-border);
+      }
+      .sa-badge--media {
+        background: var(--warning-surface);
+        color: var(--warning-text);
+        border-color: var(--warning-border);
+      }
+      .sa-badge--baja {
+        background: var(--info-surface);
+        color: var(--info-text);
+        border-color: var(--info-border);
+      }
+
+      .sa-cia {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 7px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+      }
+      .sa-cia--c {
+        background: var(--cia-c-surface);
+        color: var(--cia-c-text);
+      }
+      .sa-cia--i {
+        background: var(--cia-i-surface);
+        color: var(--cia-i-text);
+      }
+      .sa-cia--a {
+        background: var(--cia-a-surface);
+        color: var(--cia-a-text);
+      }
+      .sa-cia-group {
+        display: inline-flex;
+        gap: var(--space-1);
+      }
+
+      .sa-toggle {
+        display: inline-flex;
+        padding: 3px;
+        gap: 3px;
+        background: var(--surface-300);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .sa-toggle__opt {
+        appearance: none;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--ink-muted);
+        font-family: var(--font-sans);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 6px 16px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition:
+          background-color 0.12s ease,
+          color 0.12s ease;
+      }
+      .sa-toggle__opt:hover {
+        color: var(--ink);
+      }
+      .sa-toggle__opt:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+      .sa-toggle__opt[aria-pressed="true"].is-si {
+        background: var(--success-surface);
+        color: var(--success-text);
+        border-color: var(--success-border);
+      }
+      .sa-toggle__opt[aria-pressed="true"].is-no {
+        background: var(--danger-surface);
+        color: var(--danger-text);
+        border-color: var(--danger-border);
+      }
+      .sa-toggle__opt[aria-pressed="true"].is-na {
+        background: var(--neutral-surface);
+        color: var(--neutral-text);
+        border-color: var(--neutral-border);
+      }
+      .sa-toggle__opt[aria-pressed="true"].is-freq {
+        background: var(--surface-200);
+        color: var(--brand-text);
+        border-color: var(--brand);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .sa-icon {
+        width: 1em;
+        height: 1em;
+        flex: none;
+        vertical-align: -0.125em;
+        color: inherit;
+      }
+
+      .sa-card {
+        background: var(--surface-200);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        padding: var(--space-4);
+        max-width: 640px;
+      }
+      .sa-card__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        margin-bottom: var(--space-3);
+        flex-wrap: wrap;
+      }
+      .sa-card__meta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        flex-wrap: wrap;
+      }
+      .sa-card__code {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink-subtle);
+      }
+      .sa-card__q {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 500;
+        color: var(--ink);
+        margin: 0 0 var(--space-3);
+      }
+      .sa-card__help {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 19px;
+        color: var(--ink-muted);
+        margin: 0 0 var(--space-4);
+        padding-left: var(--space-3);
+        border-left: 2px solid var(--border);
+      }
+      .sa-card__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+
+      .sa-ctrl {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-4);
+        max-width: 640px;
+      }
+      .sa-ctrl__num {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: var(--brand);
+        color: var(--on-brand);
+        font-family: var(--font-mono);
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+      }
+      .sa-ctrl__body {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .sa-ctrl__eyebrow {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-subtle);
+        margin: 0 0 2px;
+      }
+      .sa-ctrl__name {
+        font-family: var(--font-sans);
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 650;
+        color: var(--ink);
+        margin: 0;
+      }
+      .sa-ctrl__meta {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 19px;
+        color: var(--ink-muted);
+        margin: var(--space-2) 0 0;
+      }
+      .sa-ctrl__progress {
+        margin-top: var(--space-3);
+      }
+
+      .sa-progress {
+        max-width: 640px;
+      }
+      .sa-progress__track {
+        height: 8px;
+        background: var(--surface-300);
+        border-radius: var(--radius-pill);
+        overflow: hidden;
+      }
+      .sa-progress__fill {
+        height: 100%;
+        min-width: 8px;
+        background: var(--brand);
+        border-radius: var(--radius-pill);
+        transition:
+          width 0.2s ease,
+          background-color 0.2s ease;
+      }
+      .sa-progress--complete .sa-progress__fill {
+        background: var(--success-text);
+      }
+      .sa-progress--sm .sa-progress__track {
+        height: 6px;
+      }
+
+      /* ===== Layout de la página (responsive) ===== */
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: var(--space-7);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+      .topbar {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        width: fit-content;
+        font-size: 13px;
+        color: var(--ink-muted);
+        text-decoration: none;
+      }
+      .back-link:hover {
+        color: var(--brand-text);
+      }
+      .topbar-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        color: var(--ink-subtle);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .questions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+      .footer-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        padding-top: var(--space-5);
+        border-top: 1px solid var(--border);
+        max-width: 640px;
+      }
+      .footer-nav-right {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+      }
+      .footer-count {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--ink-muted);
+        white-space: nowrap;
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          padding: 20px 16px;
+          gap: var(--space-5);
+        }
+        .questions {
+          gap: var(--space-4);
+        }
+        .sa-ctrl__name {
+          font-size: 20px;
+          line-height: 26px;
+        }
+      }
+      @media (max-width: 480px) {
+        .footer-nav {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .footer-nav-right {
+          flex-direction: column-reverse;
+          align-items: stretch;
+        }
+        .footer-nav .sa-btn {
+          width: 100%;
+        }
+        .footer-count {
+          text-align: center;
+        }
+        .sa-ctrl__num {
+          width: 38px;
+          height: 38px;
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <a href="#" class="back-link">← Volver al cuestionario</a>
+        <div class="topbar-row">
+          <div class="eyebrow">
+            <svg
+              class="sa-icon"
+              viewBox="0 0 80 80"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              style="font-size: 15px"
+            >
+              <path
+                d="M39.9984 70.2398C38.2 69.3964 36.453 68.432 34.7698 67.3503C27.502 62.6795 21.7299 56.0182 18.141 48.1596C14.5521 40.3011 13.2977 31.5766 14.5272 23.0253C14.7766 21.2909 15.126 19.5785 15.5718 17.896L40 10L64.4246 17.8948C64.8706 19.5777 65.2201 21.2905 65.4695 23.0253C66.699 31.5766 65.4446 40.3011 61.8557 48.1596C58.2668 56.0182 52.4947 62.6795 45.2269 67.3503C43.5437 68.432 41.7967 69.3964 39.9984 70.2398Z"
+              />
+            </svg>
+            <span
+              >Cuestionario CIS Controls v8 · IG1 · Control {{
+              control.numero_control }} de 18</span
+            >
+          </div>
+          <button
+            type="button"
+            id="theme-toggle"
+            class="sa-btn sa-btn--subtle sa-btn--sm"
+          >
+            Modo oscuro
+          </button>
+        </div>
+      </div>
+
+      <header class="sa-ctrl sa-root">
+        <div class="sa-ctrl__num" aria-hidden="true">
+          {{ control.numero_control }}
+        </div>
+        <div class="sa-ctrl__body">
+          <p class="sa-ctrl__eyebrow">Control CIS v8</p>
+          <h1 class="sa-ctrl__name">{{ control.nombre_control }}</h1>
+          <p class="sa-ctrl__meta" id="ctrl-meta">
+            4 preguntas · 0 respondidas
+          </p>
+          <div class="sa-ctrl__progress">
+            <div class="sa-progress sa-progress--sm" id="ctrl-progress">
+              <div class="sa-progress__track">
+                <div
+                  class="sa-progress__fill"
+                  id="ctrl-progress-fill"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!--Englobador de todas las preguntas-->
+      <div class="questions">
+        <!--Recuadro de pregunta individual-->
+        {% for pregunta in preguntas %}
+        <article class="sa-card sa-root">
+          <!--recuadro CIA-->
+          <div class="sa-card__top">
+            <div class="sa-card__meta">
+              <span class="sa-card__code">{{ pregunta.codigo_pregunta }}</span>
+              <!--CIA-->
+              <span class="sa-cia-group">
+                {% set cias = pregunta.cia_pregunta.split() %} {% for cia in
+                cias %}
+                <span
+                  class="sa-cia sa-cia--{{cia | lower}}"
+                  title="Confidencialidad"
+                  aria-label="Confidencialidad"
+                  >{{ cia }}</span
+                >
+                {% endfor %}
+              </span>
+            </div>
+            <span
+              class="sa-badge sa-badge--{{ pregunta.criticidad_pregunta | lower }}"
+              ><span class="sa-badge__dot" aria-hidden="true"></span>{{
+              pregunta.criticidad_pregunta }}</span
+            >
+          </div>
+
+          <!--Pregunta-->
+          <p class="sa-card__q">{{ pregunta.texto_pregunta }}</p>
+          <!--Descripcion-->
+          <p class="sa-card__help">{{ pregunta.descripcion_ayuda }}</p>
+
+          <!--Acciones-->
+          <div class="sa-card__actions">
+            {% if pregunta.tipo_respuesta == "si_no_na" %}
+            <div
+              class="sa-toggle"
+              role="group"
+              aria-label="Respuesta a la pregunta {{pregunta.codigo_pregunta}}"
+              data-question="1"
+            >
+              <button
+                type="button"
+                class="sa-toggle__opt is-si"
+                data-value="si"
+                aria-pressed="false"
+              >
+                Sí
+              </button>
+              <button
+                type="button"
+                class="sa-toggle__opt is-no"
+                data-value="no"
+                aria-pressed="false"
+              >
+                No
+              </button>
+              <button
+                type="button"
+                class="sa-toggle__opt is-na"
+                data-value="na"
+                aria-pressed="false"
+              >
+                N/A
+              </button>
+            </div>
+            {% else %}
+            <div
+              class="sa-toggle"
+              role="group"
+              aria-label="Respuesta a la pregunta 11.4"
+              data-question="4"
+            >
+              <button
+                type="button"
+                class="sa-toggle__opt is-freq"
+                data-value="diario"
+                aria-pressed="false"
+              >
+                Diario
+              </button>
+              <button
+                type="button"
+                class="sa-toggle__opt is-freq"
+                data-value="semanal"
+                aria-pressed="false"
+              >
+                Semanal
+              </button>
+              <button
+                type="button"
+                class="sa-toggle__opt is-freq"
+                data-value="mensual"
+                aria-pressed="false"
+              >
+                Mensual
+              </button>
+              <button
+                type="button"
+                class="sa-toggle__opt is-na"
+                data-value="na"
+                aria-pressed="false"
+              >
+                N/A
+              </button>
+            </div>
+            {% endif %}
+          </div>
+        </article>
+        <!--End of pregunta-->
+        {% endfor %}
+      </div>
+      <!--End div totas preguntas-->
+
+      <div class="footer-nav">
+        {% if control.numero_control > 1 %}
+        <button type="button" class="sa-btn sa-btn--secondary">
+          ← Control anterior
+        </button>
+        {% endif %}
+        <div class="footer-nav-right">
+          <span class="footer-count" id="footer-count">0 / 4 respondidas</span>
+          <button type="button" class="sa-btn sa-btn--primary">
+            Guardar y continuar →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var TOTAL = {{ preguntas | count }};
+
+        function countAnswered() {
+          var groups = document.querySelectorAll(".sa-toggle[data-question]");
+          var n = 0;
+          groups.forEach(function (g) {
+            if (g.querySelector('.sa-toggle__opt[aria-pressed="true"]')) n++;
+          });
+          return n;
+        }
+
+        function updateProgress() {
+          var answered = countAnswered();
+          var pct = Math.round((answered / TOTAL) * 100);
+          var fill = document.getElementById("ctrl-progress-fill");
+          var track = document.getElementById("ctrl-progress");
+          var meta = document.getElementById("ctrl-meta");
+          var footerCount = document.getElementById("footer-count");
+          if (fill) fill.style.width = pct + "%";
+          if (track)
+            track.classList.toggle("sa-progress--complete", answered === TOTAL);
+          if (meta)
+            meta.textContent =
+              TOTAL + " preguntas · " + answered + " respondidas";
+          if (footerCount)
+            footerCount.textContent = answered + " / " + TOTAL + " respondidas";
+        }
+
+        document
+          .querySelectorAll(".sa-toggle[data-question] .sa-toggle__opt")
+          .forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var group = btn.closest(".sa-toggle");
+              group.querySelectorAll(".sa-toggle__opt").forEach(function (b) {
+                b.setAttribute("aria-pressed", "false");
+              });
+              btn.setAttribute("aria-pressed", "true");
+              updateProgress();
+            });
+          });
+        updateProgress();
+
+        // Modo oscuro: sigue la preferencia del sistema por defecto; el botón
+        // permite forzar un tema explícito para esta página.
+        var mql = window.matchMedia("(prefers-color-scheme: dark)");
+        var themeBtn = document.getElementById("theme-toggle");
+
+        function isEffectivelyDark() {
+          var forced = document.documentElement.getAttribute("data-theme");
+          return forced ? forced === "dark" : mql.matches;
+        }
+        function syncThemeLabel() {
+          if (themeBtn)
+            themeBtn.textContent = isEffectivelyDark()
+              ? "Modo claro"
+              : "Modo oscuro";
+        }
+
+        if (themeBtn) {
+          themeBtn.addEventListener("click", function () {
+            var next = isEffectivelyDark() ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            syncThemeLabel();
+          });
+        }
+        mql.addEventListener("change", function () {
+          if (!document.documentElement.getAttribute("data-theme"))
+            syncThemeLabel();
+        });
+        syncThemeLabel();
+      })();
+    </script>
+  </body>
+</html>
