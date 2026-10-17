@@ -1,0 +1,28 @@
+{
+  "usuarios": [
+    {
+      "id_usuario": 1,
+      "rol_usuario": "auditor",
+      "nombre_usuario": "Auditor",
+      "apellidoP_usuario": "Demo",
+      "correo_usuario": "auditor.demo@example.com",
+      "contraseña_usuario": "!"
+    }
+  ],
+  "empresas": [
+    {
+      "id_empresa": 1,
+      "nombre_empresa": "Empresa Demo",
+      "sector_empresa": "Pruebas",
+      "tamaño_empresa": "pequeña",
+      "id_usuario_registro": 1
+    }
+  ],
+  "sesiones": [
+    {
+      "id_sesion": 1,
+      "id_empresa": 1,
+      "id_usuario": 1
+    }
+  ]
+}
