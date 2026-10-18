@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{#- Ir a otro control. Si la sesion es editable es un boton submit del formulario:
+    guarda lo marcado y despues navega, asi no se pierden respuestas (RF-04.6).
+    Si no es editable (pausada/finalizada) es un link normal: /guardar responderia 409. -#}
+{% macro ir_a(numero, clase, texto, etiqueta = none, actual = false) -%}
+{%- if editable -%}
+<button
+  type="submit"
+  form="form-cuestionario"
+  name="destino"
+  value="{{ numero }}"
+  class="{{ clase }}"
+  {%- if etiqueta %} aria-label="{{ etiqueta }}" title="{{ etiqueta }}"{% endif %}
+  {%- if actual %} aria-current="step"{% endif %}
+>{{ texto }}</button>
+{%- else -%}
+<a
+  href="{{ url_for('cuestionario_page.cuestionario_control', numero_control = numero) }}"
+  class="{{ clase }}"
+  {%- if etiqueta %} aria-label="{{ etiqueta }}" title="{{ etiqueta }}"{% endif %}
+  {%- if actual %} aria-current="step"{% endif %}
+>{{ texto }}</a>
+{%- endif -%}
+{%- endmacro %}
+
+{% block titulo %}SecureAudit MX — Control {{ control.numero_control }}: {{ control.nombre_control }}{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/paginas/cuestionario.css') }}" />
+{% endblock %}
+
+{#- Sin enlace "Volver" por ahora: su destino es la lista de sesiones (GET /sesiones, RF-03),
+    que aun no existe. Cuando exista: block volver con "← Mis auditorias". -#}
+
+{% block eyebrow %}Cuestionario CIS Controls v8 · IG1 · Control {{ control.numero_control }} de {{ progreso | length }}{% endblock %}
+
+{% block cabecera %}
+{% if editable %}
+<!--Boton por defecto del form: al presionar Enter (por ejemplo sobre un radio) el navegador
+"da clic" al PRIMER submit del form en orden del documento. Sin este, ese seria el control 1
+del mapa y Enter te mandaria al control 1. Este guarda y se queda en el control actual-->
+<button
+  type="submit"
+  form="form-cuestionario"
+  name="destino"
+  value="{{ control.numero_control }}"
+  class="sa-oculto"
+  tabindex="-1"
+  aria-hidden="true"
+>Guardar</button>
+{% endif %}
+
+<!--Totales globales (RF-04.4). "otros" = respondidas en los demas controles segun la BD;
+las de este control las cuenta cuestionario.js en vivo mientras se marcan-->
+{% set total_global = progreso | sum(attribute = "total") %}
+{% set respondidas_global = progreso | sum(attribute = "respondidas") %}
+{% set este_control = progreso | selectattr("numero", "equalto", control.numero_control) | first %}
+{% set pct_global = (respondidas_global * 100 / total_global) | round | int %}
+{% set pct_control = (respuestas | length * 100 / preguntas | length) | round | int %}
+
+<section class="sa-global" aria-labelledby="global-titulo">
+  <div class="sa-global__head">
+    <h2 class="sa-global__title" id="global-titulo">Progreso global</h2>
+    <span class="sa-global__count" id="global-count">{{ respondidas_global }} de {{ total_global }} respondidas · {{ pct_global }}%</span>
+  </div>
+  <div
+    class="sa-progress sa-progress--sm"
+    id="global-progreso"
+    data-total="{{ total_global }}"
+    data-otros="{{ respondidas_global - este_control.respondidas }}"
+  >
+    <div class="sa-progress__track">
+      <div class="sa-progress__fill" style="width: {{ pct_global }}%"></div>
+    </div>
+  </div>
+
+  <!--Mapa de controles (RF-04.7): estado de cada uno y salto directo-->
+  <nav aria-label="Controles del cuestionario">
+    <ol class="sa-steps">
+      {% for c in progreso %}
+      <li>
+        {{ ir_a(
+          c.numero,
+          "sa-step sa-step--" ~ c.estado,
+          c.numero,
+          "Control " ~ c.numero ~ ": " ~ c.nombre ~ " — " ~ c.estado ~ " (" ~ c.respondidas ~ " de " ~ c.total ~ ")",
+          c.numero == control.numero_control,
+        ) }}
+      </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <p class="sa-legend" aria-hidden="true">
+    <span class="sa-legend__item">Pendiente</span>
+    <span class="sa-legend__item sa-legend__item--parcial">Parcial</span>
+    <span class="sa-legend__item sa-legend__item--completo">Completo</span>
+  </p>
+</section>
+
+<header class="sa-ctrl sa-root">
+  <div class="sa-ctrl__num" aria-hidden="true">{{ control.numero_control }}</div>
+  <div class="sa-ctrl__body">
+    <p class="sa-ctrl__eyebrow">Control CIS v8</p>
+    <h1 class="sa-ctrl__name">{{ control.nombre_control }}</h1>
+    <p class="sa-ctrl__meta" id="ctrl-meta">
+      {{ preguntas | length }} preguntas · {{ respuestas | length }} respondidas
+    </p>
+    <div class="sa-ctrl__progress">
+      <div class="sa-progress sa-progress--sm" id="ctrl-progress">
+        <div class="sa-progress__track">
+          <div class="sa-progress__fill" style="width: {{ pct_control }}%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% if not editable %}
+<div class="sa-alerts">
+  <p class="sa-alert sa-alert--aviso" role="status">
+    Esta sesión no está en progreso: puedes consultar las respuestas, pero no modificarlas.
+  </p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block contenido %}
+<!--Formulario: envia todas las respuestas del control a /cuestionario/guardar.
+Con JavaScript, ademas, cada cambio se autoguarda en data-autoguardar-url (RF-04.6)-->
+<form
+  id="form-cuestionario"
+  class="cuestionario-form"
+  method="post"
+  action="{{ url_for('cuestionario_page.guardar') }}"
+  data-autoguardar-url="{{ url_for('cuestionario_page.autoguardar') }}"
+  data-editable="{{ 'true' if editable else 'false' }}"
+>
+  <!--Token CSRF (RNF-01.2, T-04): sin el, Flask-WTF rechaza el POST con 400-->
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <!--Le dice a guardar() que control se esta contestando-->
+  <input type="hidden" name="numero_control" value="{{ control.numero_control }}" />
+
+  <!--Englobador de todas las preguntas-->
+  <div class="questions">
+    <!--Nombre completo de cada letra CIA (para title y lectores de pantalla)-->
+    {% set nombres_cia = {"C": "Confidencialidad", "I": "Integridad", "A": "Disponibilidad"} %}
+    <!--Recuadro de pregunta individual-->
+    {% for pregunta in preguntas %}
+    {% set guardada = respuestas.get(pregunta.id_pregunta) %}
+    {% set comentario = guardada.comentario_respuesta if guardada else none %}
+    <article class="sa-card sa-root">
+      <!--recuadro CIA-->
+      <div class="sa-card__top">
+        <div class="sa-card__meta">
+          <span class="sa-card__code">{{ pregunta.codigo_pregunta }}</span>
+          <!--CIA-->
+          <span class="sa-cia-group">
+            {% for cia in pregunta.cia_pregunta.split() %}
+            <span
+              class="sa-cia sa-cia--{{ cia | lower }}"
+              title="{{ nombres_cia[cia] }}"
+              aria-label="{{ nombres_cia[cia] }}"
+              >{{ cia }}</span
+            >
+            {% endfor %}
+          </span>
+        </div>
+        <span
+          class="sa-badge sa-badge--{{ pregunta.criticidad_pregunta | lower }}"
+          ><span class="sa-badge__dot" aria-hidden="true"></span>{{
+          pregunta.criticidad_pregunta }}</span
+        >
+      </div>
+
+      <!--Pregunta-->
+      <p class="sa-card__q">{{ pregunta.texto_pregunta }}</p>
+      <!--Descripcion-->
+      <p class="sa-card__help">{{ pregunta.descripcion_ayuda }}</p>
+
+      <!--Acciones: un radio por opcion; todos comparten name, asi solo uno puede estar marcado-->
+      <div class="sa-card__actions">
+        <div
+          class="sa-toggle"
+          role="radiogroup"
+          aria-label="Respuesta a la pregunta {{ pregunta.codigo_pregunta }}"
+          data-question="{{ pregunta.id_pregunta }}"
+        >
+          {% for valor, texto in opciones[pregunta.tipo_respuesta] %}
+          <input
+            type="radio"
+            class="sa-toggle__input"
+            id="p{{ pregunta.id_pregunta }}-{{ valor }}"
+            name="respuesta_{{ pregunta.id_pregunta }}"
+            value="{{ valor }}"
+            {% if guardada and guardada.respuesta_valor == valor %}checked{% endif %}
+            {% if not editable %}disabled{% endif %}
+          />
+          <label
+            for="p{{ pregunta.id_pregunta }}-{{ valor }}"
+            class="sa-toggle__opt is-{{ valor }}"
+            >{{ texto }}</label
+          >
+          {% endfor %}
+        </div>
+      </div>
+
+      <!--Comentario opcional (RF-04.3); el desplegable se abre solo si ya tiene texto.
+      Ojo: el contenido del textarea va pegado a las etiquetas, cualquier espacio contaria como texto-->
+      <details class="sa-comentario" {% if comentario %}open{% endif %}>
+        <summary>Comentario (opcional)</summary>
+        <textarea
+          class="sa-comentario__campo"
+          name="comentario_{{ pregunta.id_pregunta }}"
+          rows="2"
+          maxlength="{{ max_comentario }}"
+          aria-label="Comentario de la pregunta {{ pregunta.codigo_pregunta }}"
+          placeholder="Evidencia o contexto de la respuesta"
+          {% if not editable %}disabled{% endif %}
+        >{{ comentario or "" }}</textarea>
+      </details>
+    </article>
+    <!--End of pregunta-->
+    {% endfor %}
+  </div>
+  <!--End div todas preguntas-->
+
+  <div class="footer-nav">
+    {% if control.numero_control > 1 %}
+    {{ ir_a(control.numero_control - 1, "sa-btn sa-btn--secondary", "← Control anterior") }}
+    {% endif %}
+    {% set es_ultimo = control.numero_control == (progreso | last).numero %}
+    <div class="footer-nav-right">
+      <span class="footer-count" id="footer-count">{{ respuestas | length }} / {{ preguntas | length }} respondidas</span>
+      {% if editable %}
+      <button
+        type="submit"
+        name="destino"
+        value="{{ control.numero_control if es_ultimo else control.numero_control + 1 }}"
+        class="sa-btn sa-btn--primary"
+      >
+        {{ "Guardar" if es_ultimo else "Guardar y continuar →" }}
+      </button>
+      {% elif not es_ultimo %}
+      {{ ir_a(control.numero_control + 1, "sa-btn sa-btn--primary", "Control siguiente →") }}
+      {% endif %}
+    </div>
+  </div>
+</form>
+<!--End form-->
+
+<!--Estado del autoguardado ("Guardando…", "Guardado", errores). role="status" hace que
+los lectores de pantalla lo anuncien sin mover el foco; vacio no se muestra-->
+<p id="estado-guardado" class="sa-guardado" role="status" aria-live="polite"></p>
+{% endblock %}
+
+{% block scripts %}
+<!--Modulo ES: importa componentes/progreso.js y componentes/autoguardado.js; se ejecuta
+cuando el HTML ya esta listo-->
+<script type="module" src="{{ url_for('static', filename='js/paginas/cuestionario.js') }}"></script>
+{% endblock %}

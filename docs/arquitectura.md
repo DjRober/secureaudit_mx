@@ -33,8 +33,9 @@ SecureAudit MX es una aplicación web local de una sola instancia. Las tecnolog�
 | Framework web | Flask 3.x | Django | Flask es minimalista y no impone estructura. Para una app de una sola instancia sin ORM complejo, Django añade complejidad innecesaria. Flask permite aprender la arquitectura desde cero. |
 | Base de datos | SQLite 3 | PostgreSQL, MySQL | SQLite no requiere servidor ni configuración. Se crea automáticamente en el primer arranque. Suficiente para el volumen de datos esperado (< 500 sesiones, RNF-03.4). |
 | ORM / capa de datos | Flask-SQLAlchemy 3.1 (sobre SQLAlchemy 2.0) | SQL crudo con `sqlite3`, Peewee | Flask-SQLAlchemy integra SQLAlchemy con el ciclo de vida de Flask mediante una instancia `db` compartida (`init_app`). SQLAlchemy 2.0 permite modelos tipados con `Mapped`/`mapped_column` y declarar las restricciones (`CHECK`, `UNIQUE`, FK, PK compuesta) en el propio modelo, alineado con `modelo_datos.md`. |
+| Migraciones de esquema | Flask-Migrate 4.1 (sobre Alembic) | Recrear la base en cada cambio, Alembic sin integración | Versiona los cambios de esquema en `migrations/` y los aplica sin perder datos; se integra con la app factory (`migrate.init_app`) y los comandos `flask db`. Ver ADR-03. |
 | Templates | Jinja2 | React, Vue | Jinja2 está integrado en Flask sin dependencias adicionales. Evita un stack frontend separado y mantiene toda la lógica en Python. |
-| CSS / UI | Bootstrap 5 | Tailwind, CSS propio | Bootstrap 5 ofrece componentes responsivos listos para usar sin necesidad de compilador. Se sirve localmente (RNF-04.4). |
+| CSS / UI | CSS propio con tokens (sin framework) | Bootstrap 5, Tailwind | Sistema de diseño propio: variables CSS (tokens) para color, espacio y tipografía, tema claro/oscuro y componentes con prefijo `sa-`. CSS plano sin compilador ni dependencias, organizado en módulos y servido localmente (RNF-04.4). Ver ADR-08. |
 | Gráficas | Chart.js | D3.js, Plotly | Chart.js es ligero, bien documentado y suficiente para gráficas de radar y barras. Se sirve localmente. |
 | Generación PDF | WeasyPrint | ReportLab, fpdf2 | WeasyPrint convierte HTML/CSS a PDF, lo que permite reutilizar los templates de Jinja2 sin duplicar la lógica de presentación. |
 | Escaneo de red | python-nmap | scapy, socket nativo | python-nmap es un wrapper maduro sobre Nmap que simplifica el parsing de resultados y es ampliamente usado en herramientas de seguridad. |
@@ -81,8 +82,8 @@ Las carpetas marcadas **(pendiente)** forman parte de la arquitectura objetivo p
 ```
 secureaudit_mx/
 │
-├── run.py                      # Punto de entrada: crea la app (create_app) y corre el servidor
-├── seed.py                     # Sembrado idempotente de catálogos (controles y preguntas)
+├── run.py                      # Punto de entrada: crea la app, inicializa la BD con seed() (RNF-04.5) y corre el servidor
+├── seed.py                     # Inicialización idempotente: aplica migraciones y siembra catálogos (y datos demo)
 │
 ├── app/                        # Código fuente de la aplicación
 │   ├── __init__.py             # Application factory (create_app) + init de extensiones
@@ -102,7 +103,7 @@ secureaudit_mx/
 │   │   ├── respuesta.py        # Tabla puente sesiones ↔ preguntas (UNIQUE compuesto)
 │   │   └── logs.py
 │   │
-│   ├── routes/                 # (pendiente) Blueprints de Flask (un archivo por módulo)
+│   ├── routes/                 # (en progreso) Blueprints de Flask (un archivo por módulo)
 │   │   ├── auth.py             # RF-01: login, logout, registro
 │   │   ├── empresas.py         # RF-02: CRUD de empresas
 │   │   ├── sesiones.py         # RF-03: gestión de sesiones de auditoría
@@ -112,25 +113,35 @@ secureaudit_mx/
 │   │   ├── escaneo.py          # RF-08: módulo de escaneo de red
 │   │   └── admin.py            # RF-09: log de actividad y gestión de usuarios
 │   │
-│   ├── services/               # (pendiente) Lógica de negocio desacoplada de las rutas
+│   ├── services/               # (en progreso) Lógica de negocio desacoplada de las rutas
+│   │   ├── respuestas.py       # Validación, upsert y progreso de respuestas (RF-04)
 │   │   ├── scoring.py          # Algoritmo de cálculo de riesgo (RF-05)
 │   │   ├── pdf_generator.py    # Generación de reportes con WeasyPrint (RF-07)
 │   │   └── scanner.py          # Integración con python-nmap (RF-08)
 │   │
-│   ├── templates/              # (pendiente) Vistas HTML (Jinja2)
+│   ├── templates/              # (en progreso) Vistas HTML (Jinja2)
 │   │   ├── base.html           # Layout base con navbar y estilos comunes
 │   │   ├── auth/
+│   │   │   └── login.html      # RF-01 (por ahora solo la ruta de prueba del blueprint)
 │   │   ├── empresas/
 │   │   ├── sesiones/
 │   │   ├── cuestionario/
+│   │   │   └── control.html    # RF-04: preguntas de un control, progreso y mapa de controles
 │   │   ├── resultados/
 │   │   └── reportes/
 │   │
-│   └── static/                 # (pendiente) Archivos estáticos servidos localmente
+│   └── static/                 # (en progreso) Archivos estáticos servidos localmente (ADR-08)
 │       ├── css/
+│       │   ├── main.css        # Punto de entrada: importa base/ y componentes/ en orden de cascada
+│       │   ├── base/           # Tokens, reset, estructura de página y utilidades (todas las páginas)
+│       │   ├── componentes/    # Un archivo por componente sa-* (btn, toggle, card, progress, ...)
+│       │   └── paginas/        # Estilos de una sola página; los carga su template (cuestionario.css)
 │       ├── js/
-│       │   ├── bootstrap.min.js
-│       │   └── chart.min.js
+│       │   ├── base/           # Scripts de todas las páginas (tema.js: modo claro/oscuro)
+│       │   ├── componentes/    # Módulos ES reutilizables (progreso.js, autoguardado.js)
+│       │   ├── paginas/        # Módulo de entrada de cada página (cuestionario.js, RF-04.4)
+│       │   └── vendor/         # Librerías de terceros servidas localmente
+│       │       └── chart.min.js
 │       └── img/
 │
 ├── seeds/                      # Datos de catálogo para el sembrado (JSON)
@@ -154,8 +165,12 @@ secureaudit_mx/
 │
 ├── reports/                    # (pendiente) Reportes PDF generados (gitignored)
 │
+├── migrations/                 # Migraciones de esquema (Flask-Migrate / Alembic, ADR-03)
+│   ├── versions/               # Una migración por cambio de esquema (la primera: esquema inicial)
+│   └── README                  # Uso diario y receta para cambiar valores de un Enum
+│
 ├── instance/                   # Base de datos de instancia (gitignored)
-│   └── secureaudit.db          # SQLite, creada por db.create_all()
+│   └── secureaudit.db          # SQLite, creada sola al arrancar run.py (migraciones + catálogos)
 │
 ├── requirements.txt            # Dependencias Python (RNF-04.3)
 ├── .gitignore
@@ -184,7 +199,8 @@ flowchart TD
 
     H --> I[GET /cuestionario/control/1]
     I --> J[Responde preguntas\nSí / No / N/A]
-    J --> K[POST /cuestionario/guardar]
+    J -. cada cambio, sin acción del usuario\nRF-04.6 .-> AG[POST /cuestionario/autoguardar\nJSON + X-CSRFToken]
+    J --> K[POST /cuestionario/guardar\nal navegar entre controles]
     K --> L{¿Último control?}
     L -- No --> M[Siguiente control]
     M --> I
@@ -211,12 +227,13 @@ Las siguientes decisiones arquitectónicas tuvieron alternativas viables. Se doc
 | ID | Decisión | Contexto | Alternativa rechazada | Consecuencia |
 |---|---|---|---|---|
 | ADR-01 | App local sin despliegue en nube | Los datos de auditoría son sensibles para las PyMES. Transmitirlos a un servidor externo requeriría cifrado, gestión de claves y política de privacidad. | Despliegue en Railway / Render | Los datos nunca salen del equipo del auditor. La herramienta no requiere internet en ejecución. Limitación: no hay acceso remoto ni colaboración en tiempo real. |
-| ADR-02 | Jinja2 + Bootstrap en lugar de SPA | El público objetivo usa la herramienta de forma guiada y lineal, no como una aplicación interactiva compleja. Una SPA añadiría un build step y complejidad de mantenimiento. | React + API REST | El servidor Flask gestiona tanto la lógica como la presentación. Menos código, menos dependencias, más fácil de auditar. Limitación: actualizaciones de UI requieren recarga de página completa. |
-| ADR-03 | SQLite como motor, con SQLAlchemy 2.0 como ORM | La herramienta es de un solo usuario por instancia; no hay concurrencia de escritura que justifique un motor con servidor. El ORM aporta modelos tipados y validación (`CHECK`/`UNIQUE`/FK) declarada en el código. | PostgreSQL / MySQL (servidor dedicado) | Instalación con `pip install -r requirements.txt` sin pasos adicionales; la base se crea con `db.create_all()`. Limitación: SQLite no escala a múltiples usuarios simultáneos (fuera del alcance en v1.0.0), y por ahora los cambios de esquema en desarrollo se aplican recreando la base (Alembic queda como mejora futura). |
+| ADR-02 | Jinja2 en lugar de SPA | El público objetivo usa la herramienta de forma guiada y lineal, no como una aplicación interactiva compleja. Una SPA añadiría un build step y complejidad de mantenimiento. | React + API REST | El servidor Flask gestiona tanto la lógica como la presentación. Menos código, menos dependencias, más fácil de auditar. Limitación: actualizaciones de UI requieren recarga de página completa. |
+| ADR-03 | SQLite como motor, con SQLAlchemy 2.0 como ORM | La herramienta es de un solo usuario por instancia; no hay concurrencia de escritura que justifique un motor con servidor. El ORM aporta modelos tipados y validación (`CHECK`/`UNIQUE`/FK) declarada en el código. | PostgreSQL / MySQL (servidor dedicado) | Instalación con `pip install -r requirements.txt` sin pasos adicionales; la base se crea sola en el primer arranque: `run.py` aplica las migraciones y siembra los catálogos (RNF-04.5). **Cambios de esquema:** desde la Semana 4 se aplican con migraciones de Flask-Migrate (Alembic) en `migrations/`, nunca recreando la base: con usuarios y auditorías reales (a partir de la Semana 7) borrarla deja de ser una opción, y adoptarlas antes de tener datos hace que la migración base sea el esquema actual sin conversiones. Se usa modo *batch* porque SQLite no soporta la mayoría de los `ALTER TABLE` (recrea la tabla y copia los datos); para que pueda reemplazar restricciones, todas tienen nombre (convención en `app/extensions/db.py`) y cada `Enum` lleva el nombre de su `CHECK`. La receta para cambiar los valores de un `Enum` está en `migrations/README`. Limitación: SQLite no escala a múltiples usuarios simultáneos (fuera del alcance en v1.0.0). |
 | ADR-04 | WeasyPrint para PDF desde HTML | Los templates Jinja2 ya definen la estructura del reporte. Convertir HTML a PDF reutiliza ese trabajo sin duplicar la lógica de presentación. | ReportLab (PDF programático) | El diseño del reporte se controla con CSS estándar. Limitación: WeasyPrint requiere dependencias del sistema (libpango) que deben documentarse en el README. |
 | ADR-05 | `services/` como capa intermedia | El algoritmo de scoring (RF-05) y la generación de PDF (RF-07) son lo suficientemente complejos para merecer pruebas unitarias independientes de las rutas HTTP. | Lógica directamente en `routes/` | Las pruebas en `tests/` pueden importar `services/scoring.py` sin necesidad de levantar el servidor Flask. Cumple RNF-05.2. |
 | ADR-06 | Application factory + módulo `app/extensions/` | Se necesita una única instancia de `db` compartida entre los modelos, `create_app` y scripts como `seed.py`, sin caer en imports circulares (app→models→app). | Instanciar `SQLAlchemy(app)` en un módulo global | `create_app()` construye la app y llama `db.init_app(app)`; los modelos importan `db` desde `app.extensions`. Permite crear apps con distinta configuración (p. ej. para pruebas) y desacopla la definición de la extensión de la app concreta. |
 | ADR-07 | Catálogos sembrados desde JSON (`seeds/`) de forma idempotente | Los 18 controles y 71 preguntas son datos de catálogo estables (derivados de `checklist_auditoria_v1.md`) que no deben mezclarse con la lógica del sembrado. | Diccionarios embebidos en `seed.py` | El dato vive en `seeds/*.json` (editable, versionable, mapea 1:1 con el checklist); `seed.py` solo orquesta e inserta si la tabla está vacía (verificando por tabla). Limitación: no repone filas faltantes en una tabla parcialmente poblada — bastaría un *upsert* (`INSERT OR IGNORE`) si se requiere en el futuro. |
+| ADR-08 | CSS propio con tokens en lugar de Bootstrap | ADR-02 y el stack preveían Bootstrap 5, pero la interfaz del cuestionario (Semana 4) se construyó con un sistema de diseño propio: tokens en variables CSS, tema claro/oscuro con `data-theme` y componentes `sa-*` accesibles (radios nativos, foco visible, estados que no dependen solo del color). Migrar implicaba reescribir los templates sin ganancia funcional, y combinar ambos genera conflictos: el Reboot de Bootstrap altera los estilos base de encabezados, párrafos, botones y formularios, y quedarían dos sistemas de tema (`data-theme` y `data-bs-theme`). | Bootstrap 5 servido localmente | Cero dependencias de frontend para la UI y control total de la identidad visual; los tokens pueden reutilizarse en los reportes de WeasyPrint (ADR-04). Sin compilador: `css/main.css` importa `base/` y `componentes/` con `@import` en orden de cascada, cada página agrega su hoja de `paginas/` desde su template, y el JS se organiza igual con módulos ES nativos (sin *bundler*). Limitación: cada componente nuevo (formularios, tablas, navegación, diálogos) se construye y mantiene a mano; para diálogos se usará el elemento nativo `<dialog>` en lugar de JS de terceros. |
 
 ---
 

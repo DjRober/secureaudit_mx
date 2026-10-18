@@ -1,17 +1,21 @@
-﻿blinker==1.9.0
-certifi==2026.6.17
-charset-normalizer==3.4.7
-click==8.3.3
-colorama==0.4.6
+# Generado con pip freeze desde un venv limpio en el que solo se instalaron las
+# dependencias directas (las que importa el codigo):
+#   Flask==3.1.3 Flask-SQLAlchemy==3.1.1 SQLAlchemy==2.0.51 Flask-WTF==1.3.0 Flask-Migrate==4.1.0
+# Todo lo demas son dependencias de esas cinco. Para agregar una libreria: instalala en un
+# venv limpio junto con las de arriba, vuelve a hacer pip freeze y actualiza esta lista.
+alembic==1.20.0
+blinker==1.9.0
+click==8.5.0
 Flask==3.1.3
-greenlet==3.5.4
-idna==3.18
+Flask-Migrate==4.1.0
+Flask-SQLAlchemy==3.1.1
+Flask-WTF==1.3.0
+greenlet==3.5.6
 itsdangerous==2.2.0
 Jinja2==3.1.6
-MarkupSafe==3.0.3
-requests==2.34.2
+Mako==1.4.3
+MarkupSafe==3.0.4
 SQLAlchemy==2.0.51
 typing_extensions==4.16.0
-urllib3==2.7.0
-Werkzeug==3.1.8
-Flask-SQLAlchemy==3.1.1
+Werkzeug==3.1.9
+WTForms==3.2.2

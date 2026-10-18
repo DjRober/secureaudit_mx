@@ -1,0 +1,141 @@
+/* SecureAudit MX - Tokens del sistema de diseño: color, espacio, radios, sombras y
+   tipografía, con su versión de tema oscuro (data-theme o preferencia del sistema). */
+
+:root {
+  --surface-100: #f4f7fb;
+  --surface-200: #ffffff;
+  --surface-300: #e9eef5;
+  --border: #d5dde8;
+  --border-strong: #b7c2d2;
+  --ink: #131b28;
+  --ink-muted: #52607a;
+  --ink-subtle: #6c7789;
+  --brand: #0f4c81;
+  --brand-hover: #0c3e6b;
+  --on-brand: #ffffff;
+  --brand-text: #0f4c81;
+  --focus-ring: #2f81d6;
+  --danger-surface: #fbe7e6;
+  --danger-text: #a51f1a;
+  --danger-border: #f0b7b2;
+  --warning-surface: #fdf1dc;
+  --warning-text: #8a5a02;
+  --warning-border: #f2d59a;
+  --success-surface: #e2f4ea;
+  --success-text: #1c7a45;
+  --success-border: #b6e2c8;
+  --info-surface: #e4eefb;
+  --info-text: #17548c;
+  --info-border: #b9d3ef;
+  --neutral-surface: #eceff4;
+  --neutral-text: #4d5972;
+  --neutral-border: #d5dbe4;
+  --cia-c-surface: #e7e9fb;
+  --cia-c-text: #3b3fa3;
+  --cia-i-surface: #d9f2f0;
+  --cia-i-text: #0f6b64;
+  --cia-a-surface: #f0e6fb;
+  --cia-a-text: #7a2fb0;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --shadow-sm:
+    0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.04);
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.1);
+  /* Solo fuentes del sistema: la app no descarga nada de internet (ADR-01, RNF-04.4) */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono:
+    ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
+}
+
+/* Tema oscuro: sigue la preferencia del sistema operativo / navegador,           */
+/* salvo que el botón de esta página lo haya forzado con [data-theme].            */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-100: #0d1220;
+    --surface-200: #151c2c;
+    --surface-300: #1e2739;
+    --border: #2a3446;
+    --border-strong: #3b475d;
+    --ink: #eef3f9;
+    --ink-muted: #9fabc0;
+    --ink-subtle: #7f8ca3;
+    --brand: #2f6db3;
+    --brand-hover: #3f7dc4;
+    --on-brand: #ffffff;
+    --brand-text: #7cb2ec;
+    --focus-ring: #6fb0f0;
+    --danger-surface: #3a1a1c;
+    --danger-text: #f4a6a1;
+    --danger-border: #5c2a2b;
+    --warning-surface: #3a2c12;
+    --warning-text: #f2c065;
+    --warning-border: #5c451c;
+    --success-surface: #16311f;
+    --success-text: #7fd6a1;
+    --success-border: #285138;
+    --info-surface: #172a3f;
+    --info-text: #8fbdec;
+    --info-border: #294864;
+    --neutral-surface: #232b3a;
+    --neutral-text: #aab6c9;
+    --neutral-border: #384357;
+    --cia-c-surface: #1c2140;
+    --cia-c-text: #a9adf0;
+    --cia-i-surface: #0f3230;
+    --cia-i-text: #6fd3ca;
+    --cia-a-surface: #2a1c40;
+    --cia-a-text: #ce9df0;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.55);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-100: #0d1220;
+  --surface-200: #151c2c;
+  --surface-300: #1e2739;
+  --border: #2a3446;
+  --border-strong: #3b475d;
+  --ink: #eef3f9;
+  --ink-muted: #9fabc0;
+  --ink-subtle: #7f8ca3;
+  --brand: #2f6db3;
+  --brand-hover: #3f7dc4;
+  --on-brand: #ffffff;
+  --brand-text: #7cb2ec;
+  --focus-ring: #6fb0f0;
+  --danger-surface: #3a1a1c;
+  --danger-text: #f4a6a1;
+  --danger-border: #5c2a2b;
+  --warning-surface: #3a2c12;
+  --warning-text: #f2c065;
+  --warning-border: #5c451c;
+  --success-surface: #16311f;
+  --success-text: #7fd6a1;
+  --success-border: #285138;
+  --info-surface: #172a3f;
+  --info-text: #8fbdec;
+  --info-border: #294864;
+  --neutral-surface: #232b3a;
+  --neutral-text: #aab6c9;
+  --neutral-border: #384357;
+  --cia-c-surface: #1c2140;
+  --cia-c-text: #a9adf0;
+  --cia-i-surface: #0f3230;
+  --cia-i-text: #6fd3ca;
+  --cia-a-surface: #2a1c40;
+  --cia-a-text: #ce9df0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.55);
+}

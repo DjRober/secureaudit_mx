@@ -463,11 +463,11 @@
     "id_pregunta": 47,
     "id_control": 11,
     "codigo_pregunta": "11.4",
-    "texto_pregunta": "¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual)",
+    "texto_pregunta": "¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual/Nunca)",
     "cia_pregunta": "A",
     "criticidad_pregunta": "Alta",
     "tipo_respuesta": "frecuencia",
-    "descripcion_ayuda": "Indica cada cuánto se realizan los backups (diario, semanal o mensual). CIS recomienda al menos semanal, o más seguido según la sensibilidad de los datos; a mayor frecuencia, menos datos se pierden ante un incidente (CIS v8, 11.2)."
+    "descripcion_ayuda": "Indica cada cuánto se realizan los backups (diario, semanal, mensual o nunca). CIS recomienda al menos semanal, o más seguido según la sensibilidad de los datos; a mayor frecuencia, menos datos se pierden ante un incidente (CIS v8, 11.2)."
   },
   {
     "id_pregunta": 48,

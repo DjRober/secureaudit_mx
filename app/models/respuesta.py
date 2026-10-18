@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey, Enum, UniqueConstraint
 from typing import Literal, Optional
 import datetime
 
-Respuesta_valor = Literal["si", "no", "na", "diario", "semanal", "mensual"]
+Respuesta_valor = Literal["si", "no", "na", "diario", "semanal", "mensual", "nunca"]
 
 class Respuesta(db.Model):
     __tablename__ = "respuestas"
@@ -15,8 +15,8 @@ class Respuesta(db.Model):
     id_sesion: Mapped[int] = mapped_column(ForeignKey("sesiones.id_sesion"))
     #id_pregunta	INTEGER	FK → preguntas.id_pregunta, NOT NULL	Pregunta respondida
     id_pregunta: Mapped[int] = mapped_column(ForeignKey("preguntas.id_pregunta"))
-    #respuesta_valor	TEXT	NOT NULL, CHECK IN ('si','no','na','diario','semanal','mensual')	Valor de la respuesta
-    respuesta_valor: Mapped[Respuesta_valor] = mapped_column(Enum("si", "no", "na", "diario", "semanal", "mensual", create_constraint=True))
+    #respuesta_valor	TEXT	NOT NULL, CHECK IN ('si','no','na','diario','semanal','mensual','nunca')	Valor de la respuesta
+    respuesta_valor: Mapped[Respuesta_valor] = mapped_column(Enum("si", "no", "na", "diario", "semanal", "mensual", "nunca", name="ck_respuestas_respuesta_valor", create_constraint=True))
     #comentario_respuesta	TEXT	NULLABLE	Observaciones del auditor
     comentario_respuesta: Mapped[Optional[str]]
     #auto_completada	BOOLEAN	NOT NULL, DEFAULT 0	Indica si fue llenada automáticamente por el escaneo (RF-08.5)

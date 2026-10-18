@@ -13,7 +13,7 @@ class Usuario(db.Model):
     # id_usuario	INTEGER	PK, AUTOINCREMENT	Identificador único del usuario
     id_usuario: Mapped[int] = mapped_column(primary_key=True)
     #rol_usuario	TEXT	NOT NULL, CHECK IN ('auditor','tecnico','directivo')	Rol del usuario (RF-01.4): U01, U02, U03
-    rol_usuario: Mapped[Rol_usuario] = mapped_column(Enum("auditor", "tecnico", "directivo", create_constraint=True))
+    rol_usuario: Mapped[Rol_usuario] = mapped_column(Enum("auditor", "tecnico", "directivo", name="ck_usuarios_rol_usuario", create_constraint=True))
     #nombre_usuario	TEXT	NOT NULL	Nombre(s)
     nombre_usuario: Mapped[str]
     #apellidoP_usuario	TEXT	NOT NULL	Apellido paterno

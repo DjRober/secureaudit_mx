@@ -1,0 +1,33 @@
+/* SecureAudit MX - punto de entrada de los estilos globales (ADR-08).
+
+   Lo carga templates/base.html en todas las páginas. Este archivo solo importa:
+   el orden de los @import ES el orden de la cascada, de lo general a lo
+   particular. No lleva reglas propias (los @import deben ir antes que cualquier
+   regla o el navegador los ignora).
+
+   - base/         tokens, reset y estructura común de página
+   - componentes/  un archivo por componente sa-*, reutilizable en cualquier página
+   - paginas/      NO se importa aquí: cada template agrega la hoja de su página
+                   en el bloque {% block estilos %} de base.html
+
+   Para un componente nuevo: crea componentes/<nombre>.css y agrega su @import. */
+
+/* 1. Base */
+@import url("base/tokens.css");
+@import url("base/reset.css");
+@import url("base/layout.css");
+
+/* 2. Componentes */
+@import url("componentes/btn.css");
+@import url("componentes/badge.css");
+@import url("componentes/cia.css");
+@import url("componentes/toggle.css");
+@import url("componentes/icon.css");
+@import url("componentes/card.css");
+@import url("componentes/progress.css");
+@import url("componentes/alert.css");
+@import url("componentes/steps.css");
+@import url("componentes/guardado.css");
+
+/* 3. Utilidades: al final para que ganen ante un empate de especificidad */
+@import url("base/utilidades.css");

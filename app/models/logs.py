@@ -16,7 +16,7 @@ class Log(db.Model):
     #accion_log	TEXT	NOT NULL	Acción realizada (login, logout, crear_sesion, generar_reporte, ejecutar_escaneo, crud_usuario, etc.)
     accion_log: Mapped[str]
     #resultado_log	TEXT	NOT NULL, CHECK IN ('exito','fallo')	Resultado de la acción
-    resultado_log: Mapped[str] = mapped_column(Enum("exito", "fallo", create_constraint=True))
+    resultado_log: Mapped[str] = mapped_column(Enum("exito", "fallo", name="ck_logs_resultado_log", create_constraint=True))
     #detalle_log	TEXT	NULLABLE	Información adicional (sin datos sensibles, RF-09.4)
     detalle_log: Mapped[Optional[str]]
 

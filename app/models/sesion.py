@@ -20,7 +20,7 @@ class Sesion(db.Model):
     #fecha_fin	DATETIME	NULLABLE	Fecha de finalización (NULL mientras esté en progreso)
     fecha_fin: Mapped[Optional[datetime.datetime]]
     #estado_sesion	TEXT	NOT NULL, CHECK IN ('en_progreso','pausada','finalizada'), DEFAULT 'en_progreso'	Estado de la sesión (RF-03.3: pausar/reanudar; RF-03.5: finalizada = inmutable)4
-    estado_sesion: Mapped[Estados_sesion] = mapped_column(Enum("en_progreso", "pausada", "finalizada", create_constraint=True), server_default="en_progreso")
+    estado_sesion: Mapped[Estados_sesion] = mapped_column(Enum("en_progreso", "pausada", "finalizada", name="ck_sesiones_estado_sesion", create_constraint=True), server_default="en_progreso")
 
     #Parents
     empresa: Mapped["Empresa"] = relationship(back_populates="sesiones")

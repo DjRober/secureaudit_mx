@@ -338,7 +338,7 @@ El sistema debe calcular automáticamente un puntaje de riesgo por control y un 
 | ID      | Descripción                                                                                                                                                                                     |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RF-05.1 | Cada pregunta debe tener asignada una criticidad: **Alta**, **Media** o **Baja**.                                                                                                               |
-| RF-05.2 | El sistema debe calcular el score de riesgo de acuerdo con la siguiente tabla: respuesta "No" en pregunta Alta = 3 puntos; Media = 2 puntos; Baja = 1 punto; respuesta "Sí" o "N/A" = 0 puntos. |
+| RF-05.2 | El sistema debe calcular el score de riesgo de acuerdo con la siguiente tabla: respuesta "No" en pregunta Alta = 3 puntos; Media = 2 puntos; Baja = 1 punto; respuesta "Sí" o "N/A" = 0 puntos. Para la pregunta de frecuencia 11.4 (criticidad Alta), que **no ofrece N/A** para que una empresa sin backups no obtenga riesgo cero: "Nunca" o "Mensual" = 3 puntos; "Semanal" = 1 punto; "Diario" = 0 puntos (ver `modelo_datos.md`, sección 5). |
 | RF-05.3 | El sistema debe calcular un score parcial por cada control CIS y un score global de la auditoría (escala 0–100, donde 100 representa el máximo riesgo).                                         |
 | RF-05.4 | El sistema debe clasificar cada control con un nivel de riesgo: **Crítico** (≥ 75%), **Alto** (50–74%), **Medio** (25–49%) o **Bajo** (< 25%).                                                  |
 | RF-05.5 | El sistema debe recalcular el score en tiempo real conforme el auditor avanza en el cuestionario.                                                                                               |
@@ -526,7 +526,7 @@ La herramienta debe poder instalarse y ejecutarse en los sistemas operativos má
 | RNF-04.1 | La aplicación debe funcionar en Windows 10/11, Ubuntu 20.04+ y macOS 12+.                                                                                   |
 | RNF-04.2 | La aplicación debe ejecutarse con Python 3.10 o superior. No debe depender de versiones específicas del sistema operativo más allá de lo que impone Python. |
 | RNF-04.3 | Todas las dependencias deben estar declaradas en `requirements.txt` e instalarse mediante `pip install -r requirements.txt` sin pasos adicionales.          |
-| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Todas las librerías frontend (Bootstrap, Chart.js) deben servirse localmente.      |
+| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Las librerías frontend (Chart.js) y todos los recursos de la interfaz (CSS, JavaScript y fuentes) deben servirse localmente. |
 | RNF-04.5 | La base de datos SQLite debe crearse e inicializarse automáticamente en el primer arranque, sin intervención del usuario.                                   |
 
 ---
