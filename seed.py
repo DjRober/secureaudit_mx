@@ -1,5 +1,6 @@
 from app import create_app
 from app.extensions import db
+from flask_migrate import upgrade
 from sqlalchemy import insert, select, func
 from app.models import Control, Pregunta, Usuario, Empresa, Sesion
 import json
@@ -14,8 +15,11 @@ demo = json.loads((SEEDS / "demo.json").read_text(encoding="utf-8"))
 def seed():
     app = create_app()
     with app.app_context():
-        db.create_all()
-        
+        # Esquema: se aplican las migraciones pendientes (equivale a "flask db upgrade").
+        # Ya no se usa db.create_all(): crearia tablas sin registrar la version en
+        # alembic_version y las migraciones posteriores no sabrian desde donde partir (ADR-03)
+        upgrade()
+
         # Controles y preguntas aqui
         count_controles = db.session.scalar(select(func.count()).select_from(Control))
         count_preguntas = db.session.scalar(select(func.count()).select_from(Pregunta))

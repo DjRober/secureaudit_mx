@@ -16,7 +16,7 @@ class Respuesta(db.Model):
     #id_pregunta	INTEGER	FK → preguntas.id_pregunta, NOT NULL	Pregunta respondida
     id_pregunta: Mapped[int] = mapped_column(ForeignKey("preguntas.id_pregunta"))
     #respuesta_valor	TEXT	NOT NULL, CHECK IN ('si','no','na','diario','semanal','mensual','nunca')	Valor de la respuesta
-    respuesta_valor: Mapped[Respuesta_valor] = mapped_column(Enum("si", "no", "na", "diario", "semanal", "mensual", "nunca", create_constraint=True))
+    respuesta_valor: Mapped[Respuesta_valor] = mapped_column(Enum("si", "no", "na", "diario", "semanal", "mensual", "nunca", name="ck_respuestas_respuesta_valor", create_constraint=True))
     #comentario_respuesta	TEXT	NULLABLE	Observaciones del auditor
     comentario_respuesta: Mapped[Optional[str]]
     #auto_completada	BOOLEAN	NOT NULL, DEFAULT 0	Indica si fue llenada automáticamente por el escaneo (RF-08.5)

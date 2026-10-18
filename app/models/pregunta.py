@@ -25,10 +25,10 @@ class Pregunta(db.Model):
     cia_pregunta: Mapped[str] 
 
     # criticidad_pregunta	TEXT	NOT NULL, CHECK IN ('Alta','Media','Baja')
-    criticidad_pregunta: Mapped[Criticidad] = mapped_column(Enum("Alta","Media","Baja", create_constraint=True))
+    criticidad_pregunta: Mapped[Criticidad] = mapped_column(Enum("Alta","Media","Baja", name="ck_preguntas_criticidad_pregunta", create_constraint=True))
 
     # tipo_respuesta	TEXT	NOT NULL, CHECK IN ('si_no_na','frecuencia'), DEFAULT 'si_no_na'
-    tipo_respuesta: Mapped[Tipo_respuesta] = mapped_column(Enum("si_no_na","frecuencia", create_constraint=True), server_default="si_no_na")
+    tipo_respuesta: Mapped[Tipo_respuesta] = mapped_column(Enum("si_no_na","frecuencia", name="ck_preguntas_tipo_respuesta", create_constraint=True), server_default="si_no_na")
 
     # descripcion_ayuda	TEXT	NULLABLE
     descripcion_ayuda: Mapped[Optional[str]] 

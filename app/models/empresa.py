@@ -16,7 +16,7 @@ class Empresa(db.Model):
     #sector_empresa	TEXT	NULLABLE	Giro/sector de la PyME
     sector_empresa: Mapped[Optional[str]]
     #tamaño_empresa	TEXT	NULLABLE, CHECK IN ('micro','pequeña','mediana')	Clasificación por tamaño
-    tamaño_empresa: Mapped[Optional[Tamaño_empresa]] = mapped_column(Enum("micro", "pequeña", "mediana", create_constraint=True))
+    tamaño_empresa: Mapped[Optional[Tamaño_empresa]] = mapped_column(Enum("micro", "pequeña", "mediana", name="ck_empresas_tamaño_empresa", create_constraint=True))
     #nombre_contacto_empresa	TEXT	NULLABLE	Persona de contacto
     nombre_contacto_empresa: Mapped[Optional[str]]
     #id_usuario_registro	INTEGER	FK → usuarios.id_usuario, NOT NULL	Usuario que dio de alta la empresa

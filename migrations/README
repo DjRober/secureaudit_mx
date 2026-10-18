@@ -1,0 +1,45 @@
+Migraciones de esquema de SecureAudit MX (Flask-Migrate / Alembic, ver ADR-03)
+=============================================================================
+
+Los comandos se corren desde la raiz del proyecto con el venv activo.
+
+Uso diario
+----------
+1. Cambia el modelo en app/models/.
+2. Genera la migracion:      flask --app app db migrate -m "describe el cambio"
+3. REVISA el archivo nuevo en migrations/versions/ (Alembic no detecta todo, ver abajo).
+4. Aplicala:                 flask --app app db upgrade
+5. Confirma que no falta nada: flask --app app db check   -> "No new upgrade operations detected."
+
+Instalacion nueva: "python seed.py" aplica todas las migraciones y siembra los catalogos.
+
+Por que modo batch
+------------------
+SQLite no soporta la mayoria de los ALTER TABLE. Con render_as_batch (app/extensions/migrate.py)
+cada cambio crea una tabla nueva, copia los datos y reemplaza la anterior. Por eso todas las
+restricciones tienen nombre (convencion en app/extensions/db.py): sin nombre no se pueden borrar.
+
+Receta: agregar o quitar un valor de un Enum (CHECK)
+----------------------------------------------------
+Alembic NO detecta cambios en los valores de un Enum: la migracion se escribe a mano.
+Ejemplo (probado): agregar 'quincenal' a respuestas.respuesta_valor.
+
+    VIEJOS = ("si", "no", "na", "diario", "semanal", "mensual", "nunca")
+    NOMBRE = "ck_respuestas_respuesta_valor"   # el mismo name= del Enum en el modelo
+
+    def upgrade():
+        with op.batch_alter_table("respuestas") as batch_op:
+            batch_op.alter_column(
+                "respuesta_valor",
+                existing_type = sa.Enum(*VIEJOS, name = NOMBRE, create_constraint = True),
+                type_ = sa.Enum(*VIEJOS, "quincenal", name = NOMBRE, create_constraint = True),
+                existing_nullable = False,
+            )
+
+Reglas que hacen que funcione:
+- existing_type debe describir el Enum VIEJO, con el mismo name. Alembic busca el CHECK
+  viejo por ese name para borrarlo. Si no coincide, el CHECK viejo se queda y sigue
+  rechazando el valor nuevo (la migracion "funciona" pero el valor no entra).
+- type_ lleva el Enum NUEVO con el mismo name.
+- Antes de quitar un valor, verifica que ninguna fila lo use (o migralas en la misma migracion).
+- Despues de upgrade, prueba a insertar el valor nuevo y uno invalido.
