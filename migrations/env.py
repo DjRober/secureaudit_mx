@@ -11,7 +11,10 @@ config = context.config
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-fileConfig(config.config_file_name)
+# disable_existing_loggers=False: run.py aplica las migraciones en el mismo proceso que
+# el servidor; con el valor por defecto (True) fileConfig desactivaba app.logger y el
+# logger de werkzeug, y los errores de la app dejaban de registrarse (RNF-06.4)
+fileConfig(config.config_file_name, disable_existing_loggers=False)
 logger = logging.getLogger('alembic.env')
 
 
