@@ -127,7 +127,7 @@
 | 11.1 | ¿Se realizan copias de seguridad (backups) de los datos críticos del negocio? | A | Alta |
 | 11.2 | ¿Los backups se almacenan en una ubicación separada (externa o en la nube)? | A | Alta |
 | 11.3 | ¿Se ha probado alguna vez la restauración de un backup para verificar que funciona? | A | Alta |
-| 11.4 | ¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual) | A | Alta |
+| 11.4 | ¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual/Nunca) | A | Alta |
 
 ---
 

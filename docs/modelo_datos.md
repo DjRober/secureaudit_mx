@@ -115,7 +115,7 @@ El esquema cuenta con **8 tablas**: 6 entidades principales (`usuarios`, `empres
 | id_respuesta | INTEGER | PK, AUTOINCREMENT | Identificador único de la respuesta |
 | id_sesion | INTEGER | FK → sesiones.id_sesion, NOT NULL | Sesión a la que pertenece |
 | id_pregunta | INTEGER | FK → preguntas.id_pregunta, NOT NULL | Pregunta respondida |
-| respuesta_valor | TEXT | NOT NULL, CHECK IN ('si','no','na','diario','semanal','mensual') | Valor de la respuesta |
+| respuesta_valor | TEXT | NOT NULL, CHECK IN ('si','no','na','diario','semanal','mensual','nunca') | Valor de la respuesta |
 | comentario_respuesta | TEXT | NULLABLE | Observaciones del auditor |
 | auto_completada | BOOLEAN | NOT NULL, DEFAULT 0 | Indica si fue llenada automáticamente por el escaneo (RF-08.5) |
 | fecha_actualizacion | DATETIME | NULLABLE | Última modificación manual del auditor (trazabilidad) |
@@ -181,13 +181,14 @@ Tabla puente para auditorías parciales (RF-03): define qué controles fueron se
 
 A diferencia de las otras 70 preguntas del checklist (`checklist_auditoria_v1.md`), la pregunta 11.4 no se responde con Sí/No/N.A.:
 
-> *"¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual)"*
+> *"¿Con qué frecuencia se realizan los backups? (Diario/Semanal/Mensual/Nunca)"*
 
 **Tratamiento en el modelo:**
 
 - En `preguntas`, la fila con `codigo_pregunta = '11.4'` tiene `tipo_respuesta = 'frecuencia'`.
-- En `respuestas`, el campo `respuesta_valor` para esta pregunta toma uno de los valores `'diario'`, `'semanal'`, `'mensual'` (en lugar de `'si'`/`'no'`/`'na'`).
-- El servicio de scoring (`services/scoring.py`, RF-05) debe contemplar este caso especial: la tabla de puntos de RF-05.2 (No+Alta=3, etc.) no aplica directamente. Se recomienda definir una regla equivalente, por ejemplo: `mensual` o sin backups = 3 puntos (igual que "No" en criticidad Alta), `semanal` = 1 punto, `diario` = 0 puntos. Esta regla debe documentarse en `requerimientos.md` (RF-05.2) cuando se implemente.
+- En `respuestas`, el campo `respuesta_valor` para esta pregunta toma uno de los valores `'diario'`, `'semanal'`, `'mensual'`, `'nunca'` (en lugar de `'si'`/`'no'`/`'na'`).
+- **Sin opción N/A:** en una versión anterior la 11.4 ofrecía N/A. Una empresa que nunca hace backups la habría contestado así y, como N/A suma 0 puntos, habría obtenido riesgo cero en la pregunta de disponibilidad más crítica. Por eso `na` se reemplazó por `nunca`, y el CHECK de `respuesta_valor` se amplió con ese valor.
+- El servicio de scoring (`services/scoring.py`, RF-05) debe contemplar este caso especial con la regla documentada en RF-05.2: `nunca` o `mensual` = 3 puntos (igual que "No" en criticidad Alta), `semanal` = 1 punto, `diario` = 0 puntos.
 
 ---
 
