@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{#- Score con un decimal sin ".0" sobrante: 66.7 -> "66.7", 100.0 -> "100" -#}
+{% macro porcentaje(score) -%}
+{%- if score is none -%}—{%- else -%}{{ "%g" | format(score) }}&nbsp;%{%- endif -%}
+{%- endmacro %}
+
+{% block titulo %}SecureAudit MX — Resultados de la auditoría{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/paginas/resultados.css') }}" />
+{% endblock %}
+
+{% block volver %}
+<a class="back-link" href="{{ url_for('cuestionario_page.cuestionario_control', numero_control = 1) }}">← Volver al cuestionario</a>
+{% endblock %}
+
+{% block eyebrow %}Resultados · CIS Controls v8 · IG1{% endblock %}
+
+{% block cabecera %}
+<header class="res-head">
+  <p class="res-head__empresa">{{ sesion.empresa.nombre_empresa }}</p>
+  <h1 class="res-head__title">Resultados de la auditoría</h1>
+  <p class="res-head__meta">
+    {{ respondidas }} de {{ total }} preguntas respondidas · se recalcula con cada respuesta guardada
+  </p>
+</header>
+{% endblock %}
+
+{% block contenido %}
+<!--Score global con semaforo (RF-05.3, RF-06.1)-->
+<section class="res-global sa-root" aria-labelledby="global-titulo">
+  <div
+    class="sa-semaforo"
+    role="img"
+    aria-label="{{ 'Semáforo en ' ~ semaforo_global if semaforo_global else 'Semáforo apagado: no evaluable' }}"
+  >
+    {% for color in ["rojo", "amarillo", "verde"] %}
+    <span class="sa-semaforo__luz sa-semaforo__luz--{{ color }}{% if color == semaforo_global %} is-on{% endif %}"></span>
+    {% endfor %}
+  </div>
+  <div class="res-global__body">
+    <h2 class="res-global__label" id="global-titulo">Riesgo global</h2>
+    <p class="res-global__score">{{ porcentaje(score_global) }}</p>
+    <span class="sa-nivel sa-nivel--{{ clase_global }}">{{ nivel_global or "No evaluable" }}</span>
+    <p class="res-global__help">
+      {% if score_global is none %}
+      Todavía no hay respuestas Sí/No para calcular el riesgo. Las preguntas N/A no cuentan.
+      {% else %}
+      0 % = sin riesgo, 100 % = riesgo máximo. Pondera cada «No» por la criticidad de su pregunta; las N/A no cuentan.
+      {% endif %}
+    </p>
+  </div>
+</section>
+
+<!--Radar (RF-06.2). Los datos llegan en data-controles como JSON y resultados.js dibuja la
+grafica. Comillas simples a proposito: |tojson escapa ' < > & y es seguro solo asi en un atributo-->
+<section class="res-panel sa-root" aria-labelledby="radar-titulo">
+  <h2 class="res-panel__title" id="radar-titulo">Riesgo por control</h2>
+  <div class="res-radar">
+    <canvas
+      id="radar"
+      role="img"
+      aria-label="Gráfica de radar con el riesgo de cada control. El detalle está en el semáforo por control."
+      data-controles='{{ controles | tojson }}'
+    >La gráfica necesita JavaScript; los mismos datos están en el semáforo por control.</canvas>
+  </div>
+  <p class="res-panel__note">
+    Del centro (0 %) hacia afuera (100 %), los anillos marcan los límites de nivel: 25, 50 y 75 %.
+    Un control no evaluable queda sin punto y corta la línea.
+  </p>
+</section>
+
+<!--Semaforo por control (RF-05.4)-->
+<section class="res-panel sa-root" aria-labelledby="controles-titulo">
+  <h2 class="res-panel__title" id="controles-titulo">Semáforo por control</h2>
+  <ol class="res-controles">
+    {% for c in controles %}
+    <li class="res-control">
+      <span class="res-control__num" aria-hidden="true">{{ c.numero }}</span>
+      <div class="res-control__body">
+        <a
+          class="res-control__nombre"
+          href="{{ url_for('cuestionario_page.cuestionario_control', numero_control = c.numero) }}"
+        ><span class="sa-oculto">Control {{ c.numero }}: </span>{{ c.nombre }}</a>
+        <span class="res-control__meta">{{ c.respondidas }} de {{ c.total }} respondidas</span>
+      </div>
+      <span class="res-control__score">{{ porcentaje(c.score) }}</span>
+      {#- Sin score: "No aplica" si ya se contesto todo (todo N/A); si no, falta contestar -#}
+      <span class="sa-nivel sa-nivel--{{ c.clase }}">
+        {%- if c.nivel %}{{ c.nivel }}{% elif c.estado == "completo" %}No aplica{% else %}Pendiente{% endif -%}
+      </span>
+    </li>
+    {% endfor %}
+  </ol>
+  <p class="res-leyenda">
+    <span class="sa-nivel sa-nivel--bajo">Bajo &lt; 25 %</span>
+    <span class="sa-nivel sa-nivel--medio">Medio 25–49 %</span>
+    <span class="sa-nivel sa-nivel--alto">Alto 50–74 %</span>
+    <span class="sa-nivel sa-nivel--critico">Crítico ≥ 75 %</span>
+    <span class="sa-nivel sa-nivel--ne">No evaluable</span>
+  </p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!--Chart.js 4.5.1 servido localmente (ADR-01, RNF-04.4). Es un script clasico (UMD) que
+define window.Chart; va antes del modulo de la pagina, que lo usa-->
+<script src="{{ url_for('static', filename='js/vendor/chart.umd.min.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/paginas/resultados.js') }}"></script>
+{% endblock %}

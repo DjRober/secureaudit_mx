@@ -1,0 +1,96 @@
+/* SecureAudit MX - Componentes de nivel de riesgo (RF-05.4, RF-06.1):
+   sa-semaforo (tres luces, una encendida) y sa-nivel (insignia Bajo/Medio/Alto/Crítico).
+   "ne" = no evaluable: sin preguntas Sí/No contestadas en el control. */
+
+.sa-semaforo {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: var(--surface-300);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+/* Apagada: el tono claro de su color, así se reconoce cuál es cada luz */
+.sa-semaforo__luz {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+}
+
+.sa-semaforo__luz--rojo {
+  background: var(--danger-surface);
+}
+
+.sa-semaforo__luz--amarillo {
+  background: var(--warning-surface);
+}
+
+.sa-semaforo__luz--verde {
+  background: var(--success-surface);
+}
+
+.sa-semaforo__luz--rojo.is-on {
+  background: var(--danger-text);
+  border-color: var(--danger-text);
+  box-shadow: 0 0 0 4px var(--danger-border);
+}
+
+.sa-semaforo__luz--amarillo.is-on {
+  background: var(--warning-text);
+  border-color: var(--warning-text);
+  box-shadow: 0 0 0 4px var(--warning-border);
+}
+
+.sa-semaforo__luz--verde.is-on {
+  background: var(--success-text);
+  border-color: var(--success-text);
+  box-shadow: 0 0 0 4px var(--success-border);
+}
+
+.sa-nivel {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+}
+
+.sa-nivel--bajo {
+  background: var(--success-surface);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+.sa-nivel--medio {
+  background: var(--warning-surface);
+  color: var(--warning-text);
+  border-color: var(--warning-border);
+}
+
+.sa-nivel--alto {
+  background: var(--danger-surface);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
+}
+
+/* Crítico comparte el rojo de Alto (el semáforo tiene tres colores), relleno para distinguirlo */
+.sa-nivel--critico {
+  background: var(--danger-text);
+  color: var(--surface-200);
+  border-color: var(--danger-text);
+}
+
+.sa-nivel--ne {
+  background: var(--neutral-surface);
+  color: var(--neutral-text);
+  border: 1px dashed var(--neutral-border);
+}

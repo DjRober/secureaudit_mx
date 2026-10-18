@@ -2,7 +2,7 @@ from flask import Flask
 from app.extensions import db, csrf, migrate
 import os
 import mimetypes
-from app.routes import autentificacion_page, cuestionario_page
+from app.routes import autentificacion_page, cuestionario_page, resultados_page
 
 #En Windows, Python toma el tipo MIME del registro del sistema y en algunos equipos
 #.js figura como text/plain: el navegador rechazaria los modulos ES (type="module")
@@ -30,6 +30,7 @@ def create_app():
     #Blueprints
     app.register_blueprint(autentificacion_page)
     app.register_blueprint(cuestionario_page)
+    app.register_blueprint(resultados_page)
 
     # Routes
     @app.route("/ping")

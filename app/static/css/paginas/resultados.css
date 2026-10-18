@@ -1,0 +1,191 @@
+/* SecureAudit MX - Página de resultados (templates/resultados/dashboard.html):
+   encabezado, score global, radar y semáforo por control. */
+
+.res-head__empresa {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+
+.res-head__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.res-head__meta {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--ink-muted);
+}
+
+/* Tarjeta base de las tres secciones */
+.res-global,
+.res-panel {
+  padding: var(--space-5);
+  background: var(--surface-200);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.res-global {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.res-global__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.res-global__label,
+.res-panel__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.res-global__score {
+  margin: 0;
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.res-global__help,
+.res-panel__note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--ink-muted);
+}
+
+.res-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Chart.js toma el tamaño del contenedor (responsive); el radar es cuadrado */
+.res-radar {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.res-controles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.res-control {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto 96px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--border);
+}
+
+.res-control:first-child {
+  border-top: 0;
+}
+
+.res-control__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: var(--surface-300);
+  border-radius: var(--radius-sm);
+}
+
+.res-control__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.res-control__nombre {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.res-control__nombre:hover {
+  color: var(--brand-text);
+  text-decoration: underline;
+}
+
+.res-control__meta {
+  font-size: 12px;
+  color: var(--ink-subtle);
+}
+
+.res-control__score {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--ink);
+}
+
+.res-control .sa-nivel {
+  justify-self: end;
+}
+
+.res-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  .res-global {
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .res-global__score {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .res-panel {
+    padding: var(--space-4);
+  }
+
+  /* El nivel baja a una segunda línea debajo del nombre */
+  .res-control {
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    row-gap: var(--space-1);
+  }
+
+  .res-control .sa-nivel {
+    grid-column: 2 / -1;
+    justify-self: start;
+  }
+}

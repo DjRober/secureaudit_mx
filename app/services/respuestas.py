@@ -8,6 +8,7 @@ from sqlalchemy import case, func, or_
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from app.extensions import db
 from app.models import Control, Pregunta, Respuesta
+from app.services.scoring import RespuestaEvaluada
 
 #Opciones (valor, texto) por tipo de pregunta. Es la unica fuente de verdad:
 #el template dibuja los radios con ella y guardar_respuestas() valida contra ella.
@@ -72,6 +73,17 @@ def progreso(id_sesion):
             estado = "pendiente"
         resultado.append({"numero": numero, "nombre": nombre, "total": total, "respondidas": respondidas, "estado": estado})
     return resultado
+
+
+def respuestas_para_scoring(id_sesion):
+    """Respuestas de la sesion como RespuestaEvaluada, listas para scoring.calcular_scores (RF-05)."""
+    filas = db.session.execute(
+        db.select(Control.numero_control, Pregunta.criticidad_pregunta, Pregunta.tipo_respuesta, Respuesta.respuesta_valor)
+        .join(Pregunta, Respuesta.id_pregunta == Pregunta.id_pregunta)
+        .join(Control, Pregunta.id_control == Control.id_control)
+        .where(Respuesta.id_sesion == id_sesion)
+    ).all()
+    return [RespuestaEvaluada(*fila) for fila in filas]
 
 
 def guardar_respuestas(sesion, id_control, formulario):
