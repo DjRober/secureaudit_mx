@@ -2,13 +2,14 @@
 
 | Campo                      | Valor         |
 | -------------------------- | ------------- |
-| **Versión**                | 1.0.1         |
-| **Fecha**                  | 2026-09-09    |
+| **Versión**                | 1.1.0         |
+| **Fecha**                  | 2026-10-17    |
 | **Autor**                  | Roberto Pérez |
 | **Estado**                 | En desarrollo |
 | **Estándar de referencia** | IEEE 830      |
 
 > **Registro de cambios**
+> - **v1.1.0 (2026-10-17)** — RF-05.2, RF-05.3, RF-05.4 y RF-06.1 precisan la regla de scoring implementada en la Semana 5 (`app/services/scoring.py`, ADR-09 de `arquitectura.md`): las N/A no cuentan en los puntos posibles, estado «No evaluable» cuando no hay respuestas aplicables, score global ponderado, umbrales sin huecos y color del semáforo por nivel. RF-05 y RF-06 pasan a *En progreso*.
 > - **v1.0.1 (2026-09-09)** — Nota de avance en §3: la capa de datos (modelos y catálogo) que sustenta los RF ya está implementada; los estados de los RF se mantienen en *Pendiente* hasta desarrollar su lógica. Sin cambios en los requerimientos.
 > - **v1.0.0 (2026-05-29)** — Versión inicial de la especificación.
 
@@ -201,8 +202,8 @@ SecureAudit MX ofrece una herramienta de auditoría local, gratuita y guiada, ba
 | RF-02 | Gestión de empresas auditadas             |   Alta    | Pendiente | Semana 3 |
 | RF-03 | Gestión de sesiones de auditoría          |   Alta    | Pendiente | Semana 4 |
 | RF-04 | Cuestionario de auditoría                 |   Alta    | Pendiente | Semana 4 |
-| RF-05 | Sistema de scoring y evaluación de riesgo |   Alta    | Pendiente | Semana 5 |
-| RF-06 | Dashboard de resultados                   |   Media   | Pendiente | Semana 5 |
+| RF-05 | Sistema de scoring y evaluación de riesgo |   Alta    | En progreso | Semana 5 |
+| RF-06 | Dashboard de resultados                   |   Media   | En progreso | Semana 5 |
 | RF-07 | Generación y exportación de reportes      |   Alta    | Pendiente | Semana 6 |
 | RF-08 | Módulo de escaneo de red                  |   Media   | Pendiente | Semana 8 |
 | RF-09 | Log de actividad interno                  |   Alta    | Pendiente | Semana 7 |
@@ -338,9 +339,9 @@ El sistema debe calcular automáticamente un puntaje de riesgo por control y un 
 | ID      | Descripción                                                                                                                                                                                     |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RF-05.1 | Cada pregunta debe tener asignada una criticidad: **Alta**, **Media** o **Baja**.                                                                                                               |
-| RF-05.2 | El sistema debe calcular el score de riesgo de acuerdo con la siguiente tabla: respuesta "No" en pregunta Alta = 3 puntos; Media = 2 puntos; Baja = 1 punto; respuesta "Sí" o "N/A" = 0 puntos. Para la pregunta de frecuencia 11.4 (criticidad Alta), que **no ofrece N/A** para que una empresa sin backups no obtenga riesgo cero: "Nunca" o "Mensual" = 3 puntos; "Semanal" = 1 punto; "Diario" = 0 puntos (ver `modelo_datos.md`, sección 5). |
-| RF-05.3 | El sistema debe calcular un score parcial por cada control CIS y un score global de la auditoría (escala 0–100, donde 100 representa el máximo riesgo).                                         |
-| RF-05.4 | El sistema debe clasificar cada control con un nivel de riesgo: **Crítico** (≥ 75%), **Alto** (50–74%), **Medio** (25–49%) o **Bajo** (< 25%).                                                  |
+| RF-05.2 | El sistema debe calcular el score de riesgo de acuerdo con la siguiente tabla: respuesta "No" en pregunta Alta = 3 puntos; Media = 2 puntos; Baja = 1 punto; respuesta "Sí" o "N/A" = 0 puntos. Para la pregunta de frecuencia 11.4 (criticidad Alta), que **no ofrece N/A** para que una empresa sin backups no obtenga riesgo cero: "Nunca" o "Mensual" = 3 puntos; "Semanal" = 1 punto; "Diario" = 0 puntos (ver `modelo_datos.md`, sección 5). Una respuesta "N/A" no suma puntos **ni cuenta en los puntos posibles**: si contara, rebajaría el riesgo como si fuera un "Sí". |
+| RF-05.3 | El sistema debe calcular un score parcial por cada control CIS y un score global de la auditoría (escala 0–100, donde 100 representa el máximo riesgo). Score = puntos obtenidos / puntos posibles × 100, con un decimal. El global se calcula sobre todas las respuestas (no es el promedio de los controles). Si un control no tiene respuestas aplicables (todo N/A o sin contestar) su score es **No evaluable**, nunca 0 %. |
+| RF-05.4 | El sistema debe clasificar cada control con un nivel de riesgo: **Crítico** (≥ 75%), **Alto** (50–74%), **Medio** (25–49%) o **Bajo** (< 25%). Los límites se aplican como «desde»: Alto es ≥ 50 % y < 75 %, sin huecos entre rangos; el nivel se calcula sobre el score ya redondeado a un decimal. Un control sin score se clasifica como **No evaluable**. |
 | RF-05.5 | El sistema debe recalcular el score en tiempo real conforme el auditor avanza en el cuestionario.                                                                                               |
 
 ---
@@ -363,7 +364,7 @@ El sistema debe presentar una vista consolidada de los resultados de una auditor
 
 | ID      | Descripción                                                                                                           |
 | ------- | --------------------------------------------------------------------------------------------------------------------- |
-| RF-06.1 | El sistema debe mostrar el score global de la auditoría con indicador visual tipo semáforo (Verde / Amarillo / Rojo). |
+| RF-06.1 | El sistema debe mostrar el score global de la auditoría con indicador visual tipo semáforo (Verde / Amarillo / Rojo): Verde = Bajo, Amarillo = Medio, Rojo = Alto o Crítico; apagado si no es evaluable. |
 | RF-06.2 | El sistema debe mostrar una gráfica de radar con el nivel de riesgo de cada uno de los 18 controles CIS.              |
 | RF-06.3 | El sistema debe listar los hallazgos (respuestas "No") ordenados por criticidad descendente.                          |
 | RF-06.4 | El sistema debe mostrar un resumen de cumplimiento: número de controles con riesgo Crítico, Alto, Medio y Bajo.       |

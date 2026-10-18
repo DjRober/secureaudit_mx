@@ -2,12 +2,13 @@
 
 | Campo | Valor |
 |---|---|
-| **Versión** | 1.1.0 |
-| **Fecha** | 2026-09-09 |
+| **Versión** | 1.2.0 |
+| **Fecha** | 2026-10-17 |
 | **Autor** | Roberto Pérez |
 | **Estado** | En desarrollo |
 
 > **Registro de cambios**
+> - **v1.2.0 (2026-10-17)** — Semana 5: scoring (`services/scoring.py`) y dashboard (`GET /resultados`). Chart.js 4.5.1 servido desde `static/js/vendor/chart.umd.min.js`, pytest como dependencia de desarrollo (`requirements-dev.txt`, `pytest.ini`) y ADR-09 con la regla de N/A y «No evaluable». Actualizadas las secciones 1, 3 y 5.
 > - **v1.1.0 (2026-09-09)** — Sincronizada con la implementación de la capa de datos: patrón *application factory* (`run.py` + `create_app`), módulo `app/extensions/` con la instancia de SQLAlchemy, los 8 modelos ORM (incluida la tabla puente `sesion_controles`) y el sembrado idempotente desde `seeds/*.json`. Actualizadas las secciones 1, 3 y 5.
 > - **v1.0.0 (2026-06-05)** — Versión inicial.
 
@@ -36,7 +37,8 @@ SecureAudit MX es una aplicación web local de una sola instancia. Las tecnolog�
 | Migraciones de esquema | Flask-Migrate 4.1 (sobre Alembic) | Recrear la base en cada cambio, Alembic sin integración | Versiona los cambios de esquema en `migrations/` y los aplica sin perder datos; se integra con la app factory (`migrate.init_app`) y los comandos `flask db`. Ver ADR-03. |
 | Templates | Jinja2 | React, Vue | Jinja2 está integrado en Flask sin dependencias adicionales. Evita un stack frontend separado y mantiene toda la lógica en Python. |
 | CSS / UI | CSS propio con tokens (sin framework) | Bootstrap 5, Tailwind | Sistema de diseño propio: variables CSS (tokens) para color, espacio y tipografía, tema claro/oscuro y componentes con prefijo `sa-`. CSS plano sin compilador ni dependencias, organizado en módulos y servido localmente (RNF-04.4). Ver ADR-08. |
-| Gráficas | Chart.js | D3.js, Plotly | Chart.js es ligero, bien documentado y suficiente para gráficas de radar y barras. Se sirve localmente. |
+| Gráficas | Chart.js 4.5 | D3.js, Plotly | Chart.js es ligero, bien documentado y suficiente para gráficas de radar y barras. Se sirve localmente desde `static/js/vendor/chart.umd.min.js` (build UMD de la v4.5.1, tomado del paquete de npm con su integridad verificada). |
+| Pruebas | pytest 9.1 | unittest (biblioteca estándar) | `assert` simple, *fixtures* y `parametrize` cubren los casos frontera del scoring con poco código. Es dependencia solo de desarrollo (`requirements-dev.txt`); `pytest.ini` agrega la raíz al `sys.path` para importar `app`. |
 | Generación PDF | WeasyPrint | ReportLab, fpdf2 | WeasyPrint convierte HTML/CSS a PDF, lo que permite reutilizar los templates de Jinja2 sin duplicar la lógica de presentación. |
 | Escaneo de red | python-nmap | scapy, socket nativo | python-nmap es un wrapper maduro sobre Nmap que simplifica el parsing de resultados y es ampliamente usado en herramientas de seguridad. |
 | Hashing | bcrypt (flask-bcrypt) | hashlib SHA-256 | bcrypt es el estándar recomendado para contraseñas por su factor de costo ajustable (RNF-01.1). SHA-256 no es adecuado para contraseñas. |
@@ -128,6 +130,7 @@ secureaudit_mx/
 │   │   ├── cuestionario/
 │   │   │   └── control.html    # RF-04: preguntas de un control, progreso y mapa de controles
 │   │   ├── resultados/
+│   │   │   └── dashboard.html  # RF-06: score global con semáforo, radar y semáforo por control
 │   │   └── reportes/
 │   │
 │   └── static/                 # (en progreso) Archivos estáticos servidos localmente (ADR-08)
@@ -135,23 +138,23 @@ secureaudit_mx/
 │       │   ├── main.css        # Punto de entrada: importa base/ y componentes/ en orden de cascada
 │       │   ├── base/           # Tokens, reset, estructura de página y utilidades (todas las páginas)
 │       │   ├── componentes/    # Un archivo por componente sa-* (btn, toggle, card, progress, ...)
-│       │   └── paginas/        # Estilos de una sola página; los carga su template (cuestionario.css)
+│       │   └── paginas/        # Estilos de una sola página; los carga su template (cuestionario.css, resultados.css)
 │       ├── js/
 │       │   ├── base/           # Scripts de todas las páginas (tema.js: modo claro/oscuro)
 │       │   ├── componentes/    # Módulos ES reutilizables (progreso.js, autoguardado.js)
-│       │   ├── paginas/        # Módulo de entrada de cada página (cuestionario.js, RF-04.4)
+│       │   ├── paginas/        # Módulo de entrada de cada página (cuestionario.js RF-04.4, resultados.js RF-06.2)
 │       │   └── vendor/         # Librerías de terceros servidas localmente
-│       │       └── chart.min.js
+│       │       └── chart.umd.min.js  # Chart.js 4.5.1 (build UMD: define window.Chart)
 │       └── img/
 │
 ├── seeds/                      # Datos de catálogo para el sembrado (JSON)
 │   ├── controles.json          # 18 controles CIS Controls v8 (IG1)
 │   └── preguntas.json          # 71 preguntas del checklist
 │
-├── tests/                      # (pendiente) Pruebas automatizadas (RNF-05.2)
-│   ├── test_scoring.py
-│   ├── test_reportes.py
-│   └── test_auth.py
+├── tests/                      # Pruebas automatizadas con pytest (RNF-05.2)
+│   ├── test_scoring.py         # RF-05: regla de puntos, N/A, 11.4, niveles y casos frontera
+│   ├── test_reportes.py        # (pendiente)
+│   └── test_auth.py            # (pendiente)
 │
 ├── docs/                       # Documentación del proyecto
 │   ├── requerimientos.md
@@ -173,6 +176,8 @@ secureaudit_mx/
 │   └── secureaudit.db          # SQLite, creada sola al arrancar run.py (migraciones + catálogos)
 │
 ├── requirements.txt            # Dependencias Python (RNF-04.3)
+├── requirements-dev.txt        # requirements.txt + pytest (solo desarrollo)
+├── pytest.ini                  # Configuración de pytest (raíz en sys.path, carpeta tests/)
 ├── .gitignore
 └── README.md
 ```
@@ -234,6 +239,7 @@ Las siguientes decisiones arquitectónicas tuvieron alternativas viables. Se doc
 | ADR-06 | Application factory + módulo `app/extensions/` | Se necesita una única instancia de `db` compartida entre los modelos, `create_app` y scripts como `seed.py`, sin caer en imports circulares (app→models→app). | Instanciar `SQLAlchemy(app)` en un módulo global | `create_app()` construye la app y llama `db.init_app(app)`; los modelos importan `db` desde `app.extensions`. Permite crear apps con distinta configuración (p. ej. para pruebas) y desacopla la definición de la extensión de la app concreta. |
 | ADR-07 | Catálogos sembrados desde JSON (`seeds/`) de forma idempotente | Los 18 controles y 71 preguntas son datos de catálogo estables (derivados de `checklist_auditoria_v1.md`) que no deben mezclarse con la lógica del sembrado. | Diccionarios embebidos en `seed.py` | El dato vive en `seeds/*.json` (editable, versionable, mapea 1:1 con el checklist); `seed.py` solo orquesta e inserta si la tabla está vacía (verificando por tabla). Limitación: no repone filas faltantes en una tabla parcialmente poblada — bastaría un *upsert* (`INSERT OR IGNORE`) si se requiere en el futuro. |
 | ADR-08 | CSS propio con tokens en lugar de Bootstrap | ADR-02 y el stack preveían Bootstrap 5, pero la interfaz del cuestionario (Semana 4) se construyó con un sistema de diseño propio: tokens en variables CSS, tema claro/oscuro con `data-theme` y componentes `sa-*` accesibles (radios nativos, foco visible, estados que no dependen solo del color). Migrar implicaba reescribir los templates sin ganancia funcional, y combinar ambos genera conflictos: el Reboot de Bootstrap altera los estilos base de encabezados, párrafos, botones y formularios, y quedarían dos sistemas de tema (`data-theme` y `data-bs-theme`). | Bootstrap 5 servido localmente | Cero dependencias de frontend para la UI y control total de la identidad visual; los tokens pueden reutilizarse en los reportes de WeasyPrint (ADR-04). Sin compilador: `css/main.css` importa `base/` y `componentes/` con `@import` en orden de cascada, cada página agrega su hoja de `paginas/` desde su template, y el JS se organiza igual con módulos ES nativos (sin *bundler*). Limitación: cada componente nuevo (formularios, tablas, navegación, diálogos) se construye y mantiene a mano; para diálogos se usará el elemento nativo `<dialog>` en lugar de JS de terceros. |
+| ADR-09 | Score de riesgo: las N/A no cuentan en los puntos posibles y existe el estado «No evaluable» | RF-05.2 fija los puntos de cada respuesta (N/A = 0) pero no decía si una N/A cuenta en los puntos posibles. Si contara, cada N/A bajaría el riesgo como un «Sí»: 1 «No» en pregunta Alta más 4 N/A daría 20 % (Bajo) en vez de 100 % (Crítico), y un control todo N/A saldría con 0 % en verde sin haberse evaluado. Es el mismo problema que llevó a quitar la N/A de la 11.4 (`modelo_datos.md` §5). | N/A dentro de los puntos posibles (todo N/A = 0 %, semáforo en verde) | `services/scoring.py` suma los puntos posibles solo con respuestas aplicables; si no hay ninguna, el score es `None` y el dashboard lo muestra en gris como «No aplica» (todo N/A) o «Pendiente» (falta contestar), sin punto en el radar. El global es Σ puntos / Σ posibles de todas las respuestas (no el promedio de los controles) y el nivel se calcula sobre el score redondeado a un decimal, para que el número y el color nunca se contradigan. Limitación: un control con una sola respuesta aplicable puede pasar de 0 % a 100 % con un cambio; por eso el dashboard muestra cuántas respuestas lo sustentan. |
 
 ---
 

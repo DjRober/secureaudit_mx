@@ -54,7 +54,18 @@ pip install -r requirements.txt
 python run.py                    # http://localhost:5000/cuestionario/control/1
 ```
 
+El dashboard de resultados (score global, radar y semáforo por control) está en `http://localhost:5000/resultados` y se recalcula con lo que lleves contestado.
+
 No hay que preparar la base de datos: al arrancar, `run.py` la crea en `instance/secureaudit.db`, aplica las migraciones pendientes y siembra los catálogos (RNF-04.5). En arranques posteriores solo aplica lo que falte y no duplica datos. `python seed.py` hace lo mismo sin levantar el servidor. Para cambios de esquema ver `migrations/README`.
+
+## Pruebas
+
+```bash
+pip install -r requirements-dev.txt   # requirements.txt + pytest
+pytest
+```
+
+Las pruebas están en `tests/` y no necesitan servidor ni base de datos: `app/services/scoring.py` es una función pura (ADR-05).
 
 ## Marco de referencia
 
