@@ -526,7 +526,7 @@ La herramienta debe poder instalarse y ejecutarse en los sistemas operativos má
 | RNF-04.1 | La aplicación debe funcionar en Windows 10/11, Ubuntu 20.04+ y macOS 12+.                                                                                   |
 | RNF-04.2 | La aplicación debe ejecutarse con Python 3.10 o superior. No debe depender de versiones específicas del sistema operativo más allá de lo que impone Python. |
 | RNF-04.3 | Todas las dependencias deben estar declaradas en `requirements.txt` e instalarse mediante `pip install -r requirements.txt` sin pasos adicionales.          |
-| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Todas las librerías frontend (Bootstrap, Chart.js) deben servirse localmente.      |
+| RNF-04.4 | La aplicación no debe requerir conexión a internet durante su ejecución. Las librerías frontend (Chart.js) y todos los recursos de la interfaz (CSS, JavaScript y fuentes) deben servirse localmente. |
 | RNF-04.5 | La base de datos SQLite debe crearse e inicializarse automáticamente en el primer arranque, sin intervención del usuario.                                   |
 
 ---
