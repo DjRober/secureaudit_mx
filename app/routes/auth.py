@@ -5,4 +5,4 @@ autentificacion_page = Blueprint("autentificacion_page", __name__, url_prefix="/
 #Pruebas de my first blueprint (temporal)
 @autentificacion_page.route("/")
 def show():
-    return render_template("auth.html")
+    return render_template("auth/login.html")

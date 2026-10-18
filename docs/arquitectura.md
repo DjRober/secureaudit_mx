@@ -121,9 +121,11 @@ secureaudit_mx/
 │   ├── templates/              # (en progreso) Vistas HTML (Jinja2)
 │   │   ├── base.html           # Layout base con navbar y estilos comunes
 │   │   ├── auth/
+│   │   │   └── login.html      # RF-01 (por ahora solo la ruta de prueba del blueprint)
 │   │   ├── empresas/
 │   │   ├── sesiones/
 │   │   ├── cuestionario/
+│   │   │   └── control.html    # RF-04: preguntas de un control, progreso y mapa de controles
 │   │   ├── resultados/
 │   │   └── reportes/
 │   │

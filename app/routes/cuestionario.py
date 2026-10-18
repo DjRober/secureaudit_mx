@@ -22,7 +22,7 @@ def cuestionario_control(numero_control):
     sesion = db.get_or_404(Sesion, ID_SESION_DEMO)
 
     return render_template(
-        "cuestionario.html",
+        "cuestionario/control.html",
         control = control,
         preguntas = preguntas,
         respuestas = respuestas_guardadas(sesion.id_sesion, control.id_control),
