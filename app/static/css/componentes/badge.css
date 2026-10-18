@@ -1,0 +1,40 @@
+/* SecureAudit MX - Componente sa-badge: insignia de criticidad (alta, media, baja). */
+
+.sa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+}
+
+.sa-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+
+.sa-badge--alta {
+  background: var(--danger-surface);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
+}
+
+.sa-badge--media {
+  background: var(--warning-surface);
+  color: var(--warning-text);
+  border-color: var(--warning-border);
+}
+
+.sa-badge--baja {
+  background: var(--info-surface);
+  color: var(--info-text);
+  border-color: var(--info-border);
+}

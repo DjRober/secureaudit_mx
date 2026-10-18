@@ -4,9 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block titulo %}SecureAudit MX{% endblock %}</title>
-    <!--Todo se sirve desde /static: la app no depende de internet (ADR-01, RNF-04.4)-->
+    <!--Todo se sirve desde /static: la app no depende de internet (ADR-01, RNF-04.4).
+    main.css importa base/ y componentes/ (ADR-08); cada pagina agrega su hoja en "estilos"-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    {% block estilos %}{% endblock %}
+    <!--Script clasico (no modulo) a proposito: debe aplicar el tema antes de pintar-->
+    <script src="{{ url_for('static', filename='js/base/tema.js') }}"></script>
   </head>
   <body>
     <div class="page">

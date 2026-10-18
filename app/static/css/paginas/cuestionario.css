@@ -1,0 +1,210 @@
+/* SecureAudit MX - Página del cuestionario (templates/cuestionario/control.html):
+   encabezado del control, progreso global, preguntas, comentario y pie. */
+
+.sa-ctrl {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 640px;
+}
+
+.sa-ctrl__num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+}
+
+.sa-ctrl__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sa-ctrl__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  margin: 0 0 2px;
+}
+
+.sa-ctrl__name {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 650;
+  color: var(--ink);
+  margin: 0;
+}
+
+.sa-ctrl__meta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--ink-muted);
+  margin: var(--space-2) 0 0;
+}
+
+.sa-ctrl__progress {
+  margin-top: var(--space-3);
+}
+
+/* El form envuelve preguntas + footer; hereda el gap de .page para */
+/* que el espaciado sea el mismo que antes de existir el form.        */
+.cuestionario-form {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+  max-width: 640px;
+}
+
+.footer-nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* En el control 1 no hay "Control anterior": esto mantiene el grupo a la derecha */
+.footer-nav-right {
+  margin-left: auto;
+}
+
+.sa-global {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 640px;
+  padding: var(--space-4);
+  background: var(--surface-200);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.sa-global__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.sa-global__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sa-global__count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.sa-comentario {
+  margin-top: var(--space-3);
+}
+
+.sa-comentario summary {
+  width: fit-content;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brand-text);
+  cursor: pointer;
+}
+
+.sa-comentario summary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.sa-comentario__campo {
+  display: block;
+  width: 100%;
+  min-height: 64px;
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ink);
+  background: var(--surface-100);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  resize: vertical;
+}
+
+.sa-comentario__campo:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.sa-comentario__campo:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 680px) {
+  .questions {
+    gap: var(--space-4);
+  }
+  .sa-ctrl__name {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .footer-nav-right {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    margin-left: 0;
+  }
+  .footer-nav .sa-btn {
+    width: 100%;
+  }
+  .footer-count {
+    text-align: center;
+  }
+  .sa-ctrl__num {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+}

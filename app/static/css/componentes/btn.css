@@ -1,0 +1,59 @@
+/* SecureAudit MX - Componente sa-btn: botones primario, secundario y sutil. */
+
+.sa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.sa-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.sa-btn--primary {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.sa-btn--primary:hover {
+  background: var(--brand-hover);
+}
+
+.sa-btn--secondary {
+  background: var(--surface-200);
+  color: var(--brand-text);
+  border-color: var(--border-strong);
+}
+
+.sa-btn--secondary:hover {
+  background: var(--surface-300);
+}
+
+.sa-btn--subtle {
+  background: transparent;
+  color: var(--brand-text);
+}
+
+.sa-btn--subtle:hover {
+  background: var(--surface-300);
+}
+
+.sa-btn--sm {
+  padding: 7px 12px;
+  font-size: 13px;
+}

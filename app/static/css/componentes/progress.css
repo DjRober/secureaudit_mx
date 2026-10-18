@@ -1,0 +1,30 @@
+/* SecureAudit MX - Componente sa-progress: barra de progreso. */
+
+.sa-progress {
+  max-width: 640px;
+}
+
+.sa-progress__track {
+  height: 8px;
+  background: var(--surface-300);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.sa-progress__fill {
+  height: 100%;
+  min-width: 8px;
+  background: var(--brand);
+  border-radius: var(--radius-pill);
+  transition:
+    width 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sa-progress--complete .sa-progress__fill {
+  background: var(--success-text);
+}
+
+.sa-progress--sm .sa-progress__track {
+  height: 6px;
+}

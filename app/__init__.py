@@ -1,7 +1,13 @@
 from flask import Flask
 from app.extensions import db, csrf
 import os
+import mimetypes
 from app.routes import autentificacion_page, cuestionario_page
+
+#En Windows, Python toma el tipo MIME del registro del sistema y en algunos equipos
+#.js figura como text/plain: el navegador rechazaria los modulos ES (type="module")
+#de static/js/. Se fija el tipo correcto para que funcione en cualquier equipo (RNF-04.1)
+mimetypes.add_type("text/javascript", ".js")
 
 def create_app():
     #Crear la app de flask

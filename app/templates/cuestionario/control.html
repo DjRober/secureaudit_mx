@@ -26,6 +26,10 @@
 
 {% block titulo %}SecureAudit MX — Control {{ control.numero_control }}: {{ control.nombre_control }}{% endblock %}
 
+{% block estilos %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/paginas/cuestionario.css') }}" />
+{% endblock %}
+
 {% block volver %}<a href="#" class="back-link">← Volver al cuestionario</a>{% endblock %}
 
 {% block eyebrow %}Cuestionario CIS Controls v8 · IG1 · Control {{ control.numero_control }} de {{ progreso | length }}{% endblock %}
@@ -243,5 +247,6 @@ las de este control las cuenta cuestionario.js en vivo mientras se marcan-->
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/cuestionario.js') }}"></script>
+<!--Modulo ES: importa componentes/progreso.js y se ejecuta cuando el HTML ya esta listo-->
+<script type="module" src="{{ url_for('static', filename='js/paginas/cuestionario.js') }}"></script>
 {% endblock %}

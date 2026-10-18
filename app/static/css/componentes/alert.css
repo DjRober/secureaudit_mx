@@ -1,0 +1,29 @@
+/* SecureAudit MX - Componente sa-alert: mensajes (flash) de éxito y aviso. */
+
+.sa-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 640px;
+}
+
+.sa-alert {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+}
+
+.sa-alert--exito {
+  background: var(--success-surface);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+.sa-alert--aviso {
+  background: var(--warning-surface);
+  color: var(--warning-text);
+  border-color: var(--warning-border);
+}
