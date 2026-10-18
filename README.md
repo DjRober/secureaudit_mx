@@ -38,9 +38,24 @@ El objetivo es ofrecer a las PyMES una herramienta accesible para identificar br
 secureaudit_mx/
 ├── app/          # Código fuente de la aplicación
 ├── docs/         # Documentación y checklists de auditoría
+├── migrations/   # Migraciones de esquema (Flask-Migrate / Alembic)
 ├── reports/      # Reportes generados por auditoría
 └── tests/        # Pruebas automatizadas
 ```
+
+## Instalación y ejecución
+
+Requiere Python 3.10 o superior. No necesita internet al ejecutarse (RNF-04.4).
+
+```bash
+python -m venv venv
+venv\Scripts\activate            # Windows  (Linux/macOS: source venv/bin/activate)
+pip install -r requirements.txt
+python seed.py                   # crea/actualiza la base (migraciones) y siembra los catálogos
+python run.py                    # http://localhost:5000/cuestionario/control/1
+```
+
+`python seed.py` se puede correr las veces que sea: aplica solo las migraciones pendientes y no duplica datos. Para cambios de esquema ver `migrations/README`.
 
 ## Marco de referencia
 

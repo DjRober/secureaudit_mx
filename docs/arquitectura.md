@@ -33,6 +33,7 @@ SecureAudit MX es una aplicación web local de una sola instancia. Las tecnolog�
 | Framework web | Flask 3.x | Django | Flask es minimalista y no impone estructura. Para una app de una sola instancia sin ORM complejo, Django añade complejidad innecesaria. Flask permite aprender la arquitectura desde cero. |
 | Base de datos | SQLite 3 | PostgreSQL, MySQL | SQLite no requiere servidor ni configuración. Se crea automáticamente en el primer arranque. Suficiente para el volumen de datos esperado (< 500 sesiones, RNF-03.4). |
 | ORM / capa de datos | Flask-SQLAlchemy 3.1 (sobre SQLAlchemy 2.0) | SQL crudo con `sqlite3`, Peewee | Flask-SQLAlchemy integra SQLAlchemy con el ciclo de vida de Flask mediante una instancia `db` compartida (`init_app`). SQLAlchemy 2.0 permite modelos tipados con `Mapped`/`mapped_column` y declarar las restricciones (`CHECK`, `UNIQUE`, FK, PK compuesta) en el propio modelo, alineado con `modelo_datos.md`. |
+| Migraciones de esquema | Flask-Migrate 4.1 (sobre Alembic) | Recrear la base en cada cambio, Alembic sin integración | Versiona los cambios de esquema en `migrations/` y los aplica sin perder datos; se integra con la app factory (`migrate.init_app`) y los comandos `flask db`. Ver ADR-03. |
 | Templates | Jinja2 | React, Vue | Jinja2 está integrado en Flask sin dependencias adicionales. Evita un stack frontend separado y mantiene toda la lógica en Python. |
 | CSS / UI | CSS propio con tokens (sin framework) | Bootstrap 5, Tailwind | Sistema de diseño propio: variables CSS (tokens) para color, espacio y tipografía, tema claro/oscuro y componentes con prefijo `sa-`. CSS plano sin compilador ni dependencias, organizado en módulos y servido localmente (RNF-04.4). Ver ADR-08. |
 | Gráficas | Chart.js | D3.js, Plotly | Chart.js es ligero, bien documentado y suficiente para gráficas de radar y barras. Se sirve localmente. |
@@ -137,7 +138,7 @@ secureaudit_mx/
 │       │   └── paginas/        # Estilos de una sola página; los carga su template (cuestionario.css)
 │       ├── js/
 │       │   ├── base/           # Scripts de todas las páginas (tema.js: modo claro/oscuro)
-│       │   ├── componentes/    # Módulos ES reutilizables (progreso.js)
+│       │   ├── componentes/    # Módulos ES reutilizables (progreso.js, autoguardado.js)
 │       │   ├── paginas/        # Módulo de entrada de cada página (cuestionario.js, RF-04.4)
 │       │   └── vendor/         # Librerías de terceros servidas localmente
 │       │       └── chart.min.js
@@ -164,8 +165,12 @@ secureaudit_mx/
 │
 ├── reports/                    # (pendiente) Reportes PDF generados (gitignored)
 │
+├── migrations/                 # Migraciones de esquema (Flask-Migrate / Alembic, ADR-03)
+│   ├── versions/               # Una migración por cambio de esquema (la primera: esquema inicial)
+│   └── README                  # Uso diario y receta para cambiar valores de un Enum
+│
 ├── instance/                   # Base de datos de instancia (gitignored)
-│   └── secureaudit.db          # SQLite, creada por db.create_all()
+│   └── secureaudit.db          # SQLite, creada aplicando las migraciones (python seed.py)
 │
 ├── requirements.txt            # Dependencias Python (RNF-04.3)
 ├── .gitignore
@@ -194,7 +199,8 @@ flowchart TD
 
     H --> I[GET /cuestionario/control/1]
     I --> J[Responde preguntas\nSí / No / N/A]
-    J --> K[POST /cuestionario/guardar]
+    J -. cada cambio, sin acción del usuario\nRF-04.6 .-> AG[POST /cuestionario/autoguardar\nJSON + X-CSRFToken]
+    J --> K[POST /cuestionario/guardar\nal navegar entre controles]
     K --> L{¿Último control?}
     L -- No --> M[Siguiente control]
     M --> I
@@ -222,7 +228,7 @@ Las siguientes decisiones arquitectónicas tuvieron alternativas viables. Se doc
 |---|---|---|---|---|
 | ADR-01 | App local sin despliegue en nube | Los datos de auditoría son sensibles para las PyMES. Transmitirlos a un servidor externo requeriría cifrado, gestión de claves y política de privacidad. | Despliegue en Railway / Render | Los datos nunca salen del equipo del auditor. La herramienta no requiere internet en ejecución. Limitación: no hay acceso remoto ni colaboración en tiempo real. |
 | ADR-02 | Jinja2 en lugar de SPA | El público objetivo usa la herramienta de forma guiada y lineal, no como una aplicación interactiva compleja. Una SPA añadiría un build step y complejidad de mantenimiento. | React + API REST | El servidor Flask gestiona tanto la lógica como la presentación. Menos código, menos dependencias, más fácil de auditar. Limitación: actualizaciones de UI requieren recarga de página completa. |
-| ADR-03 | SQLite como motor, con SQLAlchemy 2.0 como ORM | La herramienta es de un solo usuario por instancia; no hay concurrencia de escritura que justifique un motor con servidor. El ORM aporta modelos tipados y validación (`CHECK`/`UNIQUE`/FK) declarada en el código. | PostgreSQL / MySQL (servidor dedicado) | Instalación con `pip install -r requirements.txt` sin pasos adicionales; la base se crea con `db.create_all()`. Limitación: SQLite no escala a múltiples usuarios simultáneos (fuera del alcance en v1.0.0), y por ahora los cambios de esquema en desarrollo se aplican recreando la base (Alembic queda como mejora futura). |
+| ADR-03 | SQLite como motor, con SQLAlchemy 2.0 como ORM | La herramienta es de un solo usuario por instancia; no hay concurrencia de escritura que justifique un motor con servidor. El ORM aporta modelos tipados y validación (`CHECK`/`UNIQUE`/FK) declarada en el código. | PostgreSQL / MySQL (servidor dedicado) | Instalación con `pip install -r requirements.txt` sin pasos adicionales; la base se crea aplicando las migraciones (`python seed.py`). **Cambios de esquema:** desde la Semana 4 se aplican con migraciones de Flask-Migrate (Alembic) en `migrations/`, nunca recreando la base: con usuarios y auditorías reales (a partir de la Semana 7) borrarla deja de ser una opción, y adoptarlas antes de tener datos hace que la migración base sea el esquema actual sin conversiones. Se usa modo *batch* porque SQLite no soporta la mayoría de los `ALTER TABLE` (recrea la tabla y copia los datos); para que pueda reemplazar restricciones, todas tienen nombre (convención en `app/extensions/db.py`) y cada `Enum` lleva el nombre de su `CHECK`. La receta para cambiar los valores de un `Enum` está en `migrations/README`. Limitación: SQLite no escala a múltiples usuarios simultáneos (fuera del alcance en v1.0.0). |
 | ADR-04 | WeasyPrint para PDF desde HTML | Los templates Jinja2 ya definen la estructura del reporte. Convertir HTML a PDF reutiliza ese trabajo sin duplicar la lógica de presentación. | ReportLab (PDF programático) | El diseño del reporte se controla con CSS estándar. Limitación: WeasyPrint requiere dependencias del sistema (libpango) que deben documentarse en el README. |
 | ADR-05 | `services/` como capa intermedia | El algoritmo de scoring (RF-05) y la generación de PDF (RF-07) son lo suficientemente complejos para merecer pruebas unitarias independientes de las rutas HTTP. | Lógica directamente en `routes/` | Las pruebas en `tests/` pueden importar `services/scoring.py` sin necesidad de levantar el servidor Flask. Cumple RNF-05.2. |
 | ADR-06 | Application factory + módulo `app/extensions/` | Se necesita una única instancia de `db` compartida entre los modelos, `create_app` y scripts como `seed.py`, sin caer en imports circulares (app→models→app). | Instanciar `SQLAlchemy(app)` en un módulo global | `create_app()` construye la app y llama `db.init_app(app)`; los modelos importan `db` desde `app.extensions`. Permite crear apps con distinta configuración (p. ej. para pruebas) y desacopla la definición de la extensión de la app concreta. |
