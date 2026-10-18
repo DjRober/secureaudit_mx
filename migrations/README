@@ -11,7 +11,9 @@ Uso diario
 4. Aplicala:                 flask --app app db upgrade
 5. Confirma que no falta nada: flask --app app db check   -> "No new upgrade operations detected."
 
-Instalacion nueva: "python seed.py" aplica todas las migraciones y siembra los catalogos.
+Instalacion nueva: no hay que hacer nada. "python run.py" aplica las migraciones pendientes y
+siembra los catalogos al arrancar (RNF-04.5); "python seed.py" hace lo mismo sin el servidor.
+Ojo: run.py aplica cualquier migracion nueva que encuentre en versions/ al arrancar.
 
 Por que modo batch
 ------------------

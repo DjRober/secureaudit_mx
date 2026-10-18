@@ -51,11 +51,10 @@ Requiere Python 3.10 o superior. No necesita internet al ejecutarse (RNF-04.4).
 python -m venv venv
 venv\Scripts\activate            # Windows  (Linux/macOS: source venv/bin/activate)
 pip install -r requirements.txt
-python seed.py                   # crea/actualiza la base (migraciones) y siembra los catálogos
 python run.py                    # http://localhost:5000/cuestionario/control/1
 ```
 
-`python seed.py` se puede correr las veces que sea: aplica solo las migraciones pendientes y no duplica datos. Para cambios de esquema ver `migrations/README`.
+No hay que preparar la base de datos: al arrancar, `run.py` la crea en `instance/secureaudit.db`, aplica las migraciones pendientes y siembra los catálogos (RNF-04.5). En arranques posteriores solo aplica lo que falte y no duplica datos. `python seed.py` hace lo mismo sin levantar el servidor. Para cambios de esquema ver `migrations/README`.
 
 ## Marco de referencia
 

@@ -12,8 +12,10 @@ preguntas = json.loads((SEEDS / "preguntas.json").read_text(encoding="utf-8"))
 demo = json.loads((SEEDS / "demo.json").read_text(encoding="utf-8"))
 
 
-def seed():
-    app = create_app()
+def seed(app = None):
+    # Recibe la app si ya existe (run.py la crea para servirla); si no, crea una.
+    # Es idempotente: se puede correr en cada arranque sin duplicar nada (RNF-04.5)
+    app = app or create_app()
     with app.app_context():
         # Esquema: se aplican las migraciones pendientes (equivale a "flask db upgrade").
         # Ya no se usa db.create_all(): crearia tablas sin registrar la version en
