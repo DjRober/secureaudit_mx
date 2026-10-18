@@ -62,3 +62,29 @@ def guardar():
     )
     siguiente = destino if existe_destino else control.numero_control
     return redirect(url_for(".cuestionario_control", numero_control = siguiente))
+
+@cuestionario_page.post("/autoguardar")
+def autoguardar():
+    #Version JSON de guardar() para el autoguardado (RF-04.6, RNF-06.1). La llama
+    #static/js/componentes/autoguardado.js con fetch en cada cambio, solo con las preguntas
+    #que cambiaron: {"numero_control": 1, "respuesta_3": "si", "comentario_3": ""}.
+    #El token CSRF viaja en el header X-CSRFToken; Flask-WTF lo valida antes de llegar aqui
+    datos = request.get_json(silent = True)
+    #numero_control entero (no bool) y todo lo demas texto, igual que un formulario
+    if (not isinstance(datos, dict) or type(datos.get("numero_control")) is not int
+            or not all(isinstance(v, str) for k, v in datos.items() if k != "numero_control")):
+        return {"ok": False, "error": "Petición inválida."}, 400
+
+    control = db.session.scalar(db.select(Control).filter_by(numero_control = datos["numero_control"]))
+    sesion = db.session.get(Sesion, ID_SESION_DEMO)
+    if control is None or sesion is None:
+        return {"ok": False, "error": "El control o la sesión no existen."}, 404
+
+    try:
+        guardadas, _, sin_respuesta = guardar_respuestas(sesion, control.id_control, datos)
+    except SesionNoEditable as error:
+        return {"ok": False, "error": str(error)}, 409
+    except RespuestaInvalida as error:
+        return {"ok": False, "error": str(error)}, 400
+
+    return {"ok": True, "guardadas": guardadas, "comentarios_sin_respuesta": sin_respuesta}

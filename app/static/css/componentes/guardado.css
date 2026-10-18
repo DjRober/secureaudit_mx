@@ -1,0 +1,42 @@
+/* SecureAudit MX - Componente sa-guardado: indicador flotante del autoguardado
+   ("Guardando…", "Guardado", avisos y errores). Lo maneja js/componentes/autoguardado.js. */
+
+.sa-guardado {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 10;
+  max-width: calc(100vw - 2 * var(--space-4));
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  background: var(--surface-200);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+}
+
+/* Sin texto no se muestra (estado inicial y cuando "Guardado" se oculta solo) */
+.sa-guardado:empty {
+  display: none;
+}
+
+.sa-guardado--exito {
+  color: var(--success-text);
+  background: var(--success-surface);
+  border-color: var(--success-border);
+}
+
+.sa-guardado--aviso {
+  color: var(--warning-text);
+  background: var(--warning-surface);
+  border-color: var(--warning-border);
+}
+
+.sa-guardado--error {
+  color: var(--danger-text);
+  background: var(--danger-surface);
+  border-color: var(--danger-border);
+}

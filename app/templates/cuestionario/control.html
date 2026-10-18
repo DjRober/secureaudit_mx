@@ -30,7 +30,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/paginas/cuestionario.css') }}" />
 {% endblock %}
 
-{% block volver %}<a href="#" class="back-link">← Volver al cuestionario</a>{% endblock %}
+{#- Sin enlace "Volver" por ahora: su destino es la lista de sesiones (GET /sesiones, RF-03),
+    que aun no existe. Cuando exista: block volver con "← Mis auditorias". -#}
 
 {% block eyebrow %}Cuestionario CIS Controls v8 · IG1 · Control {{ control.numero_control }} de {{ progreso | length }}{% endblock %}
 
@@ -125,12 +126,15 @@ las de este control las cuenta cuestionario.js en vivo mientras se marcan-->
 {% endblock %}
 
 {% block contenido %}
-<!--Formulario: envia todas las respuestas del control a /cuestionario/guardar-->
+<!--Formulario: envia todas las respuestas del control a /cuestionario/guardar.
+Con JavaScript, ademas, cada cambio se autoguarda en data-autoguardar-url (RF-04.6)-->
 <form
   id="form-cuestionario"
   class="cuestionario-form"
   method="post"
   action="{{ url_for('cuestionario_page.guardar') }}"
+  data-autoguardar-url="{{ url_for('cuestionario_page.autoguardar') }}"
+  data-editable="{{ 'true' if editable else 'false' }}"
 >
   <!--Token CSRF (RNF-01.2, T-04): sin el, Flask-WTF rechaza el POST con 400-->
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -244,9 +248,14 @@ las de este control las cuenta cuestionario.js en vivo mientras se marcan-->
   </div>
 </form>
 <!--End form-->
+
+<!--Estado del autoguardado ("Guardando…", "Guardado", errores). role="status" hace que
+los lectores de pantalla lo anuncien sin mover el foco; vacio no se muestra-->
+<p id="estado-guardado" class="sa-guardado" role="status" aria-live="polite"></p>
 {% endblock %}
 
 {% block scripts %}
-<!--Modulo ES: importa componentes/progreso.js y se ejecuta cuando el HTML ya esta listo-->
+<!--Modulo ES: importa componentes/progreso.js y componentes/autoguardado.js; se ejecuta
+cuando el HTML ya esta listo-->
 <script type="module" src="{{ url_for('static', filename='js/paginas/cuestionario.js') }}"></script>
 {% endblock %}

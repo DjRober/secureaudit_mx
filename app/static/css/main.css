@@ -27,6 +27,7 @@
 @import url("componentes/progress.css");
 @import url("componentes/alert.css");
 @import url("componentes/steps.css");
+@import url("componentes/guardado.css");
 
 /* 3. Utilidades: al final para que ganen ante un empate de especificidad */
 @import url("base/utilidades.css");
