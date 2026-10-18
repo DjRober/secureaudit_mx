@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block titulo %}SecureAudit MX{% endblock %}</title>
+    <!--Todo se sirve desde /static: la app no depende de internet (ADR-01, RNF-04.4)-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        {% block volver %}{% endblock %}
+        <div class="topbar-row">
+          <div class="eyebrow">
+            <svg
+              class="sa-icon"
+              viewBox="0 0 80 80"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              style="font-size: 15px"
+            >
+              <path
+                d="M39.9984 70.2398C38.2 69.3964 36.453 68.432 34.7698 67.3503C27.502 62.6795 21.7299 56.0182 18.141 48.1596C14.5521 40.3011 13.2977 31.5766 14.5272 23.0253C14.7766 21.2909 15.126 19.5785 15.5718 17.896L40 10L64.4246 17.8948C64.8706 19.5777 65.2201 21.2905 65.4695 23.0253C66.699 31.5766 65.4446 40.3011 61.8557 48.1596C58.2668 56.0182 52.4947 62.6795 45.2269 67.3503C43.5437 68.432 41.7967 69.3964 39.9984 70.2398Z"
+              />
+            </svg>
+            <span>{% block eyebrow %}SecureAudit MX{% endblock %}</span>
+          </div>
+          <button
+            type="button"
+            id="theme-toggle"
+            class="sa-btn sa-btn--subtle sa-btn--sm"
+          >
+            Modo oscuro
+          </button>
+        </div>
+      </div>
+
+      {% block cabecera %}{% endblock %}
+
+      <!--Mensajes flash de la peticion anterior (categorias: exito, aviso)-->
+      {% with mensajes = get_flashed_messages(with_categories = true) %}
+      {% if mensajes %}
+      <div class="sa-alerts" role="status">
+        {% for categoria, mensaje in mensajes %}
+        <p class="sa-alert sa-alert--{{ categoria }}">{{ mensaje }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      {% block contenido %}{% endblock %}
+    </div>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

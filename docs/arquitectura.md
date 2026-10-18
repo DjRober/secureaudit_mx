@@ -102,7 +102,7 @@ secureaudit_mx/
 │   │   ├── respuesta.py        # Tabla puente sesiones ↔ preguntas (UNIQUE compuesto)
 │   │   └── logs.py
 │   │
-│   ├── routes/                 # (pendiente) Blueprints de Flask (un archivo por módulo)
+│   ├── routes/                 # (en progreso) Blueprints de Flask (un archivo por módulo)
 │   │   ├── auth.py             # RF-01: login, logout, registro
 │   │   ├── empresas.py         # RF-02: CRUD de empresas
 │   │   ├── sesiones.py         # RF-03: gestión de sesiones de auditoría
@@ -112,12 +112,13 @@ secureaudit_mx/
 │   │   ├── escaneo.py          # RF-08: módulo de escaneo de red
 │   │   └── admin.py            # RF-09: log de actividad y gestión de usuarios
 │   │
-│   ├── services/               # (pendiente) Lógica de negocio desacoplada de las rutas
+│   ├── services/               # (en progreso) Lógica de negocio desacoplada de las rutas
+│   │   ├── respuestas.py       # Validación, upsert y progreso de respuestas (RF-04)
 │   │   ├── scoring.py          # Algoritmo de cálculo de riesgo (RF-05)
 │   │   ├── pdf_generator.py    # Generación de reportes con WeasyPrint (RF-07)
 │   │   └── scanner.py          # Integración con python-nmap (RF-08)
 │   │
-│   ├── templates/              # (pendiente) Vistas HTML (Jinja2)
+│   ├── templates/              # (en progreso) Vistas HTML (Jinja2)
 │   │   ├── base.html           # Layout base con navbar y estilos comunes
 │   │   ├── auth/
 │   │   ├── empresas/
@@ -126,9 +127,12 @@ secureaudit_mx/
 │   │   ├── resultados/
 │   │   └── reportes/
 │   │
-│   └── static/                 # (pendiente) Archivos estáticos servidos localmente
+│   └── static/                 # (en progreso) Archivos estáticos servidos localmente
 │       ├── css/
+│       │   └── main.css        # Estilos globales (tokens, componentes, tema claro/oscuro)
 │       ├── js/
+│       │   ├── tema.js         # Modo claro/oscuro, recordado entre páginas
+│       │   ├── cuestionario.js # Progreso en vivo del cuestionario (RF-04.4)
 │       │   ├── bootstrap.min.js
 │       │   └── chart.min.js
 │       └── img/
